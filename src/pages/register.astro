@@ -1,0 +1,72 @@
+---
+
+import Form from "@/components/Form";
+
+const URL = Astro.url.pathname;
+---
+
+<section>
+  <div class="absolute top-0 py-5 px-40 min-w-max">
+    <a href="/" class="flex gap-1 cursor-pointer">
+      <picture ondragstart="return false">
+        <img
+          src="../../public/images/logo-icon.svg"
+          alt="logo"
+          class="w-[5rem]"
+        />
+      </picture>
+      <h1 class="mt-2 text-[2rem] tracking-wide">Music Corner</h1>
+    </a>
+  </div>
+  <article class="w-2/3 max-h-[45rem] mx-auto flex rounded-3xl">
+    <div class="w-2/4 aspect-auto">
+      <picture class="w-20 h-10 object-contain">
+        <img
+          src="../../public/images/Compose music-pana.svg"
+          alt="musician men"
+          class="w-11/12 h-full aspect-auto"
+          ondragstart="return false"
+        />
+      </picture>
+    </div>
+    <div class="flex justify-center flex-col items-center flex-1 gap-8">
+      <h3 class="text-4xl font-semibold">Sign up</h3>
+      <Form URL={URL} />
+      <div>
+        <!-- Social Links auths -->
+      </div>
+      <p class="mt-8 text-sm text-[#ffffff80]">
+        Already have an account? <a
+          href="/login"
+          class="text-[#26AB3C] hover:text-[#52b964] transition duration-200"
+          >Sign in here!</a
+        >
+      </p>
+    </div>
+  </article>
+
+  <style>
+    :root {
+      --color-bg: #0c1019;
+      --shadow-elevation-medium: 0.3px 0.5px 0.7px
+          hsl(var(--shadow-color) / 0.36),
+        0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+        2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+        5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+    }
+
+    section {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--color-bg);
+      background-image: url("../../public//images/bg-music.svg");
+      background-size: 70rem;
+      background-position: -5rem;
+      color: #fff;
+      box-shadow: var(--shadow-elevation-medium);
+    }
+  </style>
+</section>

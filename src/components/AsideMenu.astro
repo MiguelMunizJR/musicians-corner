@@ -1,0 +1,35 @@
+---
+import SideMenuItem from "./SideMenuItem.astro"
+import HomeIcon from "../icons/Home.astro"
+import SearchIcon from "../icons/Search.astro"
+import LibraryIcon from "../icons/Library.astro"
+---
+
+<nav class="max-w-full mx-auto">
+    <h3 class="text-center p-4 font-bold text-[20px]">Musician's Corner</h3>
+    <div class="">
+        <ul>
+          <SideMenuItem href="/">
+            <HomeIcon />
+             Inicio
+          </SideMenuItem>
+    
+          <SideMenuItem href="/#">
+            <SearchIcon />
+             Buscar
+          </SideMenuItem>
+        </ul>
+      </div>
+    
+      <div class="mt-6 flex-1">
+        <ul>
+          <SideMenuItem href="/">
+            <LibraryIcon />
+             Tu biblioteca
+          </SideMenuItem>
+    
+          <!-- {playlists.map((playlist) => <SideMenuCard playlist={playlist} />)} -->
+        </ul>
+      </div>
+</nav>
+  
