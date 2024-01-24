@@ -14,9 +14,6 @@
       "@/lib": [
         "src/lib/*"
       ],
-      "@/public": [
-        "src/public/*"
-      ],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
