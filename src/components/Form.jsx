@@ -1,9 +1,43 @@
 import PasswordIcon from "@/icons/auth/Password.jsx";
 import EmailIcon from "@/icons/auth/Email.jsx";
+import { useState } from "react";
+
+const inputStyle =
+  "w-[22rem] h-[2.7rem] pl-12 rounded-lg bg-[#222] bg-opacity-20 border-gray-700 font-medium outline-none text-[#aaa]";
 
 const Form = ({ URL }) => {
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+	});
+
+	// Manejar cambios en los campos de entrada
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({ ...prevData, [name]: value }));
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (URL === "/login") {
+			console.log("Iniciar sesion", formData);
+			setFormData({ email: "", password: "" });
+			//! Hacer POST a API
+		} else if (URL === "/register") {
+			console.log("Crear Usuario", formData);
+			setFormData({ email: "", password: "" });
+			//! Hacer POST a API
+		} else {
+			console.error("Ha ocurrido un error inesperado.");
+		}
+	};
+
 	return (
-		<form className="mt-10 flex flex-col justify-center">
+		<form
+			className="mt-10 flex flex-col justify-center"
+			onSubmit={handleSubmit}
+		>
 			<div className="flex flex-col gap-8">
 				<div className="relative">
 					<input
@@ -11,7 +45,9 @@ const Form = ({ URL }) => {
 						name="email"
 						id="email"
 						placeholder="musicapp@gmail.com"
-						className="placeholder:text-[#777]"
+						value={formData.email}
+						onChange={handleChange}
+						className={`${inputStyle} placeholder:text-[#777]`}
 						required
 					/>
 					<div
@@ -29,7 +65,9 @@ const Form = ({ URL }) => {
 						name="password"
 						id="password"
 						placeholder="************"
-						className="placeholder:text-[#777]"
+						value={formData.password}
+						onChange={handleChange}
+						className={`${inputStyle} placeholder:text-[#777]`}
 						required
 					/>
 					<div
@@ -42,7 +80,7 @@ const Form = ({ URL }) => {
 				</div>
 			</div>
 			{URL === "/login" ? (
-				<p className="my-2 text-right text-sm text-[#26AB3C] opacity-85 cursor-pointer hover:text-[#52b964] transition duration-200">
+				<p className="my-2 text-right text-sm text-[#26AB3C] opacity-85 cursor-pointer hover:text-[rgb(82,185,100)] transition duration-200">
           Recover or change your password
 				</p>
 			) : null}

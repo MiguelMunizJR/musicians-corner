@@ -31,7 +31,7 @@ const URL = Astro.url.pathname;
     </div>
     <div class="flex justify-center flex-col items-center flex-1 gap-8">
       <h3 class="text-4xl font-semibold">Sign up</h3>
-      <Form URL={URL} />
+      <Form URL={URL} client:load />
       <div>
         <!-- Social Links auths -->
       </div>

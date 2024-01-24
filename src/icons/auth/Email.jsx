@@ -10,9 +10,9 @@ const Email = ({ color }) => {
 			<path
 				d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7"
 				stroke={color}
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 			<rect
 				x="3"
@@ -21,8 +21,8 @@ const Email = ({ color }) => {
 				height="14"
 				rx="2"
 				stroke={color}
-				stroke-width="2"
-				stroke-linecap="round"
+				strokeWidth="2"
+				strokeLinecap="round"
 			/>
 		</svg>
 	);
