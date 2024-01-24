@@ -1,16 +1,19 @@
 ---
-
 import Form from "@/components/Form";
+import { Image } from "astro:assets";
 
+import LogoIcon from "../../public/images/logo-icon.svg"
+import RegisterSvg from "../../public/images/Compose music-pana.svg"
 const URL = Astro.url.pathname;
+
 ---
 
 <section title="Create an account to use Music Corner">
   <div class="absolute top-0 py-5 px-40 min-w-max">
     <a href="/" class="flex gap-1 cursor-pointer">
       <picture ondragstart="return false">
-        <img
-          src="../../public/images/logo-icon.svg"
+        <Image
+          src={LogoIcon}
           alt="logo"
           class="w-[5rem]"
         />
@@ -21,8 +24,8 @@ const URL = Astro.url.pathname;
   <article class="w-2/3 max-h-[45rem] mx-auto flex rounded-3xl">
     <div class="w-2/4 aspect-auto">
       <picture class="w-20 h-10 object-contain">
-        <img
-          src="../../public/images/Compose music-pana.svg"
+        <Image
+          src={RegisterSvg}
           alt="musician men"
           class="w-11/12 h-full aspect-auto"
           ondragstart="return false"

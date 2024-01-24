@@ -1,9 +1,0 @@
-{
-    "public": "public",
-    "version": 2,
-    "builds": [
-      { "src": "index.html", "use": "@now/static-index" },
-      { "src": "public/**/*", "use": "@now/static" }
-    ]
-  }
-  

@@ -1,7 +1,11 @@
 ---
 import Form from "@/components/Form.jsx";
+import { Image } from "astro:assets";
 
 const URL = Astro.url.pathname;
+
+import LogoIcon from "../../public/images/logo-icon.svg"
+import LoginSvg from "../../public/images/Compose music-bro.svg"
 ---
 
 <section title="Log in to Music Corner to continue">
@@ -10,8 +14,8 @@ const URL = Astro.url.pathname;
   >
     <a href="/" class="flex gap-1 cursor-pointer">
       <picture ondragstart="return false">
-        <img
-          src="../../public/images/logo-icon.svg"
+        <Image
+          src={LogoIcon}
           alt="logo"
           class="w-[5rem]"
         />
@@ -22,11 +26,10 @@ const URL = Astro.url.pathname;
   <article class="w-2/3 mx-auto max-h-[45rem] flex rounded-3xl">
     <div class="w-2/4 aspect-auto">
       <picture class="w-20 h-10 object-contain">
-        <img
-          src="../../public/images/Compose music-bro.svg"
+        <Image
+          src={LoginSvg}
           alt="musician men"
           class="w-full h-full aspect-auto"
-          ondragstart="return false"
         />
       </picture>
     </div>
