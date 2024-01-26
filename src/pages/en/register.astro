@@ -1,0 +1,62 @@
+---
+import Form from "@/components/Form";
+import Logo from "@/components/Logo.astro";
+const URL = Astro.url.pathname;
+---
+
+<section title="Create an account to use Music Corner">
+  <Logo className="top-6 left-[60px] w-[380px]" />
+  <article class="w-7/12 max-w-[85rem] mx-auto h-[40rem] flex">
+    <div class="w-2/4 flex justify-center">
+      <picture>
+        <img
+          src="https://imagedelivery.net/cD6Iwz1G-Kzv3zO8zmxwnA/3bf1c823-88e3-4e0d-8664-6e6236d11e00/public"
+          alt="musician men"
+          class="w-full h-full"
+          ondragstart="return false"
+        />
+      </picture>
+    </div>
+    <div
+      class="w-1/2 min-h-full flex justify-center flex-col items-center flex-1 gap-8"
+    >
+      <h3 class="mb-8 text-4xl font-semibold">Sign up</h3>
+      <Form URL={URL} client:load />
+      <div>
+        <!-- Social Links auths -->
+      </div>
+      <p class="text-sm text-[#ffffff80]">
+        Already have an account? <a
+          href="/login"
+          class="text-[#26AB3C] hover:text-[#52b964] transition duration-200"
+          >Sign in here!</a
+        >
+      </p>
+    </div>
+  </article>
+
+  <style>
+    :root {
+      --color-bg: #0c1019;
+      --shadow-elevation-medium: 0.3px 0.5px 0.7px
+          hsl(var(--shadow-color) / 0.36),
+        0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+        2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+        5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+    }
+
+    section {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--color-bg);
+      background-image: url("https://imagedelivery.net/cD6Iwz1G-Kzv3zO8zmxwnA/32df3be3-ace5-488d-a1b6-30f8ef794200/public");
+      background-size: 70rem;
+      background-position: -5rem;
+      color: #fff;
+      box-shadow: var(--shadow-elevation-medium);
+    }
+  </style>
+</section>

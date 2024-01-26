@@ -1,9 +1,9 @@
+import { useState } from "react";
 import PasswordIcon from "@/icons/auth/Password.jsx";
 import EmailIcon from "@/icons/auth/Email.jsx";
-import { useState } from "react";
 
 const inputStyle =
-  "w-[22rem] h-[2.7rem] pl-12 rounded-lg bg-[#222] bg-opacity-20 border-gray-700 font-medium outline-none text-[#aaa]";
+  "w-[22rem] h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa]";
 
 const Form = ({ URL }) => {
 	const [formData, setFormData] = useState({
@@ -35,7 +35,7 @@ const Form = ({ URL }) => {
 
 	return (
 		<form
-			className="mt-10 flex flex-col justify-center"
+			className="flex flex-col justify-center relative"
 			onSubmit={handleSubmit}
 		>
 			<div className="flex flex-col gap-8">
@@ -85,7 +85,9 @@ const Form = ({ URL }) => {
 				</p>
 			) : null}
 			<button className="mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none font-semibold transition duration-200 hover:bg-[#40b954]">
-				{URL === "/login" ? "Login" : "Sign up"}
+				{
+					URL.includes("/login") ? "Inicia sesión" : "Crear cuenta"
+				}
 			</button>
 		</form>
 	);

@@ -1,0 +1,14 @@
+---
+const { className } = Astro.props;
+---
+
+<div class={`absolute ${className} z-50`}>
+  <a href="/">
+    <img
+      src="/images/logo-w.png"
+      alt="Logo"
+      class="w-full h-full"
+      ondragstart="return false"
+    />
+  </a>
+</div>
