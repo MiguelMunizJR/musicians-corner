@@ -14,9 +14,6 @@
       "@/lib": [
         "src/lib/*"
       ],
-      "@/i18n": [
-        "src/i18n/*"
-      ],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

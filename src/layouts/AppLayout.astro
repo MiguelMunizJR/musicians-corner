@@ -1,23 +1,17 @@
 ---
+import AsideMenu from "@/components/AsideMenu.astro";
+import Logo from "@/components/Logo.astro";
+
 interface Props {
   title: string;
   description?: string;
 }
 
 const { title, description } = Astro.props;
+
+// ENDPOINT RENDER
+// https://musicians-corner-app.onrender.com/api/v1
 ---
-
-
-
-<!--! ENDPOINT RENDER -->
-<!--? https://musicians-corner-app.onrender.com/api/v1 -->
-
-<!--* /users -->
-<!--* /me -->
-<!--* /:id -->
-
-
-
 
 <!doctype html>
 <html lang="en">
@@ -27,23 +21,34 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <title>{title}</title>
   </head>
-  <body class="relative h-screen">
-    <main>
-      <slot />
-    </main>
+  <body>
+    <div id="app" class="relative h-screen">
+      <aside class="[grid-area:aside] flex-col flex overflow-y-auto bg-[#131824]">
+        <Logo className="w-60 mx-auto relative py-6" />
+        <AsideMenu />
+      </aside>
+      <main class="[grid-area:main] bg-zinc-900 overflow-y-auto w-full">
+        <slot />
+      </main>
+      <footer class="[grid-area:player] h-[80px] hidden">
+        <!-- FOOTER PLAYER -->
+      </footer>
+    </div>
     <style is:global>
       html {
         font-family: "CircularStd", system-ui, sans-serif;
-        background: #0c1019;
         color: white;
       }
 
-      body {
+      #app {
         width: 100%;
         height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        display: grid;
+        grid-template-areas:
+          "aside main main"
+          "player player player";
+        grid-template-columns: 280px 1fr;
+        grid-template-rows: 1fr auto;
         background-color: #0c1019;
       }
 
