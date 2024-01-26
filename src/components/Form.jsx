@@ -3,7 +3,7 @@ import PasswordIcon from "@/icons/auth/Password.jsx";
 import EmailIcon from "@/icons/auth/Email.jsx";
 
 const inputStyle =
-  "w-[22rem] h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa]";
+  "w-[22rem] h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20";
 
 const Form = ({ URL }) => {
 	const [formData, setFormData] = useState({
@@ -85,9 +85,21 @@ const Form = ({ URL }) => {
 				</p>
 			) : null}
 			<button className="mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none font-semibold transition duration-200 hover:bg-[#40b954]">
-				{
-					URL.includes("/login") ? "Inicia sesión" : "Crear cuenta"
-				}
+				{URL.includes("/login") ? "Inicia sesión" : "Crear cuenta"}
+			</button>
+			<p className="mx-auto py-2 text-gray-300">- O -</p>
+			<button class="px-4 py-2 border flex justify-center items-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-500 hover:text-slate-300 hover:shadow transition duration-150">
+				<img
+					class="w-6 h-6"
+					src="https://www.svgrepo.com/show/475656/google-color.svg"
+					alt="google logo"
+					loading="lazy"
+				/>
+				<span>
+					{
+						URL.includes("/login") ? "Inicia sesión con Google" : "Crear cuenta con Google"
+					}
+				</span>
 			</button>
 		</form>
 	);
