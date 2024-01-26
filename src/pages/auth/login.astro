@@ -2,6 +2,7 @@
 import AuthLayout from "@/layouts/AuthLayout.astro";
 import Form from "@/components/Form.jsx";
 import Logo from "@/components/Logo.astro";
+import { ROUTES_PATH } from "@/const";
 
 const URL = Astro.url.pathname;
 ---
@@ -29,7 +30,7 @@ const URL = Astro.url.pathname;
         </div>
         <p class="text-sm text-[#ffffff80]">
           ¿Todavía no tienes una cuenta? <a
-            href="/register"
+            href={ROUTES_PATH.REGISTER}
             class="text-[#26AB3C] hover:text-[#52b964] transition duration-200"
             >¡Regístrate gratis!</a
           >
