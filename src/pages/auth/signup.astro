@@ -1,6 +1,6 @@
 ---
 import AuthLayout from "@/layouts/AuthLayout.astro";
-import Form from "@/components/Form";
+import Form from "@/components/Form.astro";
 import Logo from "@/components/Logo.astro";
 import { ROUTES_PATH } from "@/const";
 const URL = Astro.url.pathname;
@@ -28,10 +28,10 @@ const URL = Astro.url.pathname;
           <!-- Social Links auths -->
         </div>
         <p class="text-sm text-[#ffffff80]">
-          Already have an account? <a
+          ¿Ya tienes una cuenta? <a
             href={ROUTES_PATH.LOGIN}
             class="text-[#26AB3C] hover:text-[#52b964] transition duration-200"
-            >Sign in here!</a
+            >Inicia sesión aqui!</a
           >
         </p>
       </div>

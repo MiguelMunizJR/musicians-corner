@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import { ROUTES_PATH } from "@/const";
 ---
 
 <header class="w-full h-24 bg-transparent flex items-end absolute top-0 z-50">
@@ -22,14 +23,14 @@ import Logo from "./Logo.astro";
     <div class="flex gap-4">
       <button>
         <a
-          href="/auth/login"
+          href={ROUTES_PATH.LOGIN}
           class="bg-[#26ab3c] text-white px-4 py-3 rounded-full transition-all hover:bg-[#1bc237]"
           >Iniciar Sesión</a
         >
       </button>
       <button>
         <a
-          href="/auth/register"
+          href={ROUTES_PATH.SIGNUP}
           class="bg-white text-gray-900 font-medium px-4 py-3 rounded-full transition-all hover:bg-gray-300"
           >Crear una cuenta</a
         >

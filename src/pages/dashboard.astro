@@ -5,6 +5,34 @@ import AvatarIcon from "@/icons/dashboard/Avatar.astro";
 import AppLayout from "@/layouts/AppLayout.astro";
 import SearchIcon from "@/icons/Search.astro";
 import RecordingIcon from "@/icons/dashboard/Recording.astro";
+import { supabase } from "../lib/supabase";
+
+const { cookies, redirect } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (!accessToken || !refreshToken) {
+  return redirect("/signin");
+}
+
+const { data, error } = await supabase.auth.setSession({
+  refresh_token: refreshToken.value,
+  access_token: accessToken.value,
+});
+
+if (error) {
+  cookies.delete("sb-access-token", {
+    path: "/",
+  });
+  cookies.delete("sb-refresh-token", {
+    path: "/",
+  });
+
+  return redirect("/signin");
+}
+
+const email = data?.user?.email;
 ---
 
 <AppLayout title="Musician's Corner Dashboard">
@@ -40,7 +68,7 @@ import RecordingIcon from "@/icons/dashboard/Recording.astro";
         </div>
       </header>
       <article>
-       
+        <h1>Welcome {email}</h1>
       </article>
     </div>
     <aside class="w-[30rem] h-max flex flex-row">
