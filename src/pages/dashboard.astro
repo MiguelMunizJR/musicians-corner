@@ -5,10 +5,11 @@ import AvatarIcon from "@/icons/dashboard/Avatar.astro";
 import AppLayout from "@/layouts/AppLayout.astro";
 import SearchIcon from "@/icons/Search.astro";
 import RecordingIcon from "@/icons/dashboard/Recording.astro";
+import Notification from "@/components/Notification.astro";
 ---
 
 <AppLayout title="Musician's Corner Dashboard">
-  <section class="w-full h-screen px-10 flex bg-[#0c1019]">
+  <section class="w-full h-screen px-10 flex bg-[#10141d]">
     <div class="flex-1">
       <header class="w-full h-max mt-10 flex gap-8">
         <div class="w-full relative">
@@ -16,7 +17,7 @@ import RecordingIcon from "@/icons/dashboard/Recording.astro";
             type="search"
             name="search"
             id="search"
-            class="w-full h-12 rounded-md bg-slate-600/25 hover:bg-[#171c27] pl-14 outline-none transition-all"
+            class="w-full h-12 rounded-md bg-[#2d364286] hover:bg-[#35404e86] pl-14 outline-none transition-all"
             placeholder="Tap to search..."
           />
           <div
@@ -45,12 +46,9 @@ import RecordingIcon from "@/icons/dashboard/Recording.astro";
     </div>
     <aside class="w-[30rem] h-max flex flex-row">
       <header class="w-full flex justify-end items-center gap-4">
-        <div
-          class="w-[38px] h-[38px] p-1 rounded-full ring-1 ring-gray-700/65 hover:bg-slate-500/20 flex justify-center items-center transition-all cursor-pointer"
-        >
-          <Noti className="w-6" />
+        <div class="mt-2">
+          <Notification className="w-7 h-7 relative" client:load />
         </div>
-
         <article
           class="w-max mx-4 py-3 px-4 rounded-xl my-8 flex gap-3 hover:bg-slate-600/15 cursor-pointer transition-all"
         >
@@ -69,5 +67,12 @@ import RecordingIcon from "@/icons/dashboard/Recording.astro";
         </article>
       </header>
     </aside>
+
+    <style>
+      section {
+        background-color: #10141d;
+        background-image: url("https://imagedelivery.net/cD6Iwz1G-Kzv3zO8zmxwnA/32df3be3-ace5-488d-a1b6-30f8ef794200/public");
+      }
+    </style>
   </section>
 </AppLayout>
