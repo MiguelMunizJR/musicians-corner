@@ -1,0 +1,74 @@
+---
+import { ROUTES_PATH } from "../const";
+import Icon404 from "../icons/Icon404.astro";
+---
+
+<section class="w-full h-full flex justify-center items-center">
+  <article class="w-1/2 min-h-max flex gap-8">
+    <div>
+      <Icon404 />
+    </div>
+    <div class="flex flex-col justify-center gap-8">
+      <h1 class="text-7xl font-bold">404</h1>
+      <h2 class="font-semibold text-2xl">Something's missing.</h2>
+      <p>This page is missing or you assembled yhe link incorrectly.</p>
+      <a href={ROUTES_PATH.HOME}>Go to website --></a>
+    </div>
+  </article>
+
+  <style>
+    html {
+      font-family: "CircularStd", system-ui, sans-serif;
+      color: white;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #10141d;
+      background-image: url("https://imagedelivery.net/cD6Iwz1G-Kzv3zO8zmxwnA/32df3be3-ace5-488d-a1b6-30f8ef794200/public");
+      background-size: 80rem;
+      background-position: 4rem;
+    }
+
+    @font-face {
+      font-family: "CircularStd";
+      src: url("/fonts/CircularStd-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "CircularStd";
+      src: url("/fonts/CircularStd-Book.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "CircularStd";
+      src: url("/fonts/CircularStd-Light.woff2") format("woff2");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "CircularStd";
+      src: url("/fonts/CircularStd-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "CircularStd";
+      src: url("/fonts/CircularStd-Black.woff2") format("woff2");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+</section>
