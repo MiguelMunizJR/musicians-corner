@@ -1,0 +1,27 @@
+---
+import SearchIcon from "@/icons/Search.astro";
+
+interface Props {
+    className?: string;
+    placeholder?: string;
+}
+
+const { className, placeholder } = Astro.props;
+---
+
+<div class="w-full relative">
+    <input
+      type="search"
+      name="search"
+      id="search"
+      class={`${className} w-full h-12 rounded-md bg-[#2d364286] hover:bg-[#35404e86] pl-14 outline-none transition-all`}
+      placeholder={placeholder}
+    />
+    <div
+      class="absolute inset-y-0 left-0 pl-5
+          flex items-center
+          pointer-events-none"
+    >
+      <SearchIcon className="w-6" />
+    </div>
+  </div>

@@ -8,35 +8,6 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-
-// import { supabase } from "../lib/supabase";
-
-// const { cookies, redirect } = Astro;
-
-// const accessToken = cookies.get("sb-access-token");
-// const refreshToken = cookies.get("sb-refresh-token");
-
-// if (!accessToken || !refreshToken) {
-//   return redirect("/signin");
-// }
-
-// const { data, error } = await supabase.auth.setSession({
-//   refresh_token: refreshToken.value,
-//   access_token: accessToken.value,
-// });
-
-// if (error) {
-//   cookies.delete("sb-access-token", {
-//     path: "/",
-//   });
-//   cookies.delete("sb-refresh-token", {
-//     path: "/",
-//   });
-
-//   return redirect("/signin");
-// }
-
-// const email = data?.user?.email;
 ---
 
 <html lang="en">
@@ -51,7 +22,7 @@ const { title, description } = Astro.props;
       <aside
         class="[grid-area:aside] flex-col flex overflow-y-auto bg-[#2d364286]"
       >
-        <Logo className="w-[226px] mx-auto relative py-10" />
+        <Logo className="w-[226px] mx-auto relative py-6" />
         <AsideMenu />
       </aside>
       <main class="[grid-area:main] overflow-y-auto w-full">
@@ -119,6 +90,10 @@ const { title, description } = Astro.props;
         font-display: swap;
       }
     </style>
-    <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
+    <script
+      is:inline
+      src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"
+    ></script>
+
   </body>
 </html>

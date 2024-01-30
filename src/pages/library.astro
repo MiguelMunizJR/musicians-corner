@@ -1,12 +1,14 @@
 ---
-import ArrowDown from "@/icons/dashboard/ArrowDown.astro";
+import AppLayout from "@/layouts/AppLayout.astro";
 import Notification from "@/components/Notification.astro";
 import RecordingIcon from "@/icons/dashboard/Recording.astro";
-import AvatarIcon from "@/icons/dashboard/Avatar.astro";
-import SearchIcon from "@/icons/Search.astro";
-import AppLayout from "@/layouts/AppLayout.astro";
-
 import { supabase } from "@/lib/supabase";
+import AvatarCard from "@/components/AvatarCard.astro";
+import SearchInput from "@/components/SearchInput.astro";
+import Greeting from "@/components/Greeting.tsx";
+import { playlists } from "@/lib/data";
+import PlayListItemCard from "@/components/PlayListItemCard.astro";
+
 const { cookies, redirect } = Astro;
 
 const accessToken = cookies.get("sb-access-token");
@@ -31,26 +33,13 @@ if (error) {
 }
 ---
 
-<AppLayout title="Musician's Corner Dashboard">
+<AppLayout title="">
   <section class="w-full h-screen px-10 flex bg-[#10141d]">
     <main class="flex-1">
-      <header class="w-full h-max mt-6 flex gap-8">
-        <div class="w-full relative">
-          <input
-            type="search"
-            name="search"
-            id="search"
-            class="w-full h-12 rounded-md bg-[#2d364286] hover:bg-[#35404e86] pl-14 outline-none transition-all"
-            placeholder="Tap to search..."
-          />
-          <div
-            class="absolute inset-y-0 left-0 pl-5
-          flex items-center
-          pointer-events-none"
-          >
-            <SearchIcon className="w-6" />
-          </div>
-        </div>
+      <header class="w-3/4 h-max mt-6 flex gap-8">
+        <SearchInput
+          placeholder="Black and yellow - Wiz Khalifa, Dream on - Aerosmith ..."
+        />
 
         <div
           class="w-52 rounded-md bg-red-500/70 hover:bg-red-500/85 flex justify-center items-center transition-all gap-3 cursor-pointer"
@@ -64,30 +53,25 @@ if (error) {
         </div>
       </header>
       <article>
-        WELCOME
+        <Greeting className="mt-12" />
+        <div>
+            <!-- HERO LIBRARY GALLERY -->
+        </div>
+        <div class="flex flex-wrap mt-8 gap-4">
+          {
+            playlists.map((playlist) => (
+              <PlayListItemCard playlist={playlist} />
+            ))
+          }
+        </div>
       </article>
     </main>
-    <aside class="w-[30rem] h-max flex flex-row">
+    <aside class="w-[28rem] flex flex-row items-start">
       <header class="w-full flex justify-end items-center gap-3 -mt-3">
         <div>
           <Notification className="w-7 h-7 relative" />
         </div>
-        <article
-          class="w-max mx-4 py-3 px-4 rounded-xl my-8 flex gap-3 hover:bg-slate-600/15 cursor-pointer transition-all"
-        >
-          <AvatarIcon className="w-[42px]" />
-          <div class="flex flex-col gap-1">
-            <h6>{data.user?.email}</h6>
-            <p
-              class="bg-blue-600 w-max px-3 text-sm font-semibold rounded-full"
-            >
-              Pro
-            </p>
-          </div>
-          <div>
-            <ArrowDown className="w-3 mt-1" />
-          </div>
-        </article>
+        <AvatarCard className="" data={data.user?.email} />
       </header>
     </aside>
 

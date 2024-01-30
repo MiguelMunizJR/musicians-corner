@@ -1,0 +1,24 @@
+---
+import AvatarIcon from "@/icons/dashboard/Avatar.astro";
+import ArrowDown from "@/icons/dashboard/ArrowDown.astro";
+
+interface Props {
+    className?: string;
+    data?: string 
+}
+
+const { className, data } = Astro.props;
+---
+
+<article
+  class={`${className} w-max mx-4 py-3 px-4 rounded-xl my-8 flex gap-3 hover:bg-slate-600/15 cursor-pointer transition-all`}
+>
+  <AvatarIcon className="w-[42px]" />
+  <div class="flex flex-col gap-1">
+    <h6>{data ?? "Anonimous"}</h6>
+    <p class="bg-blue-600 w-max px-3 text-sm font-semibold rounded-full">Pro</p>
+  </div>
+  <div>
+    <ArrowDown className="w-3 mt-1" />
+  </div>
+</article>

@@ -15,6 +15,7 @@ export const ROUTES_PATH = Object.freeze({
 	SIGNUP: "/auth/signup",
 	USER: "/users/me",
 	DASHBOARD: "/dashboard",
+	LIBRARY: "/library",
 	NOT_FOUND: "*"
 });
 
