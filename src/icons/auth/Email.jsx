@@ -1,12 +1,7 @@
----
-interface Props {
-	color?: string;
-}
+import React from "react";
 
-const { color = '#000' } = Astro.props;
----
-
-
+const Email = ({ color }) => {
+	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="25"
@@ -17,9 +12,9 @@ const { color = '#000' } = Astro.props;
 			<path
 				d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7"
 				stroke={color}
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 			<rect
 				x="3"
@@ -28,7 +23,11 @@ const { color = '#000' } = Astro.props;
 				height="14"
 				rx="2"
 				stroke={color}
-				stroke-width="2"
-				stroke-linecap="round"
+				strokeWidth="2"
+				strokeLinecap="round"
 			/>
 		</svg>
+	);
+};
+
+export default Email;

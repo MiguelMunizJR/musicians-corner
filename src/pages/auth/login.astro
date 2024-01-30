@@ -1,10 +1,17 @@
 ---
 import AuthLayout from "@/layouts/AuthLayout.astro";
-import Form from "@/components/Form.astro";
-import Logo from "@/components/Logo.astro";
+import Form from "@/components/Form";
 import { ROUTES_PATH } from "@/const";
 
 const URL = Astro.url.pathname;
+const { cookies, redirect } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (accessToken && refreshToken) {
+  redirect(ROUTES_PATH.DASHBOARD);
+}
 ---
 
 <AuthLayout title="Inicia sesión en Musician's Corner">
@@ -17,6 +24,7 @@ const URL = Astro.url.pathname;
             alt="musician-men"
             class="w-full h-full"
             ondragstart="return false"
+            loading="lazy"
           />
         </picture>
       </div>
@@ -25,9 +33,6 @@ const URL = Astro.url.pathname;
       >
         <h3 class="mb-8 text-4xl font-semibold">Inicia sesión</h3>
         <Form URL={URL} client:load />
-        <div>
-          <!-- Social Links auths -->
-        </div>
         <p class="text-sm text-[#ffffff80]">
           ¿Todavía no tienes una cuenta? <a
             href={ROUTES_PATH.SIGNUP}
