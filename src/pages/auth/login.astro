@@ -1,7 +1,7 @@
 ---
-import AuthLayout from "@/layouts/AuthLayout.astro";
 import Form from "@/components/Form";
 import { ROUTES_PATH } from "@/const";
+import Layout from "@/layouts/Layout.astro";
 
 const URL = Astro.url.pathname;
 const { cookies, redirect } = Astro;
@@ -9,14 +9,14 @@ const { cookies, redirect } = Astro;
 const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
 
-if (accessToken && refreshToken) {
-  redirect(ROUTES_PATH.DASHBOARD);
+if (accessToken || refreshToken) {
+  return redirect(ROUTES_PATH.DASHBOARD);
 }
 ---
 
-<AuthLayout title="Inicia sesión en Musician's Corner">
+<Layout title="Inicia sesión en Musician's Corner">
   <section title="Log in to Music Corner to continue">
-    <article class="w-7/12 max-w-[85rem] mx-auto h-[40rem] flex">
+    <article class="mt-12 w-7/12 max-w-[85rem] mx-auto h-[40rem] flex">
       <div class="w-2/4 flex justify-center">
         <picture>
           <img
@@ -31,7 +31,7 @@ if (accessToken && refreshToken) {
       <div
         class="w-1/2 min-h-full flex justify-center flex-col items-center flex-1 gap-8"
       >
-        <h3 class="mb-8 text-4xl font-semibold">Inicia sesión</h3>
+        <h3 class="mb-6 text-4xl font-semibold">Inicia sesión</h3>
         <Form URL={URL} client:load />
         <p class="text-sm text-[#ffffff80]">
           ¿Todavía no tienes una cuenta? <a
@@ -52,4 +52,4 @@ if (accessToken && refreshToken) {
       }
     </style>
   </section>
-</AuthLayout>
+</Layout>

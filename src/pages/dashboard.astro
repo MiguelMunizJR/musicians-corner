@@ -1,12 +1,9 @@
 ---
-import ArrowDown from "@/icons/dashboard/ArrowDown.astro";
-import Notification from "@/components/Notification.astro";
-import RecordingIcon from "@/icons/dashboard/Recording.astro";
-import AvatarIcon from "@/icons/dashboard/Avatar.astro";
-import SearchIcon from "@/icons/Search.astro";
 import AppLayout from "@/layouts/AppLayout.astro";
+import SearchInput from "@/components/SearchInput.astro";
 
 import { supabase } from "@/lib/supabase";
+import AsideApp from "@/components/AsideApp.astro";
 const { cookies, redirect } = Astro;
 
 const accessToken = cookies.get("sb-access-token");
@@ -32,72 +29,13 @@ if (error) {
 ---
 
 <AppLayout title="Musician's Corner Dashboard">
-  <section class="w-full h-screen px-10 flex bg-[#10141d]">
-    <main class="flex-1">
-      <header class="w-full h-max mt-6 flex gap-8">
-        <div class="w-full relative">
-          <input
-            type="search"
-            name="search"
-            id="search"
-            class="w-full h-12 rounded-md bg-[#2d364286] hover:bg-[#35404e86] pl-14 outline-none transition-all"
-            placeholder="Tap to search..."
-          />
-          <div
-            class="absolute inset-y-0 left-0 pl-5
-          flex items-center
-          pointer-events-none"
-          >
-            <SearchIcon className="w-6" />
-          </div>
-        </div>
-
-        <div
-          class="w-52 rounded-md bg-red-500/70 hover:bg-red-500/85 flex justify-center items-center transition-all gap-3 cursor-pointer"
-        >
-          <div
-            class="w-7 h-7 ring-1 ring-white rounded-full flex justify-center items-center"
-          >
-            <RecordingIcon className="w-6" />
-          </div>
-          <h6>Nueva nota</h6>
-        </div>
+  <section class="w-full px-8 mt-6 flex gap-6">
+    <main class="w-full flex flex-col">
+      <header class="w-full h-max flex">
+        <SearchInput className="w-[60%]" />
       </header>
-      <article>
-        WELCOME
-      </article>
+      <article>WELCOME</article>
     </main>
-    <aside class="w-[30rem] h-max flex flex-row">
-      <header class="w-full flex justify-end items-center gap-3 -mt-3">
-        <div>
-          <Notification className="w-7 h-7 relative" />
-        </div>
-        <article
-          class="w-max mx-4 py-3 px-4 rounded-xl my-8 flex gap-3 hover:bg-slate-600/15 cursor-pointer transition-all"
-        >
-          <AvatarIcon className="w-[42px]" />
-          <div class="flex flex-col gap-1">
-            <h6>{data.user?.email}</h6>
-            <p
-              class="bg-blue-600 w-max px-3 text-sm font-semibold rounded-full"
-            >
-              Pro
-            </p>
-          </div>
-          <div>
-            <ArrowDown className="w-3 mt-1" />
-          </div>
-        </article>
-      </header>
-    </aside>
-
-    <style>
-      section {
-        background-color: #10141d;
-        background-image: url("https://imagedelivery.net/cD6Iwz1G-Kzv3zO8zmxwnA/32df3be3-ace5-488d-a1b6-30f8ef794200/public");
-        background-size: 70%;
-        background-position: 2rem;
-      }
-    </style>
+   <AsideApp />
   </section>
 </AppLayout>

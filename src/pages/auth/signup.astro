@@ -1,14 +1,22 @@
 ---
-import AuthLayout from "@/layouts/AuthLayout.astro";
 import Form from "@/components/Form";
 import { ROUTES_PATH } from "@/const";
+import Layout from "@/layouts/Layout.astro";
 
 const URL = Astro.url.pathname;
+const { cookies, redirect } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (accessToken || refreshToken) {
+  return redirect(ROUTES_PATH.DASHBOARD);
+}
 ---
 
-<AuthLayout title="Crea una cuenta en Musician's Corner gratis!">
+<Layout title="Crea una cuenta en Musician's Corner gratis!">
   <section>
-    <article class="w-7/12 max-w-[85rem] mx-auto h-[40rem] flex">
+    <article class="mt-14 w-7/12 max-w-[85rem] mx-auto h-[40rem] flex">
       <div class="w-2/4 flex justify-center">
         <picture>
           <img
@@ -16,13 +24,14 @@ const URL = Astro.url.pathname;
             alt="musician men"
             class="w-full h-full"
             ondragstart="return false"
+            loading="lazy"
           />
         </picture>
       </div>
       <div
-        class="w-1/2 min-h-full flex justify-center flex-col items-center flex-1 gap-8"
+        class="w-1/2 min-h-full flex justify-center flex-col items-center flex-1 gap-4"
       >
-        <h3 class="mb-8 text-4xl font-semibold">Crear cuenta</h3>
+        <h3 class="mb-10 text-4xl font-semibold">Crear cuenta</h3>
         <Form URL={URL} client:load />
         <div>
           <!-- Social Links auths -->
@@ -46,4 +55,4 @@ const URL = Astro.url.pathname;
       }
     </style>
   </section>
-</AuthLayout>
+</Layout>
