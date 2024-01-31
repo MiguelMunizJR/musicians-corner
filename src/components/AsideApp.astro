@@ -1,9 +1,12 @@
 ---
 import Notification from "./Notification.astro";
 import AvatarCard from "./AvatarCard.astro";
+import Card from "./Card.astro";
 ---
 
-<aside class="w-[22rem] max-h-screen relative flex flex-col items-start gap-8">
+<aside
+  class="w-[34rem] max-h-screen px-10 relative flex flex-col items-start gap-8"
+>
   <header class="w-full flex justify-end items-center gap-3">
     <div>
       <Notification className="w-7 h-7 relative" />
@@ -12,23 +15,11 @@ import AvatarCard from "./AvatarCard.astro";
   </header>
 
   <section class="w-full flex flex-col gap-4">
-    <article class="w-full min-h-[24rem] p-5 rounded-2xl bg-[#2025319f]">
-      <h2 class="font-medium text-lg">Herramientas</h2>
-
-      <div class="px-4"></div>
-
-      <div>
-        <!-- content -->
-      </div>
-    </article>
-    <article class="w-full min-h-[24rem] p-5 rounded-2xl bg-[#2025319f]">
-      <h2 class="font-medium text-lg">Herramientas 2</h2>
-
-      <div class="px-4"></div>
-
-      <div>
-        <!-- content -->
-      </div>
-    </article>
+    <Card title="Usado recientemente">
+      <!-- Content -->
+    </Card>
+    <Card title="Herramientas 2">
+      <!-- Content -->
+    </Card>
   </section>
 </aside>

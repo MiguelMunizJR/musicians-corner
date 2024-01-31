@@ -1,15 +1,18 @@
 ---
 interface Props {
-    color: string
-    className: string
+  className?: string;
 }
 
-const { color, className } = Astro.props;
+const { className = "" } = Astro.props;
 ---
 
-
-<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class={className}>
-  <g fill={color}>
+<svg
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class={className}
+>
+  <g fill="currentColor">
     <path
       opacity=".5"
       d="M9.052 4.5C9 5.078 9 5.804 9 6.722v10.556c0 .918 0 1.644.052 2.222H8c-2.357 0-3.536 0-4.268-.732C3 18.035 3 16.857 3 14.5v-5c0-2.357 0-3.536.732-4.268C4.464 4.5 5.643 4.5 8 4.5h1.052Z"

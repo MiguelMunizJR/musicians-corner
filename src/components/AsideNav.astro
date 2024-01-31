@@ -1,11 +1,11 @@
 ---
 import SideMenuItem from "./SideMenuItem.astro";
-import HomeIcon from "../icons/Home.astro";
-import LogoutIcon from "../icons/dashboard/Logout.astro";
 import DocsIcon from "@/icons/dashboard/DocsIcon.astro";
 import SettingsIcon from "@/icons/dashboard/SettingsIcon.astro";
 import LibraryIcon from "@/icons/dashboard/LibraryIcon.astro";
 import { ROUTES_PATH } from "@/const";
+import DashboardIcon from "@/icons/dashboard/DashboardIcon.astro";
+import LogOut from "@/components/LogoutButton.astro";
 ---
 
 <nav class="w-full h-full text-[15px] flex flex-col">
@@ -13,15 +13,15 @@ import { ROUTES_PATH } from "@/const";
     <ul class="flex flex-col gap-2">
       <SideMenuItem
         href={ROUTES_PATH.DASHBOARD}
-        className="text-white hover:text-gray-100 hover:bg-[#3c475579] py-3 px-4 gap-4 text-base font-normal"
-        >
-        <HomeIcon />
+        className="text-white hover:text-gray-100 hover:bg-[#3c475579] py-3 px-4 gap-[9px] text-base font-normal"
+      >
+        <DashboardIcon className="w-9 text-white" />
         Inicio
       </SideMenuItem>
 
       <SideMenuItem
-        href={""}
-        className="text-white hover:text-gray-100 hover:bg-[#3c475579] py-3 px-4 gap-4 text-base font-normal"
+        href={ROUTES_PATH.SCORES}
+        className="text-white hover:text-gray-100 hover:bg-[#3c475579] py-3 px-4 gap-4 text-base"
       >
         <DocsIcon className="w-7 text-white" />
         Partituras
@@ -42,25 +42,17 @@ import { ROUTES_PATH } from "@/const";
       <!-- {playlists.map((playlist) => <SideMenuCard playlist={playlist} />)} -->
     </ul>
   </div>
-  <div class="mt-10 mb-8 px-4">
-    <ul class="flex flex-col gap-2">
+
+  <div class="px-4 mb-14">
+    <ul class="w-full flex flex-col gap-4">
       <SideMenuItem
         href={""}
         className="text-white hover:text-gray-100 hover:bg-[#3c475579] py-3 px-4 gap-2 text-base font-normal"
       >
-        <SettingsIcon className="w-[34px] text-white" />
+        <SettingsIcon className="w-8 text-white" />
         Ajustes
       </SideMenuItem>
+      <LogOut />
     </ul>
-  </div>
-
-  <div class="px-4 mb-8">
-        <SideMenuItem
-          href={"/api/auth/logout"}
-          className="text-red-500 hover:text-red-600 hover:bg-red-500/15 rounded-md items-center py-3 px-4 transition duration-150"
-        >
-          <LogoutIcon color="#ef4444" className="w-7" />
-          Logout
-        </SideMenuItem>
   </div>
 </nav>

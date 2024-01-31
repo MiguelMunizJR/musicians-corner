@@ -10,10 +10,19 @@ const { cookies } = Astro;
 const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
 
-const { data } = await supabase.auth.setSession({
+const { data, error } = await supabase.auth.setSession({
   refresh_token: refreshToken?.value || "",
   access_token: accessToken?.value || "",
 });
+
+if (error) {
+  cookies.delete("sb-access-token", {
+    path: "/",
+  });
+  cookies.delete("sb-refresh-token", {
+    path: "/",
+  });
+}
 
 const isLoggin = data?.user ? true : false;
 ---
@@ -46,7 +55,10 @@ const isLoggin = data?.user ? true : false;
         <AuthButtons className="flex gap-4" />
       ) : (
         <div class="flex justify-center">
-          <SideMenuItem href={ROUTES_PATH.DASHBOARD} className="bg-[#26ab3c] hover:bg-[#36b84b] flex justify-center items-center py-3 px-4">
+          <SideMenuItem
+            href={ROUTES_PATH.DASHBOARD}
+            className="bg-[#26ab3c] hover:bg-[#36b84b] flex justify-center items-center py-3 px-4"
+          >
             <EnterIcon className="w-6 h-6" />
             Ir al Dashboard
           </SideMenuItem>

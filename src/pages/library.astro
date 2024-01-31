@@ -35,23 +35,13 @@ if (error) {
 ---
 
 <AppLayout title="">
-  <section class="w-full px-8 mt-6 flex gap-6">
-    <main class="w-full ">
-      <header class="w-3/4 h-max mt-6 flex gap-8">
+  <section class="w-full px-8 mt-4 flex gap-6">
+    <main class="w-full">
+      <header class="w-full h-max mt-6 flex">
         <SearchInput
+          className="w-[50%]"
           placeholder="Black and yellow - Wiz Khalifa, Dream on - Aerosmith ..."
         />
-
-        <div
-          class="w-52 rounded-md bg-red-500/70 hover:bg-red-500/85 flex justify-center items-center transition-all gap-3 cursor-pointer"
-        >
-          <div
-            class="w-7 h-7 ring-1 ring-white rounded-full flex justify-center items-center"
-          >
-            <RecordingIcon className="w-6" />
-          </div>
-          <h6>Nueva nota</h6>
-        </div>
       </header>
       <article>
         <Greeting className="mt-12" client:visible />

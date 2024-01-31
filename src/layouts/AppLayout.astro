@@ -22,12 +22,12 @@ const { title, description } = Astro.props;
   <body>
     <div id="app" class="relative h-screen">
       <aside
-        class="[grid-area:aside] flex-col flex overflow-y-auto bg-[#2d364286]"
+        class="[grid-area:aside] flex-col flex pt-3 overflow-y-auto bg-[#161925]"
       >
-        <Logo className="w-[226px] mx-auto relative py-6" />
+        <Logo className="w-60 mx-auto relative py-6" />
         <AsideNav />
       </aside>
-      <main class="[grid-area:main] overflow-y-auto w-full bg-[#10141d] bg-[url('/images/bg-pattern-music.svg')] bg-contain bg-center">
+      <main class="[grid-area:main] overflow-y-auto w-full bg-[#11141d]">
         <slot />
       </main>
       <footer class="[grid-area:player] h-[80px] hidden">
@@ -49,7 +49,7 @@ const { title, description } = Astro.props;
           "player player player";
         grid-template-columns: 250px 1fr;
         grid-template-rows: 1fr auto;
-        background-color: #10141d;
+        background-color: #1F2235;
       }
 
       @font-face {
