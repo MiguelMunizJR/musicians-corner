@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 
-const Greeting = ({ className }) => {
-	const [greeting, setGreeting] = useState("Buenos días");
+interface Props {
+  className?: string;
+}
+
+const Greeting = ({ className = "" }: Props) => {
+	const [greeting, setGreeting] = useState("");
+
+	const currentTime = new Date();
+	const currentHour = currentTime.getHours();
 
 	useEffect(() => {
-		const currentTime = new Date();
-		const currentHour = currentTime.getHours();
+		let newGreeting = "";
 
-		let greeting = "";
-
-		if (currentHour < 12) {
-			greeting = "Buenos días";
-		} else if (currentHour < 18) {
-			greeting = "Buenas tardes";
+		if (currentHour >= 7 && currentHour < 12) {
+			newGreeting = "Buenos días";
+		} else if (currentHour >= 12 && currentHour < 20) {
+			newGreeting = "Buenas tardes";
 		} else {
-			greeting = "Buenas noches";
+			newGreeting = "Buenas noches";
 		}
 
-		setGreeting(greeting);
-	}, []);
+		setGreeting(newGreeting);
+	}, [currentHour]);
 
 	return <h1 className={`${className} text-4xl font-bold`}>{greeting}</h1>;
 };

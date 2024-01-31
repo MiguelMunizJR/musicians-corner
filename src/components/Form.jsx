@@ -81,7 +81,7 @@ const Form = ({ URL }) => {
             ¿Has olvidado tu contraseña?
 					</p>
 				) : null}
-				<button className="mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none font-semibold transition duration-200 hover:bg-[#40b954]">
+				<button className="mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none font-semibold transition duration-200 hover:bg-[#3fb452]">
 					{URL.includes("/login") ? "Inicia sesión" : "Crear cuenta"}
 				</button>
 				<p className="mx-auto py-2 text-gray-300">- O -</p>

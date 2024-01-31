@@ -1,40 +1,69 @@
 ---
+import AuthButtons from "./AuthButtons.astro";
+import AvatarCard from "./AvatarCard.astro";
 import Logo from "./Logo.astro";
+
+import { supabase } from "@/lib/supabase";
+import SideMenuItem from "./SideMenuItem.astro";
 import { ROUTES_PATH } from "@/const";
+import EnterIcon from "@/icons/dashboard/EnterIcon.astro";
+const { cookies } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+const { data } = await supabase.auth.setSession({
+  refresh_token: refreshToken?.value || "",
+  access_token: accessToken?.value || "",
+});
+
+const isLoggin = data?.user ? true : false;
+const authRoute = Astro.url.pathname.includes("auth");
 ---
 
-<header class="w-full h-24 bg-transparent flex items-end absolute top-0 z-50">
+<header
+  class="w-full h-[75px] bg-transparent flex items-end absolute top-0 z-50"
+>
   <Logo className="top-6 left-[60px] w-[350px]" />
-  <nav class="ml-[730px] mr-[65px] py-4 flex flex-1 justify-between">
-    <ul class="flex gap-20">
-      <li>
-        <a href="#">Inicio</a>
-      </li>
-      <li>
-        <a href="#">Precios</a>
-      </li>
-      <li>
-        <a href="#">Productos</a>
-      </li>
-      <li>
-        <a href="#">Contacto</a>
-      </li>
+  <nav class="ml-[730px] mr-[65px] flex flex-1 justify-between">
+    <ul class="flex gap-20 mt-12">
+      {
+        !authRoute ? (
+          <>
+            <li>
+              <a href="#">Inicio</a>
+            </li>
+            <li>
+              <a href="#">Precios</a>
+            </li>
+            <li>
+              <a href="#">Productos</a>
+            </li>
+            <li>
+              <a href="#">Contacto</a>
+            </li>
+          </>
+        ) : null
+      }
     </ul>
-    <div class="flex gap-4">
-      <button>
-        <a
-          href={ROUTES_PATH.LOGIN}
-          class="bg-[#26ab3c] text-white px-4 py-3 rounded-full transition-all hover:bg-[#1bc237]"
-          >Iniciar Sesión</a
-        >
-      </button>
-      <button>
-        <a
-          href={ROUTES_PATH.SIGNUP}
-          class="bg-white text-gray-900 font-medium px-4 py-3 rounded-full transition-all hover:bg-gray-300"
-          >Crear una cuenta</a
-        >
-      </button>
+
+    <div class="flex items-end">
+      {
+        isLoggin ? (
+          <div class="relative top-6 w-full min-h-max flex gap-6 justify-center items-center">
+            <SideMenuItem
+              href={ROUTES_PATH.DASHBOARD}
+              className="bg-[#26ab3c] hover:bg-[#36b84b] flex justify-center items-center text-base py-2 px-3"
+            >
+              <EnterIcon className="w-5 h-5" />
+              Ir al Dashboard
+            </SideMenuItem>
+            <AvatarCard />
+          </div>
+        ) : (
+          <AuthButtons className="flex gap-4" />
+        )
+      }
     </div>
   </nav>
 </header>

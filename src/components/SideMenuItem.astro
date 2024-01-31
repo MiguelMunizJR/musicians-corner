@@ -1,7 +1,7 @@
 ---
 interface Props {
   href?: string
-  className: string
+  className?: string
 }
 
 const { href, className } = Astro.props
@@ -9,7 +9,7 @@ const { href, className } = Astro.props
 
 <li class="list-none">
   <a
-    class={className}
+    class={`gap-2 flex rounded-lg font-normal items-center transition duration-150 border-none ${className} `}
     href={href}
   >
     <slot />

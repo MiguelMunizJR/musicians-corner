@@ -6,7 +6,7 @@ interface Props {
     placeholder?: string;
 }
 
-const { className, placeholder } = Astro.props;
+const { className, placeholder = "Find what you're looking for..." } = Astro.props;
 ---
 
 <div class="w-full relative">
@@ -14,7 +14,7 @@ const { className, placeholder } = Astro.props;
       type="search"
       name="search"
       id="search"
-      class={`${className} w-full h-12 rounded-md bg-[#2d364286] hover:bg-[#35404e86] pl-14 outline-none transition-all`}
+      class={`w-full h-12 rounded-md bg-[#202531] hover:bg-[#35404e86] pl-14 outline-none transition-all ${className} `}
       placeholder={placeholder}
     />
     <div

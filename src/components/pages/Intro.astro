@@ -1,13 +1,29 @@
 ---
+import AuthButtons from "../AuthButtons.astro";
+
+import { supabase } from "@/lib/supabase";
+import SideMenuItem from "../SideMenuItem.astro";
 import { ROUTES_PATH } from "@/const";
-import Logo from "../Logo.astro";
+import EnterIcon from "@/icons/dashboard/EnterIcon.astro";
+const { cookies } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+const { data } = await supabase.auth.setSession({
+  refresh_token: refreshToken?.value || "",
+  access_token: accessToken?.value || "",
+});
+
+const isLoggin = data?.user ? true : false;
 ---
 
 <div class="relative h-screen overflow-hidden">
   <img
-    src="/public/images/rock-2658355_1920.jpg"
-    alt="Imagen de héroe"
+    src="/images/hero-bg.jpg"
+    alt="bg-hero"
     class="object-cover w-full h-full opacity-40"
+    loading="lazy"
   />
 
   <div
@@ -25,22 +41,17 @@ import Logo from "../Logo.astro";
       scelerisque bibendum nec non nisl. Nullam nec vulputate dui, sit amet
       aliquet erat. Integer eu feugiat ligula. Etiam vel est purus.
     </p>
-    <div class="flex justify-center gap-4">
-      <button>
-        <a
-          href={ROUTES_PATH.LOGIN}
-          class="bg-[#26ab3c] text-white px-6 py-3 rounded-full hover:bg-[#1bc237]"
-          >Iniciar Sesión</a
-        >
-      </button>
-      <p class="text-white/80">- O -</p>
-      <button>
-        <a
-          href={ROUTES_PATH.SIGNUP}
-          class="bg-white text-gray-900 font-medium px-6 py-3 rounded-full transition-all hover:bg-gray-300"
-          >Crear una cuenta</a
-        >
-      </button>
-    </div>
+    {
+      !isLoggin ? (
+        <AuthButtons className="flex gap-4" />
+      ) : (
+        <div class="flex justify-center">
+          <SideMenuItem href={ROUTES_PATH.DASHBOARD} className="bg-[#26ab3c] hover:bg-[#36b84b] flex justify-center items-center py-3 px-4">
+            <EnterIcon className="w-6 h-6" />
+            Ir al Dashboard
+          </SideMenuItem>
+        </div>
+      )
+    }
   </div>
 </div>

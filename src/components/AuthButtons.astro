@@ -1,0 +1,16 @@
+---
+import { ROUTES_PATH } from "@/const";
+import LoginButton from "./LoginButton.astro";
+import SignUpButton from "./SignUpButton.astro";
+
+interface Props {
+    className?: string
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class={`flex justify-center gap-4 ${className}`}>
+    <LoginButton href={ROUTES_PATH.LOGIN} />
+    <SignUpButton href={ROUTES_PATH.SIGNUP} />
+  </div>
