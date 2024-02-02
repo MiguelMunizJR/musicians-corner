@@ -6,13 +6,15 @@ import UploadMusicIcon from "@/icons/dashboard/UploadMusic.astro";
 import LikedMusicIcon from "@/icons/dashboard/LikedMusic.astro";
 import AddIcon from "@/icons/dashboard/Add.astro";
 import { ROUTES_PATH } from "../../const";
+import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
+import CardButtonCategories from "../CardButtonCategories.astro";
 ---
 
 <section class="w-full h-[300px] mt-6 flex flex-col">
   <div class="w-full min-h-max flex items-center gap-24">
     <article>
       <h2 class="text-2xl font-medium py-3">Mis partituras</h2>
-      <Card className="min-h-[18.5rem] bg-transparent py-4 px-0">
+      <Card className="min-h-[18.5rem] bg-transparent p-3">
         <div class="w-full flex gap-4">
           <CardButton
             className="bg-[#1A1E2C] hover:bg-[#212636]"
@@ -40,10 +42,10 @@ import { ROUTES_PATH } from "../../const";
     </article>
     <article>
       <h3 class="text-2xl font-medium py-3">Mis albumes</h3>
-      <Card className="min-h-[18.5rem] bg-transparent py-4 px-0">
+      <Card className="min-h-[18.5rem] bg-transparent p-3">
         <div class="w-full min-h-max flex items-center gap-4">
           <CardButton
-            className="bg-green-500/40 ring-1 ring-green-600 hover:bg-green-500/60"
+            className="bg-green-500/40 hover:bg-green-500/60"
             href=""
             title=""
           >
@@ -55,6 +57,36 @@ import { ROUTES_PATH } from "../../const";
   </div>
   <article>
     <h2 class="text-2xl font-medium py-3">Partituras</h2>
-    <Card className="" />
+    <Card className="bg-transparent p-3">
+      <article class="w-full min-h-max flex flex-col justify-center gap-2">
+        <CardButtonCategories
+          className="w-3/4"
+          title="Banda Sinaloense"
+          description="Partituras para banda sinaloense"
+          total="100"
+          href=""
+        >
+          <MusicCategoryIcon className="w-16" />
+        </CardButtonCategories>
+        <CardButtonCategories
+          className="w-3/4"
+          title="Mariachi"
+          description="Partituras para mariachi"
+          total="9"
+          href=""
+        >
+          <MusicCategoryIcon className="w-16" />
+        </CardButtonCategories>
+        <CardButtonCategories
+          className="w-3/4"
+          title="Musica versatil"
+          description="Partituras para grupos versatiles"
+          total="10"
+          href=""
+        >
+          <MusicCategoryIcon className="w-16" />
+        </CardButtonCategories>
+      </article>
+    </Card>
   </article>
 </section>
