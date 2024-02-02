@@ -1,10 +1,60 @@
 ---
+import ScoresIcon from "@/icons/dashboard/ScoresIcon.astro";
 import Card from "../Card.astro";
+import CardButton from "../CardButton.astro";
+import UploadMusicIcon from "@/icons/dashboard/UploadMusic.astro";
+import LikedMusicIcon from "@/icons/dashboard/LikedMusic.astro";
+import AddIcon from "@/icons/dashboard/Add.astro";
+import { ROUTES_PATH } from "../../const";
 ---
 
-<section class="w-full h-[300px] mt-8 flex flex-col gap-10">
+<section class="w-full h-[300px] mt-6 flex flex-col">
+  <div class="w-full min-h-max flex items-center gap-24">
+    <article>
+      <h2 class="text-2xl font-medium py-3">Mis partituras</h2>
+      <Card className="min-h-[18.5rem] bg-transparent py-4 px-0">
+        <div class="w-full flex gap-4">
+          <CardButton
+            className="bg-[#1A1E2C] hover:bg-[#212636]"
+            href={ROUTES_PATH.SCORES.MY_SCORES}
+            title="Mis partituras"
+          >
+            <ScoresIcon className="w-16" />
+          </CardButton>
+          <CardButton
+            className="bg-[#1A1E2C] hover:bg-[#212636]"
+            href={ROUTES_PATH.SCORES.MY_UPLOADS}
+            title="Mis subidas"
+          >
+            <UploadMusicIcon className="w-16" />
+          </CardButton>
+          <CardButton
+            className="bg-[#1A1E2C] hover:bg-[#212636]"
+            href={ROUTES_PATH.SCORES.MY_LIKED}
+            title="Mis favoritos"
+          >
+            <LikedMusicIcon className="w-11" />
+          </CardButton>
+        </div>
+      </Card>
+    </article>
+    <article>
+      <h3 class="text-2xl font-medium py-3">Mis albumes</h3>
+      <Card className="min-h-[18.5rem] bg-transparent py-4 px-0">
+        <div class="w-full min-h-max flex items-center gap-4">
+          <CardButton
+            className="bg-green-500/40 ring-1 ring-green-600 hover:bg-green-500/60"
+            href=""
+            title=""
+          >
+            <AddIcon className="w-16 opacity-80" />
+          </CardButton>
+        </div>
+      </Card>
+    </article>
+  </div>
   <article>
     <h2 class="text-2xl font-medium py-3">Partituras</h2>
-    <Card />
+    <Card className="" />
   </article>
 </section>

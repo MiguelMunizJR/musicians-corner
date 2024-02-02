@@ -1,0 +1,23 @@
+---
+interface Props {
+  title?: string;
+  className?: string;
+  href: string;
+}
+
+const { title = "", className = "", href = "" } = Astro.props;
+---
+
+<article
+  class={`w-36 h-36 flex justify-center items-center rounded-lg relative transition-all ${className}`}
+>
+  <a
+    class="w-full min-h-max flex flex-col justify-center items-center"
+    href={href}
+  >
+    <slot />
+    <div>
+      {title !== "" ? <h3 class="pt-5 mx-auto text-balance">{title}</h3> : null}
+    </div>
+  </a>
+</article>
