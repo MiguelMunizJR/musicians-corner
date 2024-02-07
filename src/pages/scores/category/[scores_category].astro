@@ -1,0 +1,38 @@
+---
+import AppLayout from "@/layouts/AppLayout.astro";
+import CardScore from "@/components/CardScore.astro";
+import { fade } from "astro:transitions";
+
+const { scores_category } = Astro.params;
+
+const title = "Banda Sinaloense";
+---
+
+<AppLayout title="">
+  <section class="w-full mt-10 flex flex-col">
+    <article>
+      <h2 class="text-2xl font-medium py-3" transition:name="scores_title">
+        Partituras
+      </h2>
+      <h4
+        class="mt-4 text-lg text-gray-100 font-semibold"
+        transition:animate={fade({ duration: ".4s" })}
+      >
+        {title}
+      </h4>
+    </article>
+    <section
+      class="w-full min-h-max mt-8 mb-24 grid grid-cols-4 gap-x-8 gap-y-12"
+      transition:animate={fade({ duration: ".4s" })}
+    >
+      <CardScore />
+      <CardScore />
+      <CardScore />
+      <CardScore />
+      <CardScore />
+      <CardScore />
+      <CardScore />
+      <CardScore />
+    </section>
+  </section>
+</AppLayout>

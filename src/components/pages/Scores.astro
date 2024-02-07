@@ -56,15 +56,15 @@ import CardButtonCategories from "../CardButtonCategories.astro";
     </article>
   </div>
   <article class="-mt-20">
-    <h2 class="text-2xl font-medium py-3">Partituras</h2>
+    <h2 class="text-2xl font-medium py-3" transition:name="scores_title">Partituras</h2>
     <Card className="bg-transparent p-3">
       <article class="w-full min-h-max flex flex-col justify-center gap-2">
         <CardButtonCategories
           className="w-3/4"
           title="Banda Sinaloense"
           description="Partituras para banda sinaloense"
-          total="100"
-          href=""
+          total="200"
+          href={ROUTES_PATH.SCORES_CATEGORY.BANDA}
         >
           <MusicCategoryIcon className="w-16" />
         </CardButtonCategories>
@@ -73,16 +73,17 @@ import CardButtonCategories from "../CardButtonCategories.astro";
           title="Mariachi"
           description="Partituras para mariachi"
           total="9"
-          href=""
+          href={ROUTES_PATH.SCORES_CATEGORY.MARIACHI}
+
         >
           <MusicCategoryIcon className="w-16" />
         </CardButtonCategories>
         <CardButtonCategories
           className="w-3/4"
-          title="Musica versatil"
-          description="Partituras para grupos versatiles"
-          total="10"
-          href=""
+          title="Sonora"
+          description="Partituras para sonora tropical"
+          total="20"
+          href={ROUTES_PATH.SCORES_CATEGORY.SONORA}
         >
           <MusicCategoryIcon className="w-16" />
         </CardButtonCategories>

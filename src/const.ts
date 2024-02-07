@@ -11,12 +11,8 @@ interface IRoutesPath {
   DASHBOARD: string;
   LIBRARY: string;
   USER: string;
-  SCORES: {
-    SCORES: string;
-    MY_SCORES: string;
-    MY_UPLOADS: string;
-    MY_LIKED: string;
-  }
+  SCORES: { [key: string]: string };
+  SCORES_CATEGORY: { [key: string]: string };
   METRONOME: string;
   TUNER: string;
   SETTINGS: string;
@@ -41,9 +37,14 @@ export const ROUTES_PATH: IRoutesPath = Object.freeze({
 	USER: "/users/me",
 	SCORES: {
 		SCORES: "/scores",
-		MY_SCORES: "/scores/[id]/scores",
-		MY_UPLOADS: "/scores/[id]/uploads",
-		MY_LIKED: "/scores/[id]/liked",
+		MY_SCORES: "/scores/[user_id]/scores",
+		MY_UPLOADS: "/scores/[user_id]/uploads",
+		MY_LIKED: "/scores/[user_id]/liked",
+	},
+	SCORES_CATEGORY: {
+		BANDA: "/scores/category/banda",
+		MARIACHI: "/scores/category/mariachi",
+		SONORA: "/scores/category/sonora",
 	},
 	METRONOME: "/metronome",
 	TUNER: "/tuner",
