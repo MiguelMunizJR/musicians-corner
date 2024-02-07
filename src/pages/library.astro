@@ -1,14 +1,7 @@
 ---
 import AppLayout from "@/layouts/AppLayout.astro";
-import Notification from "@/components/Notification.astro";
-import RecordingIcon from "@/icons/dashboard/Recording.astro";
 import { supabase } from "@/lib/supabase";
-import AvatarCard from "@/components/AvatarCard.astro";
-import SearchInput from "@/components/SearchInput.astro";
-import Greeting from "@/components/Greeting.tsx";
-import { playlists } from "@/lib/data";
-import PlayListItemCard from "@/components/PlayListItemCard.astro";
-import AsideApp from "@/components/AsideApp.astro";
+import LibraryPage from "@/components/pages/Library.astro";
 
 const { cookies, redirect } = Astro;
 
@@ -19,7 +12,7 @@ if (!accessToken || !refreshToken) {
   return redirect("/auth/login");
 }
 
-const { data, error } = await supabase.auth.setSession({
+const { error } = await supabase.auth.setSession({
   refresh_token: refreshToken?.value || "",
   access_token: accessToken?.value || "",
 });
@@ -35,28 +28,7 @@ if (error) {
 ---
 
 <AppLayout title="Mi biblioteca - Musician's Corner">
-  <section class="w-full px-8 mt-4 flex gap-6">
-    <main class="w-full">
-      <header class="w-full h-max mt-4 flex">
-        <SearchInput
-          className="w-[50%]"
-          placeholder="Black and yellow - Wiz Khalifa, Dream on - Aerosmith ..."
-        />
-      </header>
-      <article>
-        <Greeting className="mt-12" client:visible />
-        <div>
-          <!-- HERO LIBRARY GALLERY -->
-        </div>
-        <div class="flex flex-wrap mt-8 gap-4">
-          {
-            playlists.map((playlist) => (
-              <PlayListItemCard playlist={playlist} />
-            ))
-          }
-        </div>
-      </article>
-    </main>
-    <AsideApp />
+  <section class="w-full">
+    <LibraryPage />
   </section>
 </AppLayout>

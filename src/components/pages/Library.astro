@@ -1,0 +1,12 @@
+---
+import { playlists } from "@/lib/data";
+import Greeting from "../Greeting";
+import PlayListItemCard from "../PlayListItemCard.astro";
+---
+
+<section>
+  <Greeting className="mt-12" client:visible />
+  <article class="flex flex-wrap mt-8 gap-4">
+    {playlists.map((playlist) => <PlayListItemCard playlist={playlist} />)}
+  </article>
+</section>

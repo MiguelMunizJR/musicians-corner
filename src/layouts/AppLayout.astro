@@ -2,6 +2,8 @@
 import { ViewTransitions } from "astro:transitions";
 import AsideNav from "@/components/AsideNav.astro";
 import Logo from "@/components/Logo.astro";
+import HeaderApp from "@/components/HeaderApp.astro";
+import AsideApp from "@/components/AsideApp.astro";
 
 interface Props {
   title: string;
@@ -27,8 +29,12 @@ const { title, description } = Astro.props;
         <Logo className="w-60 mx-auto relative py-5" />
         <AsideNav />
       </aside>
-      <main class="[grid-area:main] overflow-y-auto w-full bg-[#11141d]">
-        <slot />
+      <main class="[grid-area:main] px-14 overflow-y-auto w-full bg-[#11141d]">
+        <HeaderApp />
+        <div class="w-full flex justify-between gap-20">
+          <slot />
+          <AsideApp />
+        </div>
       </main>
       <footer class="[grid-area:player] h-[80px] hidden">
         <!-- FOOTER PLAYER -->
@@ -49,7 +55,7 @@ const { title, description } = Astro.props;
           "player player player";
         grid-template-columns: 250px 1fr;
         grid-template-rows: 1fr auto;
-        background-color: #1F2235;
+        background-color: #1f2235;
       }
 
       @font-face {
@@ -96,6 +102,5 @@ const { title, description } = Astro.props;
       is:inline
       src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"
     ></script>
-
   </body>
 </html>
