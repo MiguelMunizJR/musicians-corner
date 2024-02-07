@@ -1,0 +1,85 @@
+---
+import { ROUTES_PATH } from "@/const";
+import DocsIcon from "@/icons/dashboard/DocsIcon.astro";
+import ScoresIcon from "@/icons/dashboard/ScoresIcon.astro";
+import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<button
+  id="button"
+  class={`${className} flex justify-between gap-3 items-center rounded-lg text-white hover:text-gray-100 hover:bg-[#3c475579] py-2 px-4 text-base`}
+>
+  <div class="flex items-center gap-4">
+    <DocsIcon className="w-7 text-white" />
+    Partituras
+  </div>
+  <svg
+    class="w-6 h-6 -mr-2 text-gray-300 hover:text-white transition-all"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+    ><path
+      fill-rule="evenodd"
+      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+      clip-rule="evenodd"></path>
+  </svg>
+</button>
+<ul id="dropdown" class="py-2 space-y-2 transition-all">
+  <li>
+    <a
+      href={ROUTES_PATH.SCORES.SCORES}
+      class="flex items-center gap-3 w-full pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
+    >
+      <ScoresIcon className="w-5 h-5" />
+      Todas las partituras
+    </a>
+  </li>
+  <li>
+    <a
+      href={ROUTES_PATH.SCORES.MY_SCORES}
+      class="flex items-center w-full gap-3 pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
+    >
+      <MusicCategoryIcon className="w-5 h-5" />
+
+      Mis partituras
+    </a>
+  </li>
+  <li>
+    <a
+      href={ROUTES_PATH.SCORES.MY_LIKED}
+      class="flex items-center w-full gap-3 pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
+    >
+      <svg
+        class="w-5 h-5"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        ><path
+          d="M20.808 11.079C19.829 16.132 12 20.5 12 20.5s-7.829-4.368-8.808-9.421C2.227 6.1 5.066 3.5 8 3.5a4.444 4.444 0 0 1 4 2 4.444 4.444 0 0 1 4-2c2.934 0 5.773 2.6 4.808 7.579Z"
+        ></path></svg
+      >
+      Favoritos
+    </a>
+  </li>
+</ul>
+
+<script>
+  const button = document.getElementById("button");
+  const dropdown = document.getElementById("dropdown");
+
+  button?.addEventListener("click", () => {
+    dropdown?.classList.toggle("hidden");
+  });
+</script>
+
+<style>
+  #dropdown {
+  }
+</style>
