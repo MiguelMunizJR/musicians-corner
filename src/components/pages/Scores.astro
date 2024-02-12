@@ -8,6 +8,46 @@ import { ROUTES_PATH } from "../../const";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../CardButtonCategories.astro";
 import AlbumForm from "@/components/scores/AlbumForm.jsx";
+
+interface Album {
+  id: string;
+  title: string;
+  description: string;
+  total: number;
+}
+
+const albums: Album[] = [
+  {
+    id: "1",
+    title: "Mi primer album",
+    description: "Album de prueba",
+    total: 10,
+  },
+  {
+    id: "2",
+    title: "Mi segundo album",
+    description: "Album de prueba",
+    total: 10,
+  },
+  {
+    id: "3",
+    title: "Mi tercer album",
+    description: "Album de prueba",
+    total: 10,
+  },
+  {
+    id: "4",
+    title: "Mi cuarto album",
+    description: "Album de prueba",
+    total: 10,
+  },
+  {
+    id: "5",
+    title: "Mi quinto album",
+    description: "Album de prueba",
+    total: 10,
+  },
+]
 ---
 
 <section class="w-full mt-10 flex flex-col">
@@ -21,21 +61,21 @@ import AlbumForm from "@/components/scores/AlbumForm.jsx";
             href={ROUTES_PATH.SCORES.MY_SCORES}
             title="Mis partituras"
           >
-            <ScoresIcon className="w-16" />
+            <ScoresIcon className="w-14" />
           </CardButton>
           <CardButton
             className="bg-[#1A1E2C] hover:bg-[#212636]"
             href={ROUTES_PATH.SCORES.MY_UPLOADS}
             title="Mis subidas"
           >
-            <UploadMusicIcon className="w-16" />
+            <UploadMusicIcon className="w-14" />
           </CardButton>
           <CardButton
             className="bg-[#1A1E2C] hover:bg-[#212636]"
             href={ROUTES_PATH.SCORES.MY_LIKED}
             title="Mis favoritos"
           >
-            <LikedMusicIcon className="w-11" />
+            <LikedMusicIcon className="w-10" />
           </CardButton>
         </div>
       </Card>
@@ -49,10 +89,21 @@ import AlbumForm from "@/components/scores/AlbumForm.jsx";
             href={ROUTES_PATH.SCORES.MY_ALBUMS}
             title="Mis álbumes"
           >
-            <ScoresIcon className="w-16" />
+            <ScoresIcon className="w-14" />
           </CardButton>
           <div class="flex items-center gap-2">
-            {}
+            {
+              albums?.map((album) => (
+                <CardButton
+                  key={album.id}
+                  className="bg-[#1A1E2C] hover:bg-[#212636] transition-all"
+                  href={ROUTES_PATH.SCORES.MY_ALBUMS}
+                  title={album.title}
+                >
+                  <ScoresIcon className="w-14" />
+                </CardButton>
+              )).slice(0, 1)
+            }
             <AlbumForm client:load />
           </div>
         </div>

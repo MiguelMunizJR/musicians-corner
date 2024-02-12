@@ -19,17 +19,17 @@ const {
   class={`w-full min-h-24 py-3 px-5 flex justify-between items-center bg-[#1A1E2C] hover:bg-[#212636] rounded-lg transition-all cursor-pointer ${className}`}
 >
   <a class="w-full flex items-center" href={href}>
-    <div class="w-full min-h-max flex items-center gap-6">
+    <div class="w-full min-h-max flex items-center gap-5">
       <slot />
       <div class="w-full min-h-max flex flex-col justify-center gap-1">
-        <h3 class="font-semibold">{title}</h3>
-        <p class="text-sm font-light text-gray-400">
+        <h3 class="font-medium text-[#26ab3c]">{title}</h3>
+        <p class="text-sm font-light text-gray-300/60">
           {description}
         </p>
       </div>
     </div>
     <div class="mr-4">
-      <p class="w-14 h-8 flex justify-center items-center font-normal text-xl bg-green-300/5 rounded text-[#26ab3c]">
+      <p class="w-14 h-8 flex justify-center items-center font-normal text-xl bg-green-500/5 rounded text-[#26ab3c]">
         <span>{total}</span>
       </p>
     </div>
