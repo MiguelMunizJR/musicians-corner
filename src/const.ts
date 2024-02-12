@@ -37,6 +37,7 @@ export const ROUTES_PATH: IRoutesPath = Object.freeze({
 	USER: "/users/me",
 	SCORES: {
 		SCORES: "/scores",
+		MY_ALBUMS: "/scores/[user_id]/my-albums",
 		MY_SCORES: "/scores/[user_id]/scores",
 		MY_UPLOADS: "/scores/[user_id]/uploads",
 		MY_LIKED: "/scores/[user_id]/liked",

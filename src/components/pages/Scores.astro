@@ -4,11 +4,10 @@ import Card from "../Card.astro";
 import CardButton from "../CardButton.astro";
 import UploadMusicIcon from "@/icons/dashboard/UploadMusic.astro";
 import LikedMusicIcon from "@/icons/dashboard/LikedMusic.astro";
-import AddIcon from "@/icons/dashboard/Add.astro";
 import { ROUTES_PATH } from "../../const";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../CardButtonCategories.astro";
-import AlbumForm from "@/components/scores/AlbumForm";
+import AlbumForm from "@/components/scores/AlbumForm.jsx";
 ---
 
 <section class="w-full mt-10 flex flex-col">
@@ -44,15 +43,18 @@ import AlbumForm from "@/components/scores/AlbumForm";
     <article>
       <h3 class="text-2xl font-medium py-3">Mis albumes</h3>
       <Card className="min-h-[18.5rem] bg-transparent p-3">
-        <div class="w-full min-h-max flex items-center gap-4">
-          <button
-            class="w-36 h-36 flex justify-center items-center rounded-lg relative bg-[#1e8530] hover:bg-[#249938] cursor-pointer transition-all"
-            data-modal-target="crud-modal"
-            data-modal-toggle="crud-modal"
+        <div class="w-full min-h-max flex items-center gap-6">
+          <CardButton
+            className="bg-[#1A1E2C] hover:bg-[#212636]"
+            href={ROUTES_PATH.SCORES.MY_ALBUMS}
+            title="Mis álbumes"
           >
-            <AddIcon className="w-16 opacity-80" />
-          </button>
-          <AlbumForm client:load />
+            <ScoresIcon className="w-16" />
+          </CardButton>
+          <div class="flex items-center gap-2">
+            {}
+            <AlbumForm client:load />
+          </div>
         </div>
       </Card>
     </article>
