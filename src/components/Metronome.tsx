@@ -71,7 +71,7 @@ const Metronome = () => {
 	};
 
 	return (
-		<section className="w-10/12 min-h-max mt-12 mx-auto flex flex-col">
+		<section className="w-10/12 min-h-max mt-8 mx-auto flex flex-col gap-8">
 			<div className="self-end flex gap-x-2 text-white">
 				<button
 					className="opacity-70 hover:opacity-100 transition"
@@ -91,7 +91,7 @@ const Metronome = () => {
 					}}
 				/>
 			</div>
-			<article className="w-full min-h-max flex flex-col justify-center items-center">
+			<article className="w-full min-h-max flex flex-col justify-center items-center gap-3">
 				<div className="w-44 h-44 rounded-full flex justify-center items-center bg-[#1e2231a2]">
 					<h3 className="flex flex-col items-center">
 						<span className="text-6xl text-white font-bold">{bpmValue}</span>
