@@ -1,9 +1,12 @@
 import { API_ROUTES, ROUTES_PATH } from "@/const";
 import EmailIcon from "@/icons/auth/Email.jsx";
 import PasswordIcon from "@/icons/auth/Password.jsx";
+import { useUser } from "@/store/useUser";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 
 const Form = ({ URL }) => {
+	const setUser = useUser((state) => state.setUser);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -11,23 +14,24 @@ const Form = ({ URL }) => {
 		const URL_BASE =
       URL === ROUTES_PATH.LOGIN ? API_ROUTES.LOGIN : API_ROUTES.SIGNUP;
 
-		await fetch(URL_BASE, {
-			method: "POST",
-			body: formData,
-		})
-			.then((res) => {
-				if (res.status === 201) {
-					navigate(ROUTES_PATH.LOGIN);
-				}
-
-				if (res.status === 200) {
-					navigate(ROUTES_PATH.DASHBOARD);
-				}
-			})
-			.catch((err) => {
-				console.log(err.message);
+		try {
+			const res = await fetch(URL_BASE, {
+				method: "POST",
+				body: formData,
 			});
-		return;
+
+			if (res.status === 201) {
+				navigate(ROUTES_PATH.LOGIN);
+			}
+
+			if (res.status === 200) {
+				navigate(ROUTES_PATH.DASHBOARD);
+			}
+			const user = await res.json();
+			setUser({ session: user.session, data: user.user });
+		} catch (err) {
+			console.log(err.message);
+		}
 	};
 
 	return (

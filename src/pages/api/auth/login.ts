@@ -44,7 +44,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 			path: "/",
 		});
 
-		return new Response("Login successful", { status: 200 });
+		return new Response(JSON.stringify(data), { status: 200 });
 	} catch (error) {
 		return new Response("Error during login", { status: 500 });
 	}
