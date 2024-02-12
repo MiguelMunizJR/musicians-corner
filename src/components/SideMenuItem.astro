@@ -5,12 +5,15 @@ interface Props {
 }
 
 const { href, className } = Astro.props
+
+const currentPath = Astro.url.pathname;
+const samePath = href !== currentPath ? href : null;
 ---
 
 <li class="list-none">
   <a
-    class={`gap-2 flex rounded-lg font-normal items-center transition duration-150 border-none ${className} `}
-    href={href}
+    class={`gap-2 flex rounded-lg font-normal items-center transition duration-150 border-none cursor-pointer ${className}`}
+    href={samePath}
   >
     <slot />
   </a>

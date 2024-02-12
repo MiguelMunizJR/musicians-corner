@@ -4,14 +4,12 @@ import PasswordIcon from "@/icons/auth/Password.jsx";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 
 const Form = ({ URL }) => {
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
-		const URL_BASE = URL === ROUTES_PATH.LOGIN 
-			? API_ROUTES.LOGIN 
-			: API_ROUTES.SIGNUP;
+		const URL_BASE =
+      URL === ROUTES_PATH.LOGIN ? API_ROUTES.LOGIN : API_ROUTES.SIGNUP;
 
 		await fetch(URL_BASE, {
 			method: "POST",
@@ -93,11 +91,7 @@ const Form = ({ URL }) => {
 					alt="google logo"
 					loading="lazy"
 				/>
-				<span>
-					{URL.includes("/login")
-						? "Inicia sesión con Google"
-						: "Crear cuenta con Google"}
-				</span>
+        Inicia sesión con Google
 			</button>
 		</article>
 	);
