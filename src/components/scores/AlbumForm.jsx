@@ -1,108 +1,92 @@
+import { DialogClose } from "@radix-ui/react-dialog";
+import {
+	DialogTrigger,
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogDescription,
+	DialogTitle,
+	DialogFooter
+} from "../ModalDialog";
+import { useState } from "react";
+
 const AlbumForm = () => {
-	const handleSubmit = async (e) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		const modal = document.getElementById("crud-modal");
 
-		const formData = new FormData(e.target);
-		const name = formData.get("name");
-		const description = formData.get("description");
+		const data = new FormData(e.target);
+		const title = data.get("title");
+		const description = data.get("description") || "not description";
 
-		console.log(name, description);
-		modal.classList.add("hidden");
+		console.log({ title, description });
 		e.target.reset();
+		setIsOpen(false);
 	};
 
 	return (
-		<section
-			id="crud-modal"
-			aria-hidden="true"
-			className="hidden bg-black/15 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full transition-all"
-		>
-			<div className="relative p-6 w-full max-w-md max-h-full">
-				<div className="relative bg-[#212636] rounded-lg">
-					<header className="flex items-center justify-between p-4">
-						<h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Crear albúm
-						</h3>
-						<button
-							type="button"
-							className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-							data-modal-toggle="crud-modal"
-						>
-							<svg
-								className="w-3 h-3"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 14 14"
-							>
-								<path
-									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-								></path>
-							</svg>
-							<span className="sr-only">Close modal</span>
-						</button>
-					</header>
-					<form className="p-4" onSubmit={handleSubmit}>
-						<div className="grid gap-6 mb-4 grid-cols-2">
-							<div className="col-span-2">
-								<label
-									htmlFor="name"
-									className="mb-2 text-sm font-medium text-white"
-								>
-                  Nombre
-								</label>
-								<input
-									type="text"
-									name="name"
-									id="name"
-									className="bg-gray-500/20 text-gray-300 text-sm rounded focus:ring-primary-600 w-full p-2 hover:bg-gray-500/20 outline-none"
-									placeholder="Nombre del albúm"
-									required
-								/>
-							</div>
-							<div className="col-span-2">
-								<label
-									htmlFor="description"
-									className="mb-2 text-sm font-medium text-gray-200"
-								>
-                  Descripción
-								</label>
-								<textarea
-									id="description"
-									name="description"
-									rows={4}
-									className="bg-gray-500/20 text-gray-300 text-sm rounded w-full p-2 hover:bg-gray-500/20 outline-none"
-									placeholder="Agrega una descripción"
-								></textarea>
-							</div>
+		<Dialog open={isOpen} onOpenChange={setIsOpen} >
+			<DialogTrigger asChild>
+				<button className="w-36 h-36 flex justify-center items-center rounded-lg relative bg-[#1e8530] hover:bg-[#249938] cursor-pointer transition-all">
+					<svg
+						className="w-16"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+					>
+						<path
+							fill="currentColor"
+							fillRule="evenodd"
+							d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Zm.75-13a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
+							clipRule="evenodd"
+						></path>
+					</svg>
+				</button>
+			</DialogTrigger>
+			<DialogContent className="sm:max-w-[425px] bg-[#1A1E2C] border-0">
+				<DialogHeader>
+					<DialogTitle className="font-medium ">Crear albúm</DialogTitle>
+					<DialogDescription className="text-gray-400/60">
+            Crea un nuevo albúm para mantener tus partituras organizadas.
+					</DialogDescription>
+				</DialogHeader>
+				<form onSubmit={handleSubmit}>
+					<div className="grid gap-4 py-6 text-base font-normal text-gray-300">
+						<div className="grid grid-cols-4 items-center gap-4">
+							<label htmlFor="title" className="text-right">
+                Titulo
+							</label>
+							<input
+								id="title"
+								name="title"
+								placeholder="Titulo del albúm"
+								className="col-span-3 bg-[#23293a] active:bg-[#282e41] hover:bg-[#282e41] outline-none transition-all rounded-sm p-1 px-2 text-gray-300 text-[14px]"
+							/>
 						</div>
+						<div className="grid grid-cols-4 items-center gap-4">
+							<label htmlFor="description" className="text-right">
+                Descripción
+							</label>
+							<input
+								id="description"
+								name="description"
+								placeholder="Alguna descripción (opcional)"
+								className="col-span-3 bg-[#23293a] active:bg-[#282e41] hover:bg-[#282e41] outline-none transition-all rounded-sm p-1 px-2 text-gray-300 text-[14px]"
+							/>
+						</div>
+					</div>
+					<DialogFooter className="mt-4">
 						<button
 							type="submit"
-							className="mt-4 text-white inline-flex items-center bg-[#1e8530] hover:bg-[#249938] font-medium rounded text-sm px-5 py-2 text-center transition-all"
+							className="bg-[#26ab3c] hover:bg-[#2cb643] transition-all py-2 px-3 rounded cursor-pointer"
 						>
-							<svg
-								className="me-1 -ms-1 w-5 h-5"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									fillRule="evenodd"
-									d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-									clipRule="evenodd"
-								></path>
-							</svg>
-              Crear nuevo albúm
+                Save changes
 						</button>
-					</form>
-				</div>
-			</div>
-		</section>
+					</DialogFooter>
+				</form>
+			</DialogContent>
+		</Dialog>
 	);
 };
 

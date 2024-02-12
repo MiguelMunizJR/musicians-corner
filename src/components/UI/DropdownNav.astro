@@ -9,6 +9,8 @@ interface Props {
 }
 
 const { className } = Astro.props;
+
+const currentPath = Astro.url.pathname;
 ---
 
 <button
@@ -33,7 +35,9 @@ const { className } = Astro.props;
 <ul id="dropdown" class="py-2 space-y-2 transition-all">
   <li>
     <a
-      href={ROUTES_PATH.SCORES.SCORES}
+      href={ROUTES_PATH.SCORES.SCORES !== currentPath
+        ? ROUTES_PATH.SCORES.SCORES
+        : null}
       class="flex items-center gap-3 w-full pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
     >
       <ScoresIcon className="w-5 h-5" />
@@ -42,7 +46,9 @@ const { className } = Astro.props;
   </li>
   <li>
     <a
-      href={ROUTES_PATH.SCORES.MY_SCORES}
+      href={ROUTES_PATH.SCORES.MY_SCORES !== currentPath
+        ? ROUTES_PATH.SCORES.MY_SCORES
+        : null}
       class="flex items-center w-full gap-3 pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
     >
       <MusicCategoryIcon className="w-5 h-5" />
@@ -52,7 +58,9 @@ const { className } = Astro.props;
   </li>
   <li>
     <a
-      href={ROUTES_PATH.SCORES.MY_LIKED}
+      href={ROUTES_PATH.SCORES.MY_LIKED !== currentPath
+        ? ROUTES_PATH.SCORES.MY_LIKED
+        : null}
       class="flex items-center w-full gap-3 pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
     >
       <svg
@@ -80,6 +88,7 @@ const { className } = Astro.props;
 </script>
 
 <style>
-  #dropdown {
+  a {
+    cursor: pointer;
   }
 </style>
