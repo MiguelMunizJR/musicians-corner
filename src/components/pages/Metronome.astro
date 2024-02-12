@@ -1,17 +1,10 @@
 ---
-
+import MetronomeCard from "@/components/Metronome";
 ---
 
 <section class="w-full mt-10 flex flex-col">
   <h2 class="text-3xl font-medium py-5">Metrónomo</h2>
   <article>
-    <div class="w-full flex justify-center items-baseline">
-      <div class="w-44 h-44 mt-20 rounded-full flex justify-center items-center bg-[#1e2231a2]">
-        <h3 class="flex flex-col items-center">
-          <span class="text-6xl text-white font-bold">129</span>
-          <span class="text-gray-200/30 font-normal text-2xl">BPM</span>
-        </h3>
-      </div>
-    </div>
+    <MetronomeCard client:only />
   </article>
 </section>
