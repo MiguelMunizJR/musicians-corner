@@ -7,6 +7,7 @@ import DashboardIcon from "@/icons/dashboard/DashboardIcon.astro";
 import LogOut from "@/components/auth/LogoutButton.astro";
 import Metronome from "@/icons/dashboard/Metronome.astro";
 import DropdownNav from "./DropdownNav.astro";
+import UserSettings from "@/icons/dashboard/UserSettings.astro";
 ---
 
 <nav class="w-full h-full text-[15px] flex flex-col" aria-label="Sidebar">
@@ -50,6 +51,7 @@ import DropdownNav from "./DropdownNav.astro";
         href={ROUTES_PATH.USER}
         className="text-white hover:text-gray-100 hover:bg-[#3c475579] py-3 px-4 gap-2 text-base font-normal"
       >
+      <UserSettings />
         Mi cuenta
       </SideMenuItem>
       <SideMenuItem

@@ -27,7 +27,7 @@ const AlbumForm = () => {
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen} >
 			<DialogTrigger asChild>
-				<button className="w-36 h-36 flex justify-center items-center rounded-lg relative bg-[#1e8530] hover:bg-[#249938] cursor-pointer transition-all">
+				<button className="w-36 h-36 flex justify-center items-center rounded-lg relative bg-[#26ab3c] hover:bg-[#2cb643] cursor-pointer transition-all">
 					<svg
 						className="w-16"
 						xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ const AlbumForm = () => {
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px] bg-[#1A1E2C] border-0">
 				<DialogHeader>
-					<DialogTitle className="font-medium ">Crear albúm</DialogTitle>
+					<DialogTitle className="font-medium text-xl">Crear albúm</DialogTitle>
 					<DialogDescription className="text-gray-400/60">
             Crea un nuevo albúm para mantener tus partituras organizadas.
 					</DialogDescription>
@@ -78,9 +78,9 @@ const AlbumForm = () => {
 					<DialogFooter className="mt-4">
 						<button
 							type="submit"
-							className="bg-[#26ab3c] hover:bg-[#2cb643] transition-all py-2 px-3 rounded cursor-pointer"
+							className="bg-[#26ab3c] hover:bg-[#2cb643] transition-all py-2 px-3 text-[15px] rounded cursor-pointer"
 						>
-                Save changes
+                Crear albúm
 						</button>
 					</DialogFooter>
 				</form>

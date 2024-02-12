@@ -2,11 +2,17 @@
 import AvatarCard from "./AvatarCard.astro";
 import Notification from "./Notification.astro";
 import SearchInput from "./SearchInput.astro";
+import {Button} from "./Button";
+import UploadMusic from "@/icons/dashboard/UploadMusic.astro";
 ---
 
 <header class="w-full mt-8 flex items-center">
-  <div>
+  <div class="w-full flex items-center">
     <SearchInput className="w-[725px]" />
+    <Button className="bg-[#26ab3c] hover:bg-[#2cb643] rounded w-52 h-12" >
+      <UploadMusic className="w-6 mr-[3px]" />
+      Subir partitura
+    </Button>
   </div>
   <article class="w-full flex justify-end items-center gap-3">
     <div>
