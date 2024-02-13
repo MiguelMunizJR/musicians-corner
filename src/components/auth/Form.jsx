@@ -1,12 +1,9 @@
 import { API_ROUTES, ROUTES_PATH } from "@/const";
 import EmailIcon from "@/icons/auth/Email.jsx";
 import PasswordIcon from "@/icons/auth/Password.jsx";
-import { useUser } from "@/store/useUser";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 
 const Form = ({ URL }) => {
-	const {user, setUser} = useUser((state) => state);
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -27,14 +24,11 @@ const Form = ({ URL }) => {
 			if (res.status === 200) {
 				navigate(ROUTES_PATH.DASHBOARD);
 			}
-			const user = await res.json();
-			setUser({ session: user.session, data: user.user });
 		} catch (err) {
 			console.log(err.message);
 		}
 	};
 	
-	console.log(user);
 	return (
 		<article className="flex flex-col">
 			<form
