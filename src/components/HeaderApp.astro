@@ -1,7 +1,7 @@
 ---
-import Notification from "./Notification.astro";
 import SearchInput from "./SearchInput.astro";
 import ScoresForm from "./scores/ScoresForm";
+import NotificationCard from "./NotificationCard";
 import { AvatarCard } from "./AvatarCard.jsx";
 import { getUser } from "@/lib/getUser";
 
@@ -17,9 +17,7 @@ const data = await getUser(accessToken?.value, refreshToken?.value);
     <ScoresForm client:load />
   </div>
   <article class="w-full flex justify-end items-center gap-3">
-    <div>
-      <Notification className="w-7 h-7 relative" />
-    </div>
+    <NotificationCard client:visible />
     <AvatarCard user={data} client:visible />
   </article>
 </header>
