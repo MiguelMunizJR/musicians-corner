@@ -1,8 +1,8 @@
 ---
 import AppLayout from "../../../layouts/AppLayout.astro";
-const { user_id } = Astro.params;
+import MyAlbumsComponent from "@/components/pages/scores/MyAlbums.astro";
 ---
 
 <AppLayout title="Mis albúms - Musician's Corner">
-    Hola {user_id}
+    <MyAlbumsComponent />
 </AppLayout>
