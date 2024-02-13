@@ -7,26 +7,14 @@ import { supabase } from "@/lib/supabase";
 import SideMenuItem from "../SideMenuItem.astro";
 import { ROUTES_PATH } from "@/const";
 import EnterIcon from "@/icons/dashboard/EnterIcon.astro";
-const { cookies } = Astro;
+import { getUser } from "@/lib/getUser";
 
-const accessToken = cookies.get("sb-access-token");
-const refreshToken = cookies.get("sb-refresh-token");
+const accessToken = Astro.cookies.get("sb-access-token");
+const refreshToken = Astro.cookies.get("sb-refresh-token");
 
-const { data, error } = await supabase.auth.setSession({
-  refresh_token: refreshToken?.value || "",
-  access_token: accessToken?.value || "",
-});
+const data = await getUser(accessToken?.value, refreshToken?.value);
 
-if (error) {
-  cookies.delete("sb-access-token", {
-    path: "/",
-  });
-  cookies.delete("sb-refresh-token", {
-    path: "/",
-  });
-}
-
-const isLoggin = data?.user ? true : false;
+const isLoggin = data?.user ? data?.user : false;
 const authRoute = Astro.url.pathname.includes("auth");
 ---
 
@@ -67,7 +55,7 @@ const authRoute = Astro.url.pathname.includes("auth");
               <EnterIcon className="w-5 h-5" />
               Ir al Dashboard
             </SideMenuItem>
-            <AvatarCard />
+            <AvatarCard user={data} client:visible />
           </div>
         ) : (
           <AuthButtons className="flex gap-4" />

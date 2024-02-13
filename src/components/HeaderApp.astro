@@ -3,6 +3,12 @@ import Notification from "./Notification.astro";
 import SearchInput from "./SearchInput.astro";
 import ScoresForm from "./scores/ScoresForm";
 import { AvatarCard } from "./AvatarCard.jsx";
+import { getUser } from "@/lib/getUser";
+
+const accessToken = Astro.cookies.get("sb-access-token");
+const refreshToken = Astro.cookies.get("sb-refresh-token");
+
+const data = await getUser(accessToken?.value, refreshToken?.value);
 ---
 
 <header class="w-full mt-8 flex items-center">
@@ -14,6 +20,6 @@ import { AvatarCard } from "./AvatarCard.jsx";
     <div>
       <Notification className="w-7 h-7 relative" />
     </div>
-    <AvatarCard client:visible />
+    <AvatarCard user={data} client:visible />
   </article>
 </header>

@@ -8,8 +8,8 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/DropDownMenu";
+import { ROUTES_PATH } from "@/const";
 import { logout } from "@/lib/auth/auth";
-import { useUser } from "@/store/useUser";
 
 export const AvatarIcon = () => {
 	return (
@@ -79,9 +79,9 @@ export const ArrowDown = () => {
 	);
 };
 
-export const AvatarCard = () => {
-	const { user } = useUser((state) => state);
-	console.log(user);
+export const AvatarCard = ({ user }) => {
+
+	const myScoresURL = ROUTES_PATH.SCORES.MY_SCORES.replace("[user_id]", user?.user?.id);
 
 	return (
 		<DropdownMenu>
@@ -89,7 +89,7 @@ export const AvatarCard = () => {
 				<button className="w-max mx-4 py-3 px-5 rounded-xl flex gap-3 hover:bg-slate-600/15 cursor-pointer transition-all">
 					<AvatarIcon />
 					<div className="flex flex-col gap-1">
-						<h6>Anonimous</h6>
+						<h6>{user?.user?.email}</h6>
 						<p className="bg-blue-500 w-max px-3 text-sm font-semibold rounded-full">
               Pro
 						</p>
@@ -104,15 +104,15 @@ export const AvatarCard = () => {
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuItem className="hover:bg-[#282F3B] rounded-lg px-2 py-2 text-gray-300 cursor-pointer">
-						<span>Mi perfil</span>
+						<a href={ROUTES_PATH.USER}>Mi perfil</a>
 						<DropdownMenuShortcut>⇧ + P</DropdownMenuShortcut>
 					</DropdownMenuItem>
 					<DropdownMenuItem className="hover:bg-[#282F3B] rounded-lg px-2 py-2 text-gray-300 cursor-pointer">
-						<span>Mis partituras</span>
+						<a href={myScoresURL}>Mis partituras</a>
 						<DropdownMenuShortcut>⇧ + B</DropdownMenuShortcut>
 					</DropdownMenuItem>
 					<DropdownMenuItem className="hover:bg-[#282F3B] rounded-lg px-2 py-2 text-gray-300 cursor-pointer">
-						<span>Ajustes</span>
+						<a href={ROUTES_PATH.SETTINGS}>Ajustes</a>
 						<DropdownMenuShortcut>⇧ + S</DropdownMenuShortcut>
 					</DropdownMenuItem>
 					<DropdownMenuItem className="hover:bg-[#282F3B] rounded-lg px-2 py-2 text-gray-300 cursor-pointer">
@@ -121,7 +121,10 @@ export const AvatarCard = () => {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onSelect={logout} className="hover:bg-[#2C1D28] rounded-lg py-3 px-2 cursor-pointer flex items-center gap-1 text-red-500">
+				<DropdownMenuItem
+					onSelect={logout}
+					className="hover:bg-[#2C1D28] rounded-lg py-3 px-2 cursor-pointer flex items-center gap-1 text-red-500"
+				>
 					<svg
 						viewBox="0 0 24 24"
 						fill="none"

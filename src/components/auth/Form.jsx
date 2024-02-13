@@ -9,11 +9,11 @@ const Form = ({ URL }) => {
 
 		const formData = new FormData(e.target);
 		const URL_BASE =
-      URL === ROUTES_PATH.LOGIN ? API_ROUTES.LOGIN : API_ROUTES.SIGNUP;
+      URL !== ROUTES_PATH.LOGIN ? API_ROUTES.SIGNUP : API_ROUTES.LOGIN;
 
 		try {
 			const res = await fetch(URL_BASE, {
-				method: "POST",
+				method: "post",
 				body: formData,
 			});
 
@@ -24,13 +24,11 @@ const Form = ({ URL }) => {
 			if (res.status === 200) {
 				navigate(ROUTES_PATH.DASHBOARD);
 			}
-
-			
 		} catch (err) {
 			console.log(err.message);
 		}
 	};
-	
+
 	return (
 		<article className="flex flex-col">
 			<form

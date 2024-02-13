@@ -1,31 +1,13 @@
 ---
 import AppLayout from "@/layouts/AppLayout.astro";
-import SearchInput from "@/components/SearchInput.astro";
-import AsideApp from "@/components/AsideApp.astro";
 import DashboardPage from "@/components/pages/Dashboard.astro";
+import { getUser } from "@/lib/getUser";
 
-import { supabase } from "@/lib/supabase";
-const { cookies, redirect } = Astro;
+const accessToken = Astro.cookies.get("sb-access-token")
+const refreshToken = Astro.cookies.get("sb-refresh-token")
 
-const accessToken = cookies.get("sb-access-token");
-const refreshToken = cookies.get("sb-refresh-token");
-
-if (!accessToken || !refreshToken) {
-  return redirect("/auth/login");
-}
-
-const { data, error } = await supabase.auth.setSession({
-  refresh_token: refreshToken?.value || "",
-  access_token: accessToken?.value || "",
-});
-
-if (error) {
-  cookies.delete("sb-access-token", {
-    path: "/",
-  });
-  cookies.delete("sb-refresh-token", {
-    path: "/",
-  });
+if (accessToken?.value && refreshToken?.value) {
+  await getUser(accessToken?.value, refreshToken?.value);
 }
 ---
 

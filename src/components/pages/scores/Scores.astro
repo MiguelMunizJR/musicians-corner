@@ -8,14 +8,13 @@ import { ROUTES_PATH } from "../../../const";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../../CardButtonCategories.astro";
 import AlbumForm from "@/components/scores/AlbumForm.jsx";
-import { getUser } from "@/lib/getUser"
-const { cookies } = Astro;
+import { getUser } from "@/lib/getUser";
 
-const accessToken = cookies.get("sb-access-token");
-const refreshToken = cookies.get("sb-refresh-token");
+const refreshToken = Astro.cookies.get("sb-refresh-token");
+const accessToken = Astro.cookies.get("sb-access-token");
 
-const user = await getUser(accessToken?.value, refreshToken?.value);
-const userID = user?.user?.id;
+const data = await getUser(accessToken?.value, refreshToken?.value);
+const userID = data?.user?.id;
 ---
 
 <section class="w-full mt-10 flex flex-col">
