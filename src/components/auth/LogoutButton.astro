@@ -9,7 +9,7 @@ interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<form action={API_ROUTES.LOGOUT} method="get">
+<form action={API_ROUTES.LOGOUT} method="GET">
   <button
     class={`w-full flex items-center text-red-500 hover:text-red-500 hover:ring-red-700 hover:bg-red-500/10 hover:ring-1 rounded-md gap-4 py-3 px-4 transition duration-150 ${className}`}
   >

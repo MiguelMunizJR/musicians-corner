@@ -24,6 +24,8 @@ const Form = ({ URL }) => {
 			if (res.status === 200) {
 				navigate(ROUTES_PATH.DASHBOARD);
 			}
+
+			
 		} catch (err) {
 			console.log(err.message);
 		}

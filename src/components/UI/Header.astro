@@ -1,6 +1,6 @@
 ---
 import AuthButtons from "../auth/AuthButtons.astro";
-import AvatarCard from "../AvatarCard.astro";
+import { AvatarCard } from "../AvatarCard";
 import Logo from "../Logo.astro";
 
 import { supabase } from "@/lib/supabase";
@@ -31,7 +31,7 @@ const authRoute = Astro.url.pathname.includes("auth");
 ---
 
 <header
-  class="w-full h-[75px] bg-transparent flex items-end absolute top-0 z-50"
+  class="w-full h-[75px] bg-transparent flex items-end fixed top-0 z-50"
 >
   <Logo className="top-6 left-[60px] w-[350px]" />
   <nav class="ml-[730px] mr-[65px] flex flex-1 justify-between">
