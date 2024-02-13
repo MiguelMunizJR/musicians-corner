@@ -1,31 +1,13 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "../Button";
 import { Slider } from "./Slider";
 import { Volume, VolumeSilence } from "@/icons/player/VolumeIcons";
 
-const Metronome = () => {
-	const [bpmValue, setBpmValue] = useState(89);
-	const [volume, setVolume] = useState(100);
+export const VolumeControl = () => {
+	const [volume, setVolume] = useState(1);
 	const previousVolumeRef = useRef(volume);
-	const [isPlaying, setIsPlaying] = useState(false);
 
 	const isVolumeSilenced = volume < 0.1;
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setBpmValue(Number(e.target.value));
-	};
-
-	const handleMinius = () => {
-		if (bpmValue > 20) {
-			setBpmValue((prevValue) => prevValue - 1);
-		}
-	};
-
-	const handlePlus = () => {
-		if (bpmValue < 260) {
-			setBpmValue((prevValue) => prevValue + 1);
-		}
-	};
 
 	const handleClickVolumen = () => {
 		if (isVolumeSilenced) {
@@ -34,37 +16,65 @@ const Metronome = () => {
 			previousVolumeRef.current = volume;
 			setVolume(0);
 		}
+
+		console.log(volume);
+	};
+
+	return (
+		<div className="self-end flex gap-x-2 text-white">
+			<button
+				className="opacity-70 hover:opacity-100 transition"
+				onClick={handleClickVolumen}
+			>
+				{isVolumeSilenced ? <VolumeSilence /> : <Volume />}
+			</button>
+			<Slider
+				max={100}
+				min={0}
+				value={[volume * 100]}
+				className="w-32"
+				onValueChange={(value) => {
+					const [newVolume] = value;
+					const volumeValue = newVolume / 100;
+					setVolume(volumeValue);
+				}}
+			/>
+		</div>
+	);
+};
+
+export const Metronome = () => {
+
+	const [bpm, setBpm] = useState(89);
+	const [isPlaying, setIsPlaying] = useState(false);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setBpm(Number(e?.target?.value));
+	};
+
+	const handleMinius = () => {
+		if (bpm > 20) {
+			setBpm((prevBpm) => prevBpm - 1);
+		}
+	};
+
+	const handlePlus = () => {
+		if (bpm < 260) {
+			setBpm((prevBpm) => prevBpm + 1);
+		}
 	};
 
 	const handleStart = () => {
-		setIsPlaying((prevValue) => !prevValue);
+		setIsPlaying((prev) => !prev);
 	};
 
 	return (
 		<section className="w-10/12 min-h-max mt-4 mx-auto flex flex-col gap-8">
-			<div className="self-end flex gap-x-2 text-white">
-				<button
-					className="opacity-70 hover:opacity-100 transition"
-					onClick={handleClickVolumen}
-				>
-					{isVolumeSilenced ? <VolumeSilence /> : <Volume />}
-				</button>
-				<Slider
-					max={100}
-					min={0}
-					value={[volume * 100]}
-					className="w-32"
-					onValueChange={(value) => {
-						const [newVolume] = value;
-						const volumeValue = newVolume / 100;
-						setVolume(volumeValue);
-					}}
-				/>
-			</div>
+			<VolumeControl />
 			<article className="w-full min-h-max flex flex-col justify-center items-center gap-3">
 				<div className="w-52 h-52 rounded-full flex justify-center items-center bg-[#1e2231a2] ring ring-[#26ab3c]">
 					<h3 className="flex flex-col items-center">
-						<span className="text-7xl text-white font-bold">{bpmValue}</span>
+						<span className="text-7xl text-white font-bold">{bpm}</span>
 						<span className="text-gray-100/40 font-normal text-3xl">BPM</span>
 					</h3>
 				</div>
@@ -81,7 +91,7 @@ const Metronome = () => {
 						type="range"
 						min={20}
 						max={260}
-						value={bpmValue}
+						value={bpm}
 						onChange={handleChange}
 						className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
 					/>
@@ -110,5 +120,3 @@ const Metronome = () => {
 		</section>
 	);
 };
-
-export default Metronome;

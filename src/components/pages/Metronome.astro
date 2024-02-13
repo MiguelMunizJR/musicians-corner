@@ -1,10 +1,10 @@
 ---
-import MetronomeCard from "../metronome/Metronome";
+import { Metronome as MetronomeCard } from "../metronome/Metronome";
 ---
 
 <section class="w-full mt-10 flex flex-col">
   <h2 class="text-3xl font-medium py-5">Metrónomo</h2>
   <article>
-    <MetronomeCard client:only />
+    <MetronomeCard client:load />
   </article>
 </section>

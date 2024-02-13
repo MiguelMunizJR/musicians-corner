@@ -21,6 +21,14 @@ const userID = data?.user?.id;
 const URL_SCORES = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-scores`;
 const URL_LIKED = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-liked`;
 ---
+<script>
+  const button = document.getElementById("button");
+  const dropdown = document.getElementById("dropdown");
+
+  button?.addEventListener("click", () => {
+    dropdown?.classList.toggle("hidden");
+  });
+</script>
 
 <button
   id="button"
