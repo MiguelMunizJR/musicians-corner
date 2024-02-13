@@ -1,53 +1,21 @@
 ---
 import ScoresIcon from "@/icons/dashboard/ScoresIcon.astro";
 import Card from "../Card.astro";
-import CardButton from "../CardButton.astro";
+import CardButton from "../CardButton";
 import UploadMusicIcon from "@/icons/dashboard/UploadMusic.astro";
 import LikedMusicIcon from "@/icons/dashboard/LikedMusic.astro";
 import { ROUTES_PATH } from "../../const";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../CardButtonCategories.astro";
 import AlbumForm from "@/components/scores/AlbumForm.jsx";
+import { getUser } from "@/lib/getUser"
+const { cookies } = Astro;
 
-interface Album {
-  id: string;
-  title: string;
-  description: string;
-  total: number;
-}
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
 
-const albums: Album[] = [
-  {
-    id: "1",
-    title: "Mi primer album",
-    description: "Album de prueba",
-    total: 10,
-  },
-  {
-    id: "2",
-    title: "Mi segundo album",
-    description: "Album de prueba",
-    total: 10,
-  },
-  {
-    id: "3",
-    title: "Mi tercer album",
-    description: "Album de prueba",
-    total: 10,
-  },
-  {
-    id: "4",
-    title: "Mi cuarto album",
-    description: "Album de prueba",
-    total: 10,
-  },
-  {
-    id: "5",
-    title: "Mi quinto album",
-    description: "Album de prueba",
-    total: 10,
-  },
-]
+const user = await getUser(accessToken?.value, refreshToken?.value);
+const userID = user?.user?.id;
 ---
 
 <section class="w-full mt-10 flex flex-col">
@@ -60,6 +28,8 @@ const albums: Album[] = [
             className="bg-[#1A1E2C] hover:bg-[#212636]"
             href={ROUTES_PATH.SCORES.MY_SCORES}
             title="Mis partituras"
+            userId={userID}
+            client:load
           >
             <ScoresIcon className="w-14" />
           </CardButton>
@@ -67,6 +37,7 @@ const albums: Album[] = [
             className="bg-[#1A1E2C] hover:bg-[#212636]"
             href={ROUTES_PATH.SCORES.MY_UPLOADS}
             title="Mis subidas"
+            userId={userID}
           >
             <UploadMusicIcon className="w-14" />
           </CardButton>
@@ -74,6 +45,7 @@ const albums: Album[] = [
             className="bg-[#1A1E2C] hover:bg-[#212636]"
             href={ROUTES_PATH.SCORES.MY_LIKED}
             title="Mis favoritos"
+            userId={userID}
           >
             <LikedMusicIcon className="w-10" />
           </CardButton>
@@ -88,21 +60,13 @@ const albums: Album[] = [
             className="bg-[#1A1E2C] hover:bg-[#212636]"
             href={ROUTES_PATH.SCORES.MY_ALBUMS}
             title="Mis álbumes"
+            userId={userID}
           >
             <ScoresIcon className="w-14" />
           </CardButton>
           <div class="flex items-center gap-2">
             {
-              albums?.map((album) => (
-                <CardButton
-                  key={album.id}
-                  className="bg-[#1A1E2C] hover:bg-[#212636] transition-all"
-                  href={ROUTES_PATH.SCORES.MY_ALBUMS}
-                  title={album.title}
-                >
-                  <ScoresIcon className="w-14" />
-                </CardButton>
-              )).slice(0, 1)
+              
             }
             <AlbumForm client:load />
           </div>
@@ -147,3 +111,4 @@ const albums: Album[] = [
     </Card>
   </article>
 </section>
+../CardButton.jsx

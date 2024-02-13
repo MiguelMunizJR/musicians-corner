@@ -5,7 +5,7 @@ import { useUser } from "@/store/useUser";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 
 const Form = ({ URL }) => {
-	const setUser = useUser((state) => state.setUser);
+	const {user, setUser} = useUser((state) => state);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -33,7 +33,8 @@ const Form = ({ URL }) => {
 			console.log(err.message);
 		}
 	};
-
+	
+	console.log(user);
 	return (
 		<article className="flex flex-col">
 			<form

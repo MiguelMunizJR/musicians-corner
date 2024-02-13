@@ -3,6 +3,11 @@ import { ROUTES_PATH } from "@/const";
 import DocsIcon from "@/icons/dashboard/DocsIcon.astro";
 import ScoresIcon from "@/icons/dashboard/ScoresIcon.astro";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
+import { getUser } from "@/lib/getUser";
+const { cookies } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
 
 interface Props {
   className?: string;
@@ -11,6 +16,12 @@ interface Props {
 const { className } = Astro.props;
 
 const currentPath = Astro.url.pathname;
+
+const user = await getUser(accessToken?.value, refreshToken?.value);
+const userID = user?.user?.id;
+
+const URL_SCORES = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-scores`;
+const URL_LIKED = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-scores`;
 ---
 
 <button
@@ -46,9 +57,7 @@ const currentPath = Astro.url.pathname;
   </li>
   <li>
     <a
-      href={ROUTES_PATH.SCORES.MY_SCORES !== currentPath
-        ? ROUTES_PATH.SCORES.MY_SCORES
-        : null}
+      href={ROUTES_PATH.SCORES.MY_SCORES !== currentPath ? URL_SCORES : null}
       class="flex items-center w-full gap-3 pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
     >
       <MusicCategoryIcon className="w-5 h-5" />
@@ -58,9 +67,7 @@ const currentPath = Astro.url.pathname;
   </li>
   <li>
     <a
-      href={ROUTES_PATH.SCORES.MY_LIKED !== currentPath
-        ? ROUTES_PATH.SCORES.MY_LIKED
-        : null}
+      href={ROUTES_PATH.SCORES.MY_LIKED !== currentPath ? URL_LIKED : null}
       class="flex items-center w-full gap-3 pl-6 py-2 text-[15px] text-gray-400/85 transition-all duration-75 rounded-lg group hover:bg-[#3c475579] hover:text-gray-200"
     >
       <svg

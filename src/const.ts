@@ -38,9 +38,9 @@ export const ROUTES_PATH: IRoutesPath = Object.freeze({
 	SCORES: {
 		SCORES: "/scores",
 		MY_ALBUMS: "/scores/[user_id]/my-albums",
-		MY_SCORES: "/scores/[user_id]/scores",
-		MY_UPLOADS: "/scores/[user_id]/uploads",
-		MY_LIKED: "/scores/[user_id]/liked",
+		MY_SCORES: "/scores/[user_id]/my-scores",
+		MY_UPLOADS: "/scores/[user_id]/my-uploads",
+		MY_LIKED: "/scores/[user_id]/my-liked",
 	},
 	SCORES_CATEGORY: {
 		BANDA: "/scores/category/banda",
