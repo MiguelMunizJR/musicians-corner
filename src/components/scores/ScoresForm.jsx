@@ -81,7 +81,7 @@ const ScoresForm = () => {
 					<div className="w-full py-6">
 						<div className="flex items-center justify-center w-full">
 							<label
-								for="dropzone"
+								htmlFor="dropzone"
 								className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
 							>
 								<div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -136,7 +136,7 @@ const ScoresForm = () => {
 							/>
 						</div>
 						<div className="flex items-center self-start ml-4 mt-2 gap-3">
-							<label htmlFor="category">Categoria</label>
+							<label id="category" htmlFor="category">Categoria</label>
 							<Select name="category" defaultValue="banda">
 								<SelectTrigger className="outline-none border-gray-300/40">
 									<SelectValue placeholder="Escoge una categoria" />

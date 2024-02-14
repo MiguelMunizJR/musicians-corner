@@ -1,10 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Button } from "../Button";
 import { Slider } from "./Slider";
 import { Volume, VolumeSilence } from "@/icons/player/VolumeIcons";
+import { usePlayer } from "@/store/useStore";
 
 export const VolumeControl = () => {
-	const [volume, setVolume] = useState(1);
+	const volume = usePlayer((state) => state.volume);
+	const setVolume = usePlayer((state) => state.setVolume);
 	const previousVolumeRef = useRef(volume);
 
 	const isVolumeSilenced = volume < 0.1;
@@ -16,12 +18,10 @@ export const VolumeControl = () => {
 			previousVolumeRef.current = volume;
 			setVolume(0);
 		}
-
-		console.log(volume);
 	};
 
 	return (
-		<div className="self-end flex gap-x-2 text-white">
+		<div className="self-end flex gap-x-2 text-gray-300">
 			<button
 				className="opacity-70 hover:opacity-100 transition"
 				onClick={handleClickVolumen}
@@ -29,10 +29,11 @@ export const VolumeControl = () => {
 				{isVolumeSilenced ? <VolumeSilence /> : <Volume />}
 			</button>
 			<Slider
-				max={100}
+				defaultValue={[100]}
 				min={0}
+				max={100}
 				value={[volume * 100]}
-				className="w-32"
+				className="w-40"
 				onValueChange={(value) => {
 					const [newVolume] = value;
 					const volumeValue = newVolume / 100;
@@ -44,37 +45,59 @@ export const VolumeControl = () => {
 };
 
 export const Metronome = () => {
+	const { isPlaying, setIsPlaying, volume, tempo, setTempo } =
+    usePlayer((state) => state);
+	const audioRef = useRef();
 
-	const [bpm, setBpm] = useState(89);
-	const [isPlaying, setIsPlaying] = useState(false);
+	useEffect(() => {
+		setIsPlaying(false);
+	}, []);
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setBpm(Number(e?.target?.value));
+	useEffect(() => {
+		let interval;
+
+		if (isPlaying) {
+			interval = setInterval(() => {
+				audioRef.current.play();
+			}, (60 / tempo) * 1000);
+		} else {
+			audioRef.current.pause();
+		}
+
+		return () => clearInterval(interval);
+	}, [isPlaying, tempo]);
+
+	useEffect(() => {
+		audioRef.current.volume = volume;
+	}, [volume]);
+
+	const handleChange = (e) => {
+		setTempo(Number(e?.target?.value));
 	};
 
 	const handleMinius = () => {
-		if (bpm > 20) {
-			setBpm((prevBpm) => prevBpm - 1);
+		if (tempo > 20) {
+			setTempo(tempo - 1);
 		}
 	};
 
 	const handlePlus = () => {
-		if (bpm < 260) {
-			setBpm((prevBpm) => prevBpm + 1);
+		if (tempo < 260) {
+			setTempo(tempo + 1);
 		}
 	};
 
 	const handleStart = () => {
-		setIsPlaying((prev) => !prev);
+		setIsPlaying(!isPlaying);
 	};
 
 	return (
 		<section className="w-10/12 min-h-max mt-4 mx-auto flex flex-col gap-8">
 			<VolumeControl />
 			<article className="w-full min-h-max flex flex-col justify-center items-center gap-3">
-				<div className="w-52 h-52 rounded-full flex justify-center items-center bg-[#1e2231a2] ring ring-[#26ab3c]">
+				<div className="w-52 h-52 rounded-full flex justify-center items-center bg-[#1e2231a2] ring transition-all ring-[#26ab3c]">
 					<h3 className="flex flex-col items-center">
-						<span className="text-7xl text-white font-bold">{bpm}</span>
+						<span className="text-7xl text-white font-bold">{tempo}</span>
 						<span className="text-gray-100/40 font-normal text-3xl">BPM</span>
 					</h3>
 				</div>
@@ -89,9 +112,10 @@ export const Metronome = () => {
 					<input
 						id="default-range"
 						type="range"
+						defaultValue={80}
 						min={20}
-						max={260}
-						value={bpm}
+						max={240}
+						value={tempo}
 						onChange={handleChange}
 						className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
 					/>
@@ -115,6 +139,16 @@ export const Metronome = () => {
 					}`}
 				>
 					{isPlaying ? "Stop" : "Start"}
+					<audio ref={audioRef}>
+						<source
+							src="https://programadorwebvalencia.com/videos/blog/2019/11/tick.ogg"
+							type="audio/ogg"
+						/>
+						<source
+							src="https://programadorwebvalencia.com/videos/blog/2019/11/tick.mp3"
+							type="audio/mpeg"
+						/>
+					</audio>
 				</Button>
 			</article>
 		</section>
