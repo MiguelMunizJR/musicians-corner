@@ -1,6 +1,6 @@
+import { ROUTES_PATH, URL_API } from "@/const";
+import { supabase } from "@/lib/supabase";
 import type { APIRoute } from "astro";
-import { supabase } from "../../../lib/supabase";
-// import { ROUTES_PATH, URL_API } from "@/const";
 
 export const POST: APIRoute = async ({ request, cookies }) => {
 	const formData = await request.formData();
@@ -12,32 +12,26 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 		return new Response("Email and password are required", { status: 400 });
 	}
 
+	const URL = `${URL_API}${ROUTES_PATH.LOGIN}`;
 	try {
-		//TODO Autenticacion con db postgres
-		// const response = await fetch(`${URL_API}${ROUTES_PATH.LOGIN}`, {
-		// 	method: "POST",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify({ email, password }),
-		// });
-
-		// if (!response.ok) {
-		// 	throw new Error(`Login failed with status: ${response.status}`);
-		// }
-
-		//TODO Autenticacion con supabase
-		const { data, error } = await supabase.auth.signInWithPassword({
-			email,
-			password,
+		const data = await fetch(URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
 		});
 
-		if (error) {
-			return new Response(error.message, { status: 500 });
+		if (!data.ok) {
+			return new Response("Error in credentials", { status: 400 });
 		}
 
-		const { access_token, refresh_token } = data.session;
-		
+		const user = await data.json();
+		const { access_token, refresh_token } = user.session;
+
 		cookies.set("sb-access-token", access_token, {
 			path: "/",
 		});
@@ -45,7 +39,12 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 			path: "/",
 		});
 
-		return new Response(JSON.stringify(data), { status: 200 });
+		await supabase.auth.setSession({
+			refresh_token,
+			access_token,
+		});
+
+		return new Response(JSON.stringify(user), { status: 200 });
 	} catch (error) {
 		return new Response("Error during login", { status: 500 });
 	}

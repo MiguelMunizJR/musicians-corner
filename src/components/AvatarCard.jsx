@@ -10,6 +10,7 @@ import {
 } from "@/components/DropDownMenu";
 import { ROUTES_PATH } from "@/const";
 import { logout } from "@/lib/auth/auth";
+import useUser from "../hooks/useUser";
 
 export const AvatarIcon = () => {
 	return (
@@ -66,7 +67,7 @@ export const AvatarIcon = () => {
 export const ArrowDown = () => {
 	return (
 		<svg
-			className="w-3 mt-1"
+			className="w-[12px]"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 -4.5 20 20"
 		>
@@ -79,28 +80,33 @@ export const ArrowDown = () => {
 	);
 };
 
-export const AvatarCard = ({ user }) => {
+export const AvatarCard = () => {
+	const { user } = useUser();
 
-	const myScoresURL = ROUTES_PATH.SCORES.MY_SCORES.replace("[user_id]", user?.user?.id);
+	const myScoresURL = ROUTES_PATH.SCORES.MY_SCORES.replace(
+		"[user_id]",
+		user?.user?.id
+	);
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<button className="w-max mx-4 py-3 px-5 rounded-xl flex gap-3 hover:bg-slate-600/15 cursor-pointer transition-all">
+				<button className="min-w-72 mx-4 min-h-20 py-3 px-5 rounded-xl flex items-center gap-3 hover:bg-slate-600/15 cursor-pointer transition-all">
 					<AvatarIcon />
-					<div className="flex flex-col gap-1">
-						<h6>{user?.user?.email}</h6>
+					<div className=" flex flex-col gap-1">
+						<h6 className="text-gray-300">{user?.email}</h6>
 						<p className="bg-blue-500 w-max px-3 text-sm font-semibold rounded-full">
               Pro
 						</p>
 					</div>
-					<div>
+					<div className="ml-4">
 						<ArrowDown />
 					</div>
 				</button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="w-56 p-2 border-gray-700/40 bg-[#161925]">
-				<DropdownMenuLabel>Mi cuenta</DropdownMenuLabel>
+			<DropdownMenuContent className="w-72 p-3 border-gray-700/40 bg-[#161925]">
+				<DropdownMenuLabel className="text-[1rem]">Mi cuenta</DropdownMenuLabel>
+				<DropdownMenuSeparator />
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuItem className="hover:bg-[#282F3B] rounded-lg px-2 py-2 text-gray-300 cursor-pointer">

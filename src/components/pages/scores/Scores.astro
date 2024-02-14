@@ -2,19 +2,13 @@
 import ScoresIcon from "@/icons/dashboard/ScoresIcon.astro";
 import Card from "../../Card.astro";
 import CardButton from "../../CardButton";
-import UploadMusicIcon from "@/icons/dashboard/UploadMusic.astro";
 import LikedMusicIcon from "@/icons/dashboard/LikedMusic.astro";
 import { ROUTES_PATH } from "../../../const";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../../CardButtonCategories.astro";
 import AlbumForm from "@/components/scores/AlbumForm.jsx";
-import { getUser } from "@/lib/getUser";
 
-const refreshToken = Astro.cookies.get("sb-refresh-token");
-const accessToken = Astro.cookies.get("sb-access-token");
-
-const data = await getUser(accessToken?.value, refreshToken?.value);
-const userID = data?.user?.id;
+const userID = "2";
 ---
 
 <section class="w-full mt-10 flex flex-col">
@@ -31,14 +25,6 @@ const userID = data?.user?.id;
             client:load
           >
             <ScoresIcon className="w-14" />
-          </CardButton>
-          <CardButton
-            className="bg-[#1A1E2C] hover:bg-[#212636]"
-            href={ROUTES_PATH.SCORES.MY_UPLOADS}
-            title="Mis subidas"
-            userId={userID}
-          >
-            <UploadMusicIcon className="w-14" />
           </CardButton>
           <CardButton
             className="bg-[#1A1E2C] hover:bg-[#212636]"
@@ -110,4 +96,3 @@ const userID = data?.user?.id;
     </Card>
   </article>
 </section>
-../CardButton.jsx

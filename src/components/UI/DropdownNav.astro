@@ -3,7 +3,6 @@ import { ROUTES_PATH } from "@/const";
 import DocsIcon from "@/icons/dashboard/DocsIcon.astro";
 import ScoresIcon from "@/icons/dashboard/ScoresIcon.astro";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
-import { getUser } from "@/lib/getUser";
 const currentPath = Astro.url.pathname;
 
 interface Props {
@@ -12,11 +11,7 @@ interface Props {
 
 const { className } = Astro.props;
 
-const refreshToken = Astro.cookies.get("sb-refresh-token");
-const accessToken = Astro.cookies.get("sb-access-token");
-
-const data = await getUser(accessToken?.value, refreshToken?.value);
-const userID = data?.user?.id;
+const userID = "2";
 
 const URL_SCORES = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-scores`;
 const URL_LIKED = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-liked`;

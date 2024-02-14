@@ -8,6 +8,7 @@ interface IRoutesPath {
   HOME: string;
   LOGIN: string;
   SIGNUP: string;
+  LOGOUT: string;
   DASHBOARD: string;
   LIBRARY: string;
   USER: string;
@@ -32,6 +33,7 @@ export const ROUTES_PATH: IRoutesPath = Object.freeze({
 	HOME: "/",
 	LOGIN: "/auth/login",
 	SIGNUP: "/auth/signup",
+	LOGOUT: "/auth/logout",
 	DASHBOARD: "/dashboard",
 	LIBRARY: "/library",
 	USER: "/users/me",
@@ -39,7 +41,6 @@ export const ROUTES_PATH: IRoutesPath = Object.freeze({
 		SCORES: "/scores",
 		MY_ALBUMS: "/scores/[user_id]/my-albums",
 		MY_SCORES: "/scores/[user_id]/my-scores",
-		MY_UPLOADS: "/scores/[user_id]/my-uploads",
 		MY_LIKED: "/scores/[user_id]/my-liked",
 	},
 	SCORES_CATEGORY: {

@@ -3,24 +3,15 @@ import AuthButtons from "../auth/AuthButtons.astro";
 import { AvatarCard } from "../AvatarCard";
 import Logo from "../Logo.astro";
 
-import { supabase } from "@/lib/supabase";
 import SideMenuItem from "../SideMenuItem.astro";
 import { ROUTES_PATH } from "@/const";
 import EnterIcon from "@/icons/dashboard/EnterIcon.astro";
-import { getUser } from "@/lib/getUser";
 
-const accessToken = Astro.cookies.get("sb-access-token");
-const refreshToken = Astro.cookies.get("sb-refresh-token");
-
-const data = await getUser(accessToken?.value, refreshToken?.value);
-
-const isLoggin = data?.user ? data?.user : false;
-const authRoute = Astro.url.pathname.includes("auth");
+const authRoute = Astro.url.pathname.includes("/auth");
+const isLogin = Astro.cookies.get("sb-access-token")?.value;
 ---
 
-<header
-  class="w-full h-[75px] bg-transparent flex items-end fixed top-0 z-50"
->
+<header class="w-full h-[75px] bg-transparent flex items-end fixed top-0 z-50">
   <Logo className="top-6 left-[60px] w-[350px]" />
   <nav class="ml-[730px] mr-[65px] flex flex-1 justify-between">
     <ul class="flex gap-20 mt-12">
@@ -46,7 +37,7 @@ const authRoute = Astro.url.pathname.includes("auth");
 
     <div class="flex items-end">
       {
-        isLoggin ? (
+        isLogin ? (
           <div class="relative top-6 w-full min-h-max flex gap-6 justify-center items-center">
             <SideMenuItem
               href={ROUTES_PATH.DASHBOARD}
@@ -55,7 +46,7 @@ const authRoute = Astro.url.pathname.includes("auth");
               <EnterIcon className="w-5 h-5" />
               Ir al Dashboard
             </SideMenuItem>
-            <AvatarCard user={data} client:visible />
+            <AvatarCard client:visible transition:name="avatar-card" transition:persist />
           </div>
         ) : (
           <AuthButtons className="flex gap-4" />

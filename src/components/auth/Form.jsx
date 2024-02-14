@@ -13,7 +13,7 @@ const Form = ({ URL }) => {
 
 		try {
 			const res = await fetch(URL_BASE, {
-				method: "post",
+				method: "POST",
 				body: formData,
 			});
 
@@ -22,6 +22,8 @@ const Form = ({ URL }) => {
 			}
 
 			if (res.status === 200) {
+				const data = await res.json();
+				localStorage.setItem("token", data.token_session);
 				navigate(ROUTES_PATH.DASHBOARD);
 			}
 		} catch (err) {
