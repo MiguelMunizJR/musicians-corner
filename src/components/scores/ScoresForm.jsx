@@ -68,23 +68,28 @@ export const UploadMusic = ({ className }) => {
 };
 
 export const ScoresForm = ({ setIsOpen }) => {
+	const token = localStorage.getItem("token");
+	const user = sessionStorage.getItem("user").slice(1, -1);
+
 	const [files, setFiles] = useState([]);
 	const [isUploading, setIsUploading] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		
 		const formData = new FormData(e.target);
 		formData.append("file", files, files.name);
+		formData.append("user", user);
+		formData.append("token", token);
 
 		//! Llamada api
 		try {
 			const res = await fetch("/api/scores", {
 				method: "POST",
-				body: formData
+				body: formData,
 			});
 
-			if (!res.ok) {
+			if (res.status !== 201) {
 				throw new Error("Error while uploading");
 			}
 

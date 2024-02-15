@@ -1,6 +1,7 @@
 import { ROUTES_PATH, URL_API } from "@/const";
 import { uploadStream } from "@/lib/cloudinary";
 import type { APIRoute } from "astro";
+import axios from "axios";
 
 export const POST: APIRoute = async ({ request }) => {
 	const formData = await request.formData();
@@ -9,6 +10,8 @@ export const POST: APIRoute = async ({ request }) => {
 	const artist = formData.get("artist");
 	const category = formData.get("category");
 	const file = formData.get("file") as File;
+	const userId = formData.get("user");
+	const token = formData.get("token");
 
 	if (!name || !file) {
 		return new Response("Missing data!", { status: 400 });
@@ -17,31 +20,34 @@ export const POST: APIRoute = async ({ request }) => {
 	const arrayBuffer = await file.arrayBuffer();
 	const unit8Array = new Uint8Array(arrayBuffer);
 
-	const fileScore = await uploadStream(unit8Array);  
+	const fileScore = await uploadStream(unit8Array);
+	const { secure_url } = fileScore;
+	const url_image = secure_url.replace(".pdf", ".jpg");
 
+	
 	if (!fileScore.url) {
 		return new Response("Error uploading file in Cloudinary", { status: 400 });
 	}
-
-	try {
-		const res = await fetch(`${URL_API}${ROUTES_PATH.SCORES.SCORES}`, {
-			method: "POST",
-			body: JSON.stringify({ name, artist, category }),
-		});
-
-		console.log(res);
-
-		if (!res.ok) {
-			return new Response("Error uploading file in DB", { status: 400 });
+	
+	const URL = `${URL_API}${ROUTES_PATH.SCORES.SCORES}`;
+	
+	const data = {
+		name,
+		artist,
+		url_score: secure_url,
+		url_image,
+		category,
+		userId: userId,
+	};
+	
+	const headers = {
+		headers: {
+			"Authorization": `Bearer ${token}`,
 		}
+	};
 
-		const resDB = await res.json();
-		console.log(resDB);
-		console.log({ name, artist, category, file });
+	console.log(fileScore);
 
-		return new Response("ok", { status: 201 });
-	} catch (e) {
-		console.error(e);
-		return new Response("Error uploading file", { status: 500 });
-	}
+	const response = await axios.post(URL, data, headers);
+	return new Response(response.data, { status: 200 });
 };

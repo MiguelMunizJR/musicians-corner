@@ -26,6 +26,7 @@ const Form = ({ URL }) => {
 			if (res.status === 200) {
 				const data = await res.json();
 				localStorage.setItem("token", data.token_session);
+				sessionStorage.setItem("user", data.user.id);
 				navigate(ROUTES_PATH.DASHBOARD);
 			}
 		} catch (err) {

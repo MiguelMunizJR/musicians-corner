@@ -11,6 +11,7 @@ export const logout = async () => {
 
 		navigate(ROUTES_PATH.HOME);
 		localStorage.removeItem("token");
+		sessionStorage.removeItem("user");
 	} catch (error) {
 		console.error(error);
 	}
