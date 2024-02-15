@@ -17,6 +17,31 @@ import {
 	SelectValue,
 } from "../SelectDropDown";
 
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginFileEncode from "filepond-plugin-file-encode";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import FilePondPluginImageCrop from "filepond-plugin-image-crop";
+import { Button } from "../Button";
+
+registerPlugin(
+	FilePondPluginImageExifOrientation,
+	FilePondPluginImagePreview,
+	FilePondPluginFileEncode,
+	FilePondPluginFileValidateSize,
+	FilePondPluginFileValidateType,
+	FilePondPluginImageResize,
+	FilePondPluginImageCrop,
+	FilePondPluginImageTransform
+);
+
 export const UploadMusic = ({ className }) => {
 	return (
 		<svg
@@ -42,22 +67,164 @@ export const UploadMusic = ({ className }) => {
 	);
 };
 
-const ScoresForm = () => {
-	const [isOpen, setIsOpen] = useState(false);
+export const ScoresForm = ({ setIsOpen }) => {
+	const [files, setFiles] = useState([]);
+	const [isUploading, setIsUploading] = useState(false);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const data = new FormData(e.target);
-		const name = data.get("name");
-		const artist = data.get("artist") || "not artist";
-		const category = data.get("category");
-		const file = data.get("dropzone");
+		const formData = new FormData(e.target);
+		formData.append("file", files, files.name);
 
-		console.log({ name, artist, category, file });
-		e.target.reset();
-		setIsOpen(false);
+		//! Llamada api
+		try {
+			const res = await fetch("/api/scores", {
+				method: "POST",
+				body: formData
+			});
+
+			if (!res.ok) {
+				throw new Error("Error while uploading");
+			}
+
+			e.target.reset();
+			setIsOpen(false);
+		} catch (e) {
+			console.error(e.message);
+		}
 	};
+
+	return (
+		<form onSubmit={handleSubmit} className="w-full relative">
+			{/* <div className="w-full py-6 transition-all">
+				<div className="flex items-center justify-center w-full">
+					<label
+						htmlFor="dropzone"
+						className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 transition-all"
+					>
+						<div className="flex flex-col items-center justify-center pt-5 pb-6">
+							<svg
+								className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+								aria-hidden="true"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 20 16"
+							>
+								<path
+									stroke="currentColor"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+								/>
+							</svg>
+							<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+								<span className="font-semibold text-pretty">
+                  Haz click aquí para subir
+								</span>{" "}
+                o arrastra y suelta tu archivo.
+							</p>
+							<p className="text-xs text-gray-500 dark:text-gray-400">
+                SVG, PNG, JPG (MAX. 800x400px)
+							</p>
+						</div>
+						<input
+							id="dropzone"
+							name="dropzone"
+							type="file"
+							className="hidden"
+							required
+						/>
+					</label>
+				</div>
+			</div> */}
+			<FilePond
+				files={files}
+				onupdatefiles={() => setIsUploading(true)}
+				onpreparefile={(_, output) => {
+					setFiles(output);
+				}}
+				onremovefile={() => setIsUploading(true)}
+				acceptedFileTypes={["application/pdf", "image/*"]}
+				allowFileEncode
+				allowImageTransform
+				imagePreviewHeight={280}
+				imageCropAspectRatio={"1:1"}
+				imageResizeTargetWidth={100}
+				imageResizeTargetHeight={100}
+				imageResizeMode={"cover"}
+				imageTransformOutputQuality={50}
+				disabled={isUploading}
+				labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+				required
+			/>
+			<div className="flex flex-col items-end gap-4 py-6 text-[15px] font-normal text-gray-400">
+				<div className="flex items-center gap-3">
+					<label htmlFor="name" className="text-right">
+            Nombre
+					</label>
+					<input
+						id="name"
+						name="name"
+						placeholder="Nombre de la partitura"
+						className="w-72 bg-[#23293a] active:bg-[#282e41] hover:bg-[#282e41] outline-none transition-all rounded-sm p-1 px-2 text-gray-300 text-[14px]"
+						required
+					/>
+				</div>
+				<div className="flex items-center gap-3">
+					<label htmlFor="artist" className="text-right">
+            Artista
+					</label>
+					<input
+						id="artist"
+						name="artist"
+						placeholder="Artista de la partitura (opcional)"
+						className="w-72 bg-[#23293a] active:bg-[#282e41] hover:bg-[#282e41] outline-none transition-all rounded-sm p-1 px-2 text-gray-300 text-[14px]"
+					/>
+				</div>
+				<div className="flex items-center self-start ml-4 mt-2 gap-3">
+					<label id="category" htmlFor="category">
+            Categoria
+					</label>
+					<Select name="category" defaultValue="banda">
+						<SelectTrigger className="outline-none border-gray-300/40">
+							<SelectValue placeholder="Escoge una categoria" />
+						</SelectTrigger>
+						<SelectContent className="bg-[#1A1E2C] border-gray-300/40">
+							<SelectGroup>
+								<SelectItem className="hover:bg-[#282E41]" value="todos">
+                  Todas
+								</SelectItem>
+								<SelectItem className="hover:bg-[#282E41]" value="banda">
+                  Banda
+								</SelectItem>
+								<SelectItem className="hover:bg-[#282E41]" value="mariachi">
+                  Mariachi
+								</SelectItem>
+								<SelectItem className="hover:bg-[#282E41]" value="sonora">
+                  Sonora
+								</SelectItem>
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+				</div>
+			</div>
+			<DialogFooter className="mt-4">
+				<Button
+					type="submit"
+					className="flex items-center justify-center bg-[#26ab3c] hover:bg-[#2cb643] transition-all text-[15px] rounded cursor-pointer py-3 px-5"
+				>
+					<UploadMusic className="w-6 mr-1" />
+          Subir partitura
+				</Button>
+			</DialogFooter>
+		</form>
+	);
+};
+
+export const ScoresFormCard = () => {
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -77,102 +244,8 @@ const ScoresForm = () => {
             descargarla.
 					</DialogDescription>
 				</DialogHeader>
-				<form onSubmit={handleSubmit}>
-					<div className="w-full py-6">
-						<div className="flex items-center justify-center w-full">
-							<label
-								htmlFor="dropzone"
-								className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-							>
-								<div className="flex flex-col items-center justify-center pt-5 pb-6">
-									<svg
-										className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-										aria-hidden="true"
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 20 16"
-									>
-										<path
-											stroke="currentColor"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth="2"
-											d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-										/>
-									</svg>
-									<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-										<span className="font-semibold text-pretty">Haz click aquí para subir</span> o arrastra y suelta tu archivo.
-									</p>
-									<p className="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG (MAX. 800x400px)
-									</p>
-								</div>
-								<input id="dropzone" name="dropzone" type="file" className="hidden" required />
-							</label>
-						</div>
-					</div>
-					<div className="flex flex-col items-end gap-4 py-6 text-[15px] font-normal text-gray-400">
-						<div className="flex items-center gap-3">
-							<label htmlFor="name" className="text-right">
-                Nombre
-							</label>
-							<input
-								id="name"
-								name="name"
-								placeholder="Nombre de la partitura"
-								className="w-72 bg-[#23293a] active:bg-[#282e41] hover:bg-[#282e41] outline-none transition-all rounded-sm p-1 px-2 text-gray-300 text-[14px]"
-								required
-							/>
-						</div>
-						<div className="flex items-center gap-3">
-							<label htmlFor="artist" className="text-right">
-                Artista
-							</label>
-							<input
-								id="artist"
-								name="artist"
-								placeholder="Artista de la partitura (opcional)"
-								className="w-72 bg-[#23293a] active:bg-[#282e41] hover:bg-[#282e41] outline-none transition-all rounded-sm p-1 px-2 text-gray-300 text-[14px]"
-							/>
-						</div>
-						<div className="flex items-center self-start ml-4 mt-2 gap-3">
-							<label id="category" htmlFor="category">Categoria</label>
-							<Select name="category" defaultValue="banda">
-								<SelectTrigger className="outline-none border-gray-300/40">
-									<SelectValue placeholder="Escoge una categoria" />
-								</SelectTrigger>
-								<SelectContent className="bg-[#1A1E2C] border-gray-300/40">
-									<SelectGroup>
-										<SelectItem className="hover:bg-[#282E41]" value="todos">
-                      Todas
-										</SelectItem>
-										<SelectItem className="hover:bg-[#282E41]" value="banda">
-                      Banda
-										</SelectItem>
-										<SelectItem className="hover:bg-[#282E41]" value="mariachi">
-                      Mariachi
-										</SelectItem>
-										<SelectItem className="hover:bg-[#282E41]" value="sonora">
-                      Sonora
-										</SelectItem>
-									</SelectGroup>
-								</SelectContent>
-							</Select>
-						</div>
-					</div>
-					<DialogFooter className="mt-4">
-						<button
-							type="submit"
-							className="flex items-center justify-center gap-1 bg-[#26ab3c] hover:bg-[#2cb643] transition-all text-[15px] rounded cursor-pointer py-2 px-5"
-						>
-							<UploadMusic className="w-5" />
-              Subir partitura
-						</button>
-					</DialogFooter>
-				</form>
+				<ScoresForm setIsOpen={setIsOpen} />
 			</DialogContent>
 		</Dialog>
 	);
 };
-
-export default ScoresForm;

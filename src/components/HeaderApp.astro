@@ -1,6 +1,6 @@
 ---
 import SearchInput from "./SearchInput.astro";
-import ScoresForm from "./scores/ScoresForm";
+import { ScoresFormCard } from "./scores/ScoresForm";
 import NotificationCard from "./NotificationCard";
 import { AvatarCard } from "./AvatarCard.jsx";
 
@@ -10,10 +10,14 @@ const data = null;
 <header class="w-full mt-8 flex items-center">
   <div class="w-full flex items-center">
     <SearchInput className="w-[725px]" />
-    <ScoresForm client:load />
+    <ScoresFormCard client:load />
   </div>
   <article class="w-full flex justify-end items-center">
     <NotificationCard client:visible />
-    <AvatarCard client:visible transition:name="avatar-card" transition:persist />
+    <AvatarCard
+      client:visible
+      transition:name="avatar-card"
+      transition:persist
+    />
   </article>
 </header>
