@@ -24,30 +24,27 @@ export const POST: APIRoute = async ({ request }) => {
 	const { secure_url } = fileScore;
 	const url_image = secure_url.replace(".pdf", ".jpg");
 
-	
 	if (!fileScore.url) {
 		return new Response("Error uploading file in Cloudinary", { status: 400 });
 	}
-	
+
 	const URL = `${URL_API}${ROUTES_PATH.SCORES.SCORES}`;
-	
-	const data = {
-		name,
-		artist,
-		url_score: secure_url,
-		url_image,
-		category,
-		userId: userId,
-	};
-	
-	const headers = {
+
+	const response = await fetch(URL, {
+		method: "POST",
 		headers: {
-			"Authorization": `Bearer ${token}`,
-		}
-	};
+			Authorization: `JWT ${token}`,
+		},
+		body: JSON.stringify({
+			name,
+			artist,
+			category,
+			url_image,
+			url_score: fileScore.url,
+			user: userId,
+		}),
+	});
 
-	console.log(fileScore);
-
-	const response = await axios.post(URL, data, headers);
-	return new Response(response.data, { status: 200 });
+	console.log(await response.json());
+	return new Response("ok", { status: 200 });
 };
