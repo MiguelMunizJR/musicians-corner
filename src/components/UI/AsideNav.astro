@@ -4,9 +4,9 @@ import SettingsIcon from "@/icons/dashboard/SettingsIcon.astro";
 import LibraryIcon from "@/icons/dashboard/LibraryIcon.astro";
 import { ROUTES_PATH } from "@/const";
 import DashboardIcon from "@/icons/dashboard/DashboardIcon.astro";
-import LogOut from "@/components/auth/LogoutButton.astro";
 import Metronome from "@/icons/dashboard/Metronome.astro";
 import DropdownNav from "./DropdownNav.astro";
+import { LogoutButton } from "../auth/LogoutButton";
 import UserSettings from "@/icons/dashboard/UserSettings.astro";
 ---
 
@@ -61,7 +61,7 @@ import UserSettings from "@/icons/dashboard/UserSettings.astro";
         <SettingsIcon className="w-8 text-white" />
         Ajustes
       </SideMenuItem>
-      <LogOut />
+      <LogoutButton client:visible />
     </ul>
   </div>
 </nav>

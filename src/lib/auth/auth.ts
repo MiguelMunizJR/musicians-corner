@@ -8,7 +8,9 @@ export const logout = async () => {
 		await fetch("/api/auth/logout", {
 			method: "GET",
 		});
+
 		navigate(ROUTES_PATH.HOME);
+		localStorage.removeItem("token");
 	} catch (error) {
 		console.error(error);
 	}

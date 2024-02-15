@@ -17,10 +17,12 @@ const Form = ({ URL }) => {
 				body: formData,
 			});
 
+			//? signup
 			if (res.status === 201) {
 				navigate(ROUTES_PATH.LOGIN);
 			}
 
+			//? login
 			if (res.status === 200) {
 				const data = await res.json();
 				localStorage.setItem("token", data.token_session);
