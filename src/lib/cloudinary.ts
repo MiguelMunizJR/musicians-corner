@@ -13,7 +13,7 @@ export const uploadStream = async (
 		cloudinary.uploader
 			.upload_stream(
 				{
-					folder: "musicians corner banda/scores",
+					folder: "musicians_corner/scores",
 				},
 				(error, result) => {
 					if (result) return resolve(result);
@@ -22,4 +22,11 @@ export const uploadStream = async (
 			)
 			.end(buffer);
 	});
+};
+
+export const deleteFile = async (fileId: string) => {
+	await cloudinary.uploader
+		.destroy(fileId)
+		.then(result => console.log(result))
+		.catch(error => console.log(error));
 };

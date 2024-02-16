@@ -69,7 +69,7 @@ export const UploadMusic = ({ className }) => {
 
 export const ScoresForm = ({ setIsOpen }) => {
 	const token = localStorage.getItem("token");
-	const user = sessionStorage.getItem("user").slice(1, -1);
+	const user = sessionStorage.getItem("user");
 
 	const [files, setFiles] = useState([]);
 	const [isUploading, setIsUploading] = useState(false);
