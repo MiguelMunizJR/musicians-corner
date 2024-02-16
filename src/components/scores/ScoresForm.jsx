@@ -67,7 +67,7 @@ export const UploadMusic = ({ className }) => {
 	);
 };
 
-export const ScoresForm = ({ setIsOpen }) => {
+export const ScoresForm = ({ setIsOpen, setIsFiles }) => {
 	const token = localStorage.getItem("token");
 	const user = sessionStorage.getItem("user");
 
@@ -76,13 +76,13 @@ export const ScoresForm = ({ setIsOpen }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		
+		setIsUploading(true);
+
 		const formData = new FormData(e.target);
-		formData.append("file", files, files.name);
+		formData.append("file", files[0], files.name);
 		formData.append("user", user);
 		formData.append("token", token);
 
-		//! Llamada api
 		try {
 			const res = await fetch("/api/scores", {
 				method: "POST",
@@ -98,59 +98,25 @@ export const ScoresForm = ({ setIsOpen }) => {
 		} catch (e) {
 			console.error(e.message);
 		}
+		setIsUploading(false);
 	};
 
 	return (
 		<form onSubmit={handleSubmit} className="w-full relative">
-			{/* <div className="w-full py-6 transition-all">
-				<div className="flex items-center justify-center w-full">
-					<label
-						htmlFor="dropzone"
-						className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 transition-all"
-					>
-						<div className="flex flex-col items-center justify-center pt-5 pb-6">
-							<svg
-								className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 20 16"
-							>
-								<path
-									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-								/>
-							</svg>
-							<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-								<span className="font-semibold text-pretty">
-                  Haz click aquí para subir
-								</span>{" "}
-                o arrastra y suelta tu archivo.
-							</p>
-							<p className="text-xs text-gray-500 dark:text-gray-400">
-                SVG, PNG, JPG (MAX. 800x400px)
-							</p>
-						</div>
-						<input
-							id="dropzone"
-							name="dropzone"
-							type="file"
-							className="hidden"
-							required
-						/>
-					</label>
-				</div>
-			</div> */}
 			<FilePond
 				files={files}
-				onupdatefiles={() => setIsUploading(true)}
-				onpreparefile={(_, output) => {
-					setFiles(output);
+				onaddfilestart={() => setIsUploading(true)}
+				onpreparefile={() => {
+					setIsUploading(false);
+					setIsFiles(true);
 				}}
-				onremovefile={() => setIsUploading(true)}
+				onupdatefiles={(fileItems) => {
+					setFiles(fileItems.map((fileItem) => fileItem.file));
+				}}
+				onremovefile={() => {
+					setFiles([]);
+					setIsFiles(false);
+				}}
 				acceptedFileTypes={["application/pdf", "image/*"]}
 				allowFileEncode
 				allowImageTransform
@@ -218,9 +184,9 @@ export const ScoresForm = ({ setIsOpen }) => {
 			<DialogFooter className="mt-4">
 				<Button
 					type="submit"
+					loading={isUploading}
 					className="flex items-center justify-center bg-[#26ab3c] hover:bg-[#2cb643] transition-all text-[15px] rounded cursor-pointer py-3 px-5"
 				>
-					<UploadMusic className="w-6 mr-1" />
           Subir partitura
 				</Button>
 			</DialogFooter>
@@ -230,6 +196,7 @@ export const ScoresForm = ({ setIsOpen }) => {
 
 export const ScoresFormCard = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isFiles, setIsFiles] = useState(false);
 
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -239,7 +206,12 @@ export const ScoresFormCard = () => {
           Subir partitura
 				</button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px] bg-[#1A1E2C] border-0">
+			<DialogContent
+				onInteractOutside={(e) => {
+					isFiles && e.preventDefault();
+				}}
+				className="sm:max-w-[425px] bg-[#1A1E2C] border-0 p-7 transition-all"
+			>
 				<DialogHeader>
 					<DialogTitle className="font-medium text-xl">
             Subir partitura
@@ -249,7 +221,7 @@ export const ScoresFormCard = () => {
             descargarla.
 					</DialogDescription>
 				</DialogHeader>
-				<ScoresForm setIsOpen={setIsOpen} />
+				<ScoresForm setIsOpen={setIsOpen} setIsFiles={setIsFiles} />
 			</DialogContent>
 		</Dialog>
 	);

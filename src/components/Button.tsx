@@ -1,20 +1,28 @@
+import { LoadingButton } from "./UI/ButtonUI";
+
 interface Props {
   children: React.ReactNode;
   className?: string;
   type?: "button" | "submit" | "reset";
-  disabled?: boolean;
+  loading?: boolean;
   handleClick?: () => void;
 }
 
-export const Button = ({ children, type = "button", disabled, className = "", handleClick }: Props) => {
+export const Button = ({
+	children,
+	type = "button",
+	loading,
+	className = "",
+	handleClick,
+}: Props) => {
 	return (
-		<button
+		<LoadingButton
 			type={type}
-			className={`min-w-32 min-h-max rounded-md flex justify-center items-center transition-all gap-3 cursor-pointer ${className}`}
+			className={`min-w-32 min-h-max rounded-md flex justify-center items-center transition-all cursor-pointer ${className}`}
+			loading={loading}
 			onClick={handleClick}
-			disabled={disabled}
 		>
 			<div className="flex justify-center items-center">{children}</div>
-		</button>
+		</LoadingButton>
 	);
 };
