@@ -2,10 +2,15 @@ import { API_ROUTES, ROUTES_PATH } from "@/const";
 import EmailIcon from "@/icons/auth/Email.jsx";
 import PasswordIcon from "@/icons/auth/Password.jsx";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
+import { Button } from "../Button";
+import { useState } from "react";
 
 const Form = ({ URL }) => {
+	const [loading, setLoading] = useState(false);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setLoading(true);
 
 		const formData = new FormData(e.target);
 		const URL_BASE =
@@ -83,17 +88,22 @@ const Form = ({ URL }) => {
             ¿Has olvidado tu contraseña?
 					</p>
 				) : null}
-				<button className="mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none font-semibold transition duration-200 hover:bg-[#3fb452]">
+				<Button
+					loading={loading}
+					type="submit"
+					className="mt-12 text-lg bg-[#26AB3C] rounded-lg p-[10px] border-none font-semibold transition duration-200 hover:bg-[#3fb452]"
+				>
 					{URL.includes("/login") ? "Inicia sesión" : "Crear cuenta"}
-				</button>
+				</Button>
 				<p className="mx-auto py-2 text-gray-300">- O -</p>
 			</form>
 			<button className="px-4 py-2 border flex justify-center items-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-500 hover:text-slate-300 hover:shadow transition duration-150">
 				<img
 					className="w-6 h-6"
 					src="https://www.svgrepo.com/show/475656/google-color.svg"
-					alt="google logo"
+					alt="google-logo"
 					loading="lazy"
+					decoding="async"
 				/>
         Inicia sesión con Google
 			</button>
