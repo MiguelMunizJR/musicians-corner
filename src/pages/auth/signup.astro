@@ -16,7 +16,24 @@ if (accessToken || refreshToken) {
 
 <Layout title="Crea una cuenta en Musician's Corner gratis!">
   <section>
-    <article class="-mt-16 md:mt-12 md:w-7/12 max-w-[85rem] mx-auto h-[40rem] flex">
+    <a class="absolute z-50 top-4 left-4" href="/">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        class="w-14"
+        stroke="#fff"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 12h12M6 12l5-5m-5 5 5 5"></path>
+      </svg>
+    </a>
+    <article
+      class="-mt-16 md:mt-12 md:w-7/12 max-w-[85rem] mx-auto h-[40rem] flex"
+    >
       <div class="w-2/4 hidden md:flex justify-center">
         <picture class="w-[85%]">
           <img
@@ -36,7 +53,9 @@ if (accessToken || refreshToken) {
         <div>
           <!-- Social Links auths -->
         </div>
-        <p class="mt-4 md:mt-0 text-sm text-balance text-center text-[#ffffff80]">
+        <p
+          class="mt-4 md:mt-0 text-sm text-balance text-center text-[#ffffff80]"
+        >
           ¿Ya tienes una cuenta? <a
             href={ROUTES_PATH.LOGIN}
             class="text-[#26AB3C] hover:text-[#52b964] transition duration-200"

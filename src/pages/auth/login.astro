@@ -15,7 +15,22 @@ if (accessToken && refreshToken) {
 ---
 
 <Layout title="Inicia sesión en Musician's Corner">
-  <section title="Log in to Music Corner to continue">
+  <section>
+    <a class="absolute z-50 top-4 left-4" href="/">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        class="w-14"
+        stroke="#fff"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 12h12M6 12l5-5m-5 5 5 5"></path>
+      </svg>
+    </a>
     <article
       class="-mt-16 md:mt-12 md:w-7/12 max-w-[85rem] mx-auto h-[40rem] flex"
     >
@@ -34,8 +49,10 @@ if (accessToken && refreshToken) {
         class="w-1/2 min-h-full flex justify-center flex-col md:items-center flex-1 gap-8"
       >
         <h3 class="mb-6 text-5xl md:text-4xl font-semibold">Inicia sesión</h3>
-          <Form URL={URL} client:load />
-        <p class="mt-4 md:mt-0 text-sm text-balance text-center text-[#ffffff80]">
+        <Form URL={URL} client:load />
+        <p
+          class="mt-4 md:mt-0 text-sm text-balance text-center text-[#ffffff80]"
+        >
           ¿Todavía no tienes una cuenta? <a
             href={ROUTES_PATH.SIGNUP}
             class="text-[#26AB3C] hover:text-[#52b964] transition duration-200"
