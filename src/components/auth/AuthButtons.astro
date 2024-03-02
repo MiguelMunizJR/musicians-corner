@@ -10,7 +10,7 @@ interface Props {
 const { className } = Astro.props;
 ---
 
-<div class={`w-full flex justify-center items-center gap-6 ${className}`}>
+<div class={`w-full flex justify-center items-center gap-4 ${className}`}>
   <div class="flex flex-col items-center gap-4">
     <LoginButton href={ROUTES_PATH.LOGIN} />
     <SignUpButton href={ROUTES_PATH.SIGNUP} />
