@@ -11,10 +11,8 @@ import AlbumForm from "@/components/scores/AlbumForm.jsx";
 const user = Astro.cookies.get("sb-user");
 let userID = ""
 
-if (user) {
-  const userData = JSON.parse(user?.value);
-  userID = userData?.user?.id;
-}
+const userData = user && JSON.parse(user?.value);
+userID = userData?.user?.id;
 ---
 
 <section class="w-full mt-10 flex flex-col">

@@ -1,6 +1,5 @@
 ---
 import AppLayout from "@/layouts/AppLayout.astro";
-import CardScore from "@/components/CardScore.astro";
 import { fade } from "astro:transitions";
 
 const { scores_category } = Astro.params;
@@ -25,14 +24,15 @@ const title = "Banda Sinaloense";
       class="w-full min-h-max mt-8 mb-24 grid grid-cols-4 gap-x-8 gap-y-12"
       transition:animate={fade({ duration: ".4s" })}
     >
+      <!-- <CardScore />
       <CardScore />
       <CardScore />
       <CardScore />
       <CardScore />
       <CardScore />
       <CardScore />
-      <CardScore />
-      <CardScore />
+      <CardScore /> -->
     </section>
   </section>
 </AppLayout>
+@/components/CardScore

@@ -5,6 +5,7 @@ import { navigate } from "astro/virtual-modules/transitions-router.js";
 import { Button } from "../Button";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { getMyUser } from "@/lib/users/getMyUser";
 
 const Form = ({ URL }) => {
 	const [loading, setLoading] = useState(false);
@@ -32,9 +33,15 @@ const Form = ({ URL }) => {
 			//? login
 			if (res.status === 200) {
 				localStorage.setItem("token", userData?.token_session);
-				const sbUser = JSON.stringify(userData);
-				Cookies.set("sb-user", sbUser, {
-					expires: 5,
+				const user = JSON.stringify(userData);
+				const dbUser = JSON.stringify(await getMyUser(userData?.token_session));
+
+				Cookies.set("sb-user", user, {
+					expires: 3,
+					path: "/",
+				});
+				Cookies.set("db-user", dbUser, {
+					expires: 3,
 					path: "/",
 				});
 				navigate(ROUTES_PATH.SCORES.SCORES);
