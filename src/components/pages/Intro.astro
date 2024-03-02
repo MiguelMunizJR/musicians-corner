@@ -31,13 +31,13 @@ const isLoggin = data?.user ? true : false;
   <div
     class="w-full absolute p-4 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 text-white"
   >
-    <h1 class="mt-[6rem] text-5xl md:text-6xl font-bold mb-8">
+    <h1 class="mt-[3rem] text-5xl md:text-6xl font-bold mb-8">
       Bienvenido a Musician's <span class="text-[#26ab3c]">Corner</span>
     </h1>
     <div
       class="flex flex-col gap-4 items-center mx-auto mt-10 md:w-[65%] text-pretty text-white"
     >
-      <p>
+      <p class="text-base">
         Encuentra y descarga partituras de diversos géneros musicales, o
         comparte las tuyas propias.
       </p>
@@ -51,10 +51,10 @@ const isLoggin = data?.user ? true : false;
         Musician's Corner.
       </p>
     </div>
-    <div class="w-full mt-20">
+    <div class="w-full mt-14">
       {
         !isLoggin ? (
-          <AuthButtons className="flex flex-col md:flex-row md:gap-4 " />
+          <AuthButtons className="flex-col" />
         ) : (
           <div class="flex justify-center">
             <SideMenuItem

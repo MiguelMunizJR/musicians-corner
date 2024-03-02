@@ -11,7 +11,7 @@ let styles = "";
 const imgHidden = Astro.url.pathname.includes("/auth");
 if (imgHidden) {
   styles =
-    "bg-[#10141d] bg-[url('/images/bg-pattern-music.svg')] bg-contain bg- bg-center";
+    "bg-[#10141d] bg-[url('/images/bg-pattern-music.svg')] bg-contain bg-center";
 }
 ---
 
@@ -33,7 +33,7 @@ if (imgHidden) {
           id="hero-bg"
           src="/images/hero-bg.webp"
           alt="bg-hero"
-          class="object-cover w-full h-full opacity-30 md:opacity-40 fixed"
+          class="object-cover w-full h-full opacity-20 md:opacity-40 fixed -z-10"
           loading="lazy"
           ondragstart="return false"
         />

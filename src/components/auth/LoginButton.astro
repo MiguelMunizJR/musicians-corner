@@ -1,7 +1,7 @@
 ---
 interface Props {
-    href: string
-    className?: string
+  href: string;
+  className?: string;
 }
 
 const { href, className = "" } = Astro.props;
@@ -10,10 +10,8 @@ const currentPath = Astro.url.pathname;
 const samePath = href !== currentPath ? href : null;
 ---
 
-<button>
-  <a
-    href={samePath}
-    class={`bg-[#26ab3c] text-white px-14 py-4 md:px-6 md:py-3 rounded-full hover:bg-[#1bc237] ${className}`}
-    >Iniciar Sesión</a
-  >
+<button
+  class="w-[240px] h-[50px] bg-[#26ab3c] text-white rounded-full hover:bg-[#1bc237]"
+>
+  <a href={samePath}>Iniciar Sesión</a>
 </button>
