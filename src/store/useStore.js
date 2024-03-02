@@ -13,7 +13,5 @@ export const usePlayer = create((set) => ({
 
 export const useUser = create((set) => ({
 	user: [],
-	session: [],
 	setUser: (user) => set({ user }),
-	setSession: (session) => set({ session })
 }));

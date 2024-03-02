@@ -1,7 +1,9 @@
+import { ROUTES_PATH, URL_API } from "@/const";
 import { supabase } from "@/lib/supabase";
 import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({ request, cookies }) => {
+	const URL = `${URL_API}${ROUTES_PATH.USER}`;
 	const formData = await request.formData();
 
 	const email = formData.get("email")?.toString();
@@ -35,7 +37,20 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 			access_token,
 		});
 
-		return new Response(JSON.stringify(data), { status: 200 });
+		//! LIB
+		const res = await fetch(URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		});
+		const responseData = await res.json();
+
+		return new Response(JSON.stringify(responseData), { status: 200 });
 	} catch (error) {
 		return new Response("Error during login", { status: 500 });
 	}

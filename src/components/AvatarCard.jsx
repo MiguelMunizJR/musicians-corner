@@ -10,7 +10,6 @@ import {
 } from "@/components/DropDownMenu";
 import { ROUTES_PATH } from "@/const";
 import { logout } from "@/lib/auth/auth";
-import { useUser } from "@/store/useStore";
 
 export const AvatarIcon = () => {
 	return (
@@ -80,9 +79,7 @@ export const ArrowDown = () => {
 	);
 };
 
-export const AvatarCard = () => {
-	const user = useUser(state => state.user);
-
+export const AvatarCard = ({ user }) => {
 	const myScoresURL = ROUTES_PATH.SCORES.MY_SCORES.replace(
 		"[user_id]",
 		user?.user?.id

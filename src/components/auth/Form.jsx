@@ -4,11 +4,10 @@ import PasswordIcon from "@/icons/auth/Password.jsx";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 import { Button } from "../Button";
 import { useState } from "react";
-import { useUser } from "@/store/useStore";
+import Cookies from "js-cookie";
 
 const Form = ({ URL }) => {
 	const [loading, setLoading] = useState(false);
-	const setUser = useUser((state) => state.setUser);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -24,8 +23,6 @@ const Form = ({ URL }) => {
 				body: formData,
 			});
 			const userData = await res.json();
-			setUser(userData);
-			console.log(userData);
 
 			//? signup
 			if (res.status === 201) {
@@ -34,8 +31,12 @@ const Form = ({ URL }) => {
 
 			//? login
 			if (res.status === 200) {
-				localStorage.setItem("token", userData?.session?.token_session);
-				sessionStorage.setItem("user", userData?.user?.id);
+				localStorage.setItem("token", userData?.token_session);
+				const sbUser = JSON.stringify(userData);
+				Cookies.set("sb-user", sbUser, {
+					expires: 5,
+					path: "/",
+				});
 				navigate(ROUTES_PATH.SCORES.SCORES);
 			}
 		} catch (err) {

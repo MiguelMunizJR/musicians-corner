@@ -8,7 +8,13 @@ import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../../CardButtonCategories.astro";
 import AlbumForm from "@/components/scores/AlbumForm.jsx";
 
-const userID = "2";
+const user = Astro.cookies.get("sb-user");
+let userID = ""
+
+if (user) {
+  const userData = JSON.parse(user?.value);
+  userID = userData?.user?.id;
+}
 ---
 
 <section class="w-full mt-10 flex flex-col">
@@ -22,7 +28,6 @@ const userID = "2";
             href={ROUTES_PATH.SCORES.MY_SCORES}
             title="Mis partituras"
             userId={userID}
-            client:load
           >
             <ScoresIcon className="w-14" />
           </CardButton>
@@ -50,9 +55,7 @@ const userID = "2";
             <ScoresIcon className="w-14" />
           </CardButton>
           <div class="flex items-center gap-2">
-            {
-              
-            }
+            {}
             <AlbumForm client:load />
           </div>
         </div>

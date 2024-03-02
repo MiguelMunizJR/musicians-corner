@@ -2,17 +2,20 @@
 import AuthButtons from "../auth/AuthButtons.astro";
 import { AvatarCard } from "../AvatarCard";
 import Logo from "../Logo.astro";
-
 import SideMenuItem from "../SideMenuItem.astro";
 import { ROUTES_PATH } from "@/const";
 import EnterIcon from "@/icons/dashboard/EnterIcon.astro";
 
 const authRoute = Astro.url.pathname.includes("/auth");
-const isLogin = Astro.cookies.get("sb-access-token")?.value;
+
+const user = Astro.cookies.get("sb-user");
+const userData = user && JSON.parse(user?.value);
 ---
 
 <header class="w-full h-[75px] bg-transparent flex items-end fixed top-0 z-50">
-  <Logo className="hidden top-6 left-[20px] lg:left-[60px] w-[300px] lg:w-[350px] md:flex" />
+  <Logo
+    className="hidden top-6 left-[20px] lg:left-[60px] w-[300px] lg:w-[350px] md:flex"
+  />
   <nav class="w-full ml-[720px] mr-[65px] flex flex-1 justify-between">
     <ul class="hidden xl:flex gap-20 mt-12">
       {
@@ -37,16 +40,21 @@ const isLogin = Astro.cookies.get("sb-access-token")?.value;
 
     <div class="flex items-end">
       {
-        isLogin ? (
+        user ? (
           <div class="relative top-8 w-full min-h-max flex gap-6 justify-center items-center">
             <SideMenuItem
-              href={ROUTES_PATH.DASHBOARD}
+              href={ROUTES_PATH.SCORES.SCORES}
               className="bg-[#26ab3c] hover:bg-[#36b84b] flex justify-center items-center text-base py-2 px-3"
             >
               <EnterIcon className="w-5 h-5" />
-              Ir al Dashboard
+              Ir a mis partituras
             </SideMenuItem>
-            <AvatarCard client:visible transition:name="avatar-card" transition:persist />
+            <AvatarCard
+              user={userData}
+              client:visible
+              transition:name="avatar-card"
+              transition:persist
+            />
           </div>
         ) : (
           <AuthButtons className="hidden xl:flex" />

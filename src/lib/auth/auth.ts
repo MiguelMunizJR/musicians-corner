@@ -1,5 +1,4 @@
 export const prerender = false;
-
 import { ROUTES_PATH } from "@/const";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 

@@ -36,6 +36,7 @@
     "filepond-plugin-image-preview": "^4.6.12",
     "filepond-plugin-image-resize": "^2.0.10",
     "filepond-plugin-image-transform": "^3.8.7",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.331.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

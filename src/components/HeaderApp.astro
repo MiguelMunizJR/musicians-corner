@@ -4,7 +4,8 @@ import { ScoresFormCard } from "./scores/ScoresForm";
 import NotificationCard from "./NotificationCard";
 import { AvatarCard } from "./AvatarCard.jsx";
 
-const data = null;
+const user = Astro.cookies.get("sb-user");
+const userData = user && JSON.parse(user?.value);
 ---
 
 <header class="w-full mt-8 flex items-center">
@@ -15,6 +16,7 @@ const data = null;
   <article class="w-full flex justify-end items-center">
     <NotificationCard client:visible />
     <AvatarCard
+      user={userData}
       client:visible
       transition:name="avatar-card"
       transition:persist

@@ -11,7 +11,14 @@ interface Props {
 
 const { className } = Astro.props;
 
-const userID = "2";
+
+const user = Astro.cookies.get("sb-user");
+let userID = ""
+
+if (user) {
+  const userData = JSON.parse(user?.value);
+  userID = userData?.user?.id;
+}
 
 const URL_SCORES = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-scores`;
 const URL_LIKED = `${ROUTES_PATH.SCORES.SCORES}/${userID}/my-liked`;
