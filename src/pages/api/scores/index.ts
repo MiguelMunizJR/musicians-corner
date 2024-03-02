@@ -12,7 +12,7 @@ export const POST: APIRoute = async ({ request }) => {
 	const artist = formData.get("artist") as string;
 	const category = formData.get("category") as string;
 	const file = formData.get("file") as File;
-	const userId = formData.get("user") as string;
+	const userId = formData.get("userId") as string;
 	const token = formData.get("token") as string;
 
 	const data = {
