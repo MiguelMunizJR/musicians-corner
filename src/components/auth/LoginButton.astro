@@ -10,8 +10,9 @@ const currentPath = Astro.url.pathname;
 const samePath = href !== currentPath ? href : null;
 ---
 
-<button
-  class="w-[240px] h-[55px] bg-[#26ab3c] text-white rounded-xl md:rounded-full hover:bg-[#1bc237]"
+<a
+  class="w-[240px] h-[55px] flex justify-center items-center bg-[#26ab3c] text-white rounded-xl md:rounded-full hover:bg-[#1bc237]"
+  href={samePath}
 >
-  <a class="w-full" href={samePath}>Iniciar Sesión</a>
-</button>
+  Iniciar Sesión
+</a>

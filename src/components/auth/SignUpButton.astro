@@ -10,8 +10,9 @@ const currentPath = Astro.url.pathname;
 const samePath = href !== currentPath ? href : null;
 ---
 
-<button
-  class="w-[240px] h-[55px] bg-white text-slate-800 px-10 py-4 md:px-6 md:py-3 rounded-xl md:rounded-full transition-all hover:bg-gray-300"
+<a
+  class="w-[240px] h-[55px] bg-white flex justify-center items-center text-slate-800 px-10 py-4 md:px-6 md:py-3 rounded-xl md:rounded-full transition-all hover:bg-gray-300"
+  href={samePath}
 >
-  <a class="w-full" href={samePath}>Crear una cuenta</a>
-</button>
+  Crear una cuenta
+</a>
