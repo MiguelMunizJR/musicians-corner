@@ -52,7 +52,7 @@ const Form = ({ URL }) => {
 							name="email"
 							id="email"
 							placeholder="musicapp@gmail.com"
-							className="w-[22rem] h-[4rem] md:h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
+							className="w-[22rem] h-[3.4rem] md:h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
 							required
 						/>
 						<div
@@ -70,7 +70,7 @@ const Form = ({ URL }) => {
 							name="password"
 							id="password"
 							placeholder="************"
-							className="w-[22rem] h-[4rem] md:h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
+							className="w-[22rem] h-[3.4rem] md:h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
 							required
 							autoComplete="true"
 						/>
