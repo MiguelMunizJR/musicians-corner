@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev --host": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
@@ -46,6 +47,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0"

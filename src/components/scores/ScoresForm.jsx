@@ -30,6 +30,7 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import { Button } from "../Button";
+import Cookies from "js-cookie";
 
 registerPlugin(
 	FilePondPluginImageExifOrientation,
@@ -69,7 +70,8 @@ export const UploadMusic = ({ className }) => {
 
 export const ScoresForm = ({ setIsOpen, setIsFiles }) => {
 	const token = localStorage.getItem("token");
-	const user = sessionStorage.getItem("user");
+	const user = Cookies.get("sb-user");
+	const userData = JSON.parse(user);
 
 	const [files, setFiles] = useState([]);
 	const [isUploading, setIsUploading] = useState(false);
@@ -80,7 +82,7 @@ export const ScoresForm = ({ setIsOpen, setIsFiles }) => {
 
 		const formData = new FormData(e.target);
 		formData.append("file", files[0], files.name);
-		formData.append("user", user);
+		formData.append("userId", userData?.user?.id);
 		formData.append("token", token);
 
 		try {
