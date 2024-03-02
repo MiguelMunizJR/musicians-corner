@@ -18,7 +18,7 @@ export const Button = ({
 	return (
 		<LoadingButton
 			type={type}
-			className={`min-w-32 min-h-max rounded-md flex justify-center items-center transition-all cursor-pointer ${className}`}
+			className={`min-w-32 rounded-md flex justify-center items-center transition-all cursor-pointer ${className}`}
 			loading={loading}
 			onClick={handleClick}
 		>

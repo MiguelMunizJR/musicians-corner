@@ -40,10 +40,10 @@ const Form = ({ URL }) => {
 	};
 
 	return (
-		<article className="flex flex-col">
+		<article className="w-full flex flex-col items-center">
 			<form
 				onSubmit={handleSubmit}
-				className="flex flex-col justify-center relative"
+				className="flex flex-col justify-center items-center relative"
 			>
 				<div className="flex flex-col gap-8">
 					<div className="relative">
@@ -52,7 +52,7 @@ const Form = ({ URL }) => {
 							name="email"
 							id="email"
 							placeholder="musicapp@gmail.com"
-							className="w-[22rem] h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
+							className="w-[22rem] h-[3rem] md:h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
 							required
 						/>
 						<div
@@ -70,7 +70,7 @@ const Form = ({ URL }) => {
 							name="password"
 							id="password"
 							placeholder="************"
-							className="w-[22rem] h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
+							className="w-[22rem] h-[3rem] md:h-[2.7rem] pl-12 rounded-lg bg-gray-600/20 border-gray-700 font-medium outline-none text-[#aaa] transition-all hover:bg-gray-500/20 placeholder:text-[#777]"
 							required
 							autoComplete="true"
 						/>
@@ -91,22 +91,24 @@ const Form = ({ URL }) => {
 				<Button
 					loading={loading}
 					type="submit"
-					className="mt-12 text-lg bg-[#26AB3C] rounded-lg p-[10px] border-none font-semibold transition duration-200 hover:bg-[#3fb452]"
+					className="w-full h-[3rem] mt-16 md:mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none font-normal transition duration-200 hover:bg-[#3fb452]"
 				>
 					{URL.includes("/login") ? "Inicia sesión" : "Crear cuenta"}
 				</Button>
 				<p className="mx-auto py-2 text-gray-300">- O -</p>
 			</form>
-			<button className="px-4 py-2 border flex justify-center items-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-500 hover:text-slate-300 hover:shadow transition duration-150">
-				<img
-					className="w-6 h-6"
-					src="https://www.svgrepo.com/show/475656/google-color.svg"
-					alt="google-logo"
-					loading="lazy"
-					decoding="async"
-				/>
-        Inicia sesión con Google
-			</button>
+			<div className="w-full">
+				<button className="w-full px-4 py-3 md:py-2 border flex justify-center items-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-500 hover:text-slate-300 hover:shadow transition duration-150">
+					<img
+						className="w-6 h-6"
+						src="https://www.svgrepo.com/show/475656/google-color.svg"
+						alt="google-logo"
+						loading="lazy"
+						decoding="async"
+					/>
+          Inicia sesión con Google
+				</button>
+			</div>
 		</article>
 	);
 };

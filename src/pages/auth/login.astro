@@ -16,7 +16,9 @@ if (accessToken && refreshToken) {
 
 <Layout title="Inicia sesión en Musician's Corner">
   <section title="Log in to Music Corner to continue">
-    <article class="mt-12 md:w-7/12 max-w-[85rem] mx-auto h-[40rem] flex">
+    <article
+      class="-mt-16 md:mt-12 md:w-7/12 max-w-[85rem] mx-auto h-[40rem] flex"
+    >
       <div class="w-2/4 hidden md:flex justify-center">
         <picture class="w-[85%]">
           <img
@@ -29,11 +31,11 @@ if (accessToken && refreshToken) {
         </picture>
       </div>
       <div
-        class="w-full md:w-1/2 min-h-full flex justify-center flex-col md:items-center flex-1 gap-8"
+        class="w-1/2 min-h-full flex justify-center flex-col md:items-center flex-1 gap-8"
       >
-        <h3 class="mb-6 text-5xl md:text-4xl font-semibold">Inicia sesión</h3>
-        <Form URL={URL} client:load />
-        <p class="text-sm text-[#ffffff80]">
+        <h3 class="mb-6 text-4xl font-semibold">Inicia sesión</h3>
+          <Form URL={URL} client:load />
+        <p class="mt-4 md:mt-0 text-sm text-balance text-center text-[#ffffff80]">
           ¿Todavía no tienes una cuenta? <a
             href={ROUTES_PATH.SIGNUP}
             class="text-[#26AB3C] hover:text-[#52b964] transition duration-200"
