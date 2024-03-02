@@ -10,3 +10,10 @@ export const usePlayer = create((set) => ({
 	setTempo: (tempo) => set({ tempo }),
 	setIsPlaying: (isPlaying) => set({ isPlaying }),
 }));
+
+export const useUser = create((set) => ({
+	user: [],
+	session: [],
+	setUser: (user) => set({ user }),
+	setSession: (session) => set({ session })
+}));

@@ -10,7 +10,7 @@ import {
 } from "@/components/DropDownMenu";
 import { ROUTES_PATH } from "@/const";
 import { logout } from "@/lib/auth/auth";
-import useUser from "../hooks/useUser";
+import { useUser } from "@/store/useStore";
 
 export const AvatarIcon = () => {
 	return (
@@ -81,7 +81,7 @@ export const ArrowDown = () => {
 };
 
 export const AvatarCard = () => {
-	const { user } = useUser();
+	const user = useUser(state => state.user);
 
 	const myScoresURL = ROUTES_PATH.SCORES.MY_SCORES.replace(
 		"[user_id]",
@@ -94,7 +94,7 @@ export const AvatarCard = () => {
 				<button className="min-w-72 mx-4 min-h-20 py-3 px-5 rounded-xl flex items-center gap-3 hover:bg-slate-600/15 cursor-pointer transition-all">
 					<AvatarIcon />
 					<div className=" flex flex-col gap-1">
-						<h6 className="text-gray-300">{user?.email}</h6>
+						<h6 className="text-gray-300">{user?.user?.email}</h6>
 						<p className="bg-blue-500 w-max px-3 text-sm font-semibold rounded-full">
               Pro
 						</p>

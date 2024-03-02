@@ -4,9 +4,11 @@ import PasswordIcon from "@/icons/auth/Password.jsx";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 import { Button } from "../Button";
 import { useState } from "react";
+import { useUser } from "@/store/useStore";
 
 const Form = ({ URL }) => {
 	const [loading, setLoading] = useState(false);
+	const setUser = useUser((state) => state.setUser);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -21,6 +23,9 @@ const Form = ({ URL }) => {
 				method: "POST",
 				body: formData,
 			});
+			const userData = await res.json();
+			setUser(userData);
+			console.log(userData);
 
 			//? signup
 			if (res.status === 201) {
@@ -29,13 +34,13 @@ const Form = ({ URL }) => {
 
 			//? login
 			if (res.status === 200) {
-				const data = await res.json();
-				localStorage.setItem("token", data.token_session);
-				sessionStorage.setItem("user", data.user.id);
-				navigate(ROUTES_PATH.DASHBOARD);
+				localStorage.setItem("token", userData?.session?.token_session);
+				sessionStorage.setItem("user", userData?.user?.id);
+				navigate(ROUTES_PATH.SCORES.SCORES);
 			}
 		} catch (err) {
 			console.log(err.message);
+			setLoading(false);
 		}
 	};
 
