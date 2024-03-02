@@ -83,22 +83,22 @@ const Form = ({ URL }) => {
 						</div>
 					</div>
 				</div>
-				{URL === "/login" ? (
-					<p className="my-2 text-right text-sm text-[#26AB3C] opacity-85 cursor-pointer hover:text-[rgb(82,185,100)] transition duration-200">
+				{URL === "/auth/login" ? (
+					<p className="my-2 self-end text-sm text-[#4f596b] opacity-85 cursor-pointer hover:text-[rgb(82,185,100)] transition duration-200">
             ¿Has olvidado tu contraseña?
 					</p>
 				) : null}
 				<Button
 					loading={loading}
 					type="submit"
-					className="w-full h-[3rem] mt-14 md:mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none font-normal transition duration-200 hover:bg-[#3fb452]"
+					className="w-full h-[3rem] mt-14 md:mt-12 bg-[#26AB3C] rounded-lg p-[10px] border-none text-base transition duration-200 hover:bg-[#3fb452]"
 				>
-					{URL.includes("/login") ? "Inicia sesión" : "Crear cuenta"}
+					{URL?.includes("/login") ? "Inicia sesión" : "Crear cuenta"}
 				</Button>
 				<p className="mx-auto py-2 text-gray-300">- O -</p>
 			</form>
 			<div className="w-full">
-				<button className="w-full px-4 py-3 md:py-2 border flex justify-center items-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-500 hover:text-slate-300 hover:shadow transition duration-150">
+				<button className="w-[352px] mx-auto px-4 py-3 border flex justify-center items-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-500 hover:text-slate-300 hover:shadow transition duration-150">
 					<img
 						className="w-6 h-6"
 						src="https://www.svgrepo.com/show/475656/google-color.svg"
