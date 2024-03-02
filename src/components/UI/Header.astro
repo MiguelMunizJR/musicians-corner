@@ -12,7 +12,7 @@ const isLogin = Astro.cookies.get("sb-access-token")?.value;
 ---
 
 <header class="w-full h-[75px] bg-transparent flex items-end fixed top-0 z-50">
-  <Logo className="top-6 left-[60px] w-[350px]" />
+  <Logo className="hidden top-6 left-[60px] w-[350px] md:flex" />
   <nav class="ml-[730px] mr-[65px] flex flex-1 justify-between">
     <ul class="flex gap-20 mt-12">
       {

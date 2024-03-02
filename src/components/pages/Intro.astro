@@ -27,36 +27,46 @@ if (error) {
 const isLoggin = data?.user ? true : false;
 ---
 
-<div class="relative w-full h-screen">
+<div class="relative w-full min-h-screen">
   <div
-    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white"
+    class="w-full absolute p-4 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 text-white"
   >
-    <h1 class="text-6xl font-bold mb-8">
+    <h1 class="mt-[6rem] text-5xl md:text-6xl font-bold mb-8">
       Bienvenido a Musician's <span class="text-[#26ab3c]">Corner</span>
     </h1>
-    <p class="mx-auto w-[65%] text-pretty font-light text-white/90 mb-14">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac purus sit
-      amet lectus fermentum venenatis. Integer eu lacus vel ligula vehicula
-      fermentum. Quisque aliquam turpis in faucibus dapibus. Curabitur id urna
-      id metus volutpat volutpat non at elit. Sed feugiat sapien id massa
-      laoreet, eu vulputate nisi convallis. Maecenas ut elit vel orci
-      scelerisque bibendum nec non nisl. Nullam nec vulputate dui, sit amet
-      aliquet erat. Integer eu feugiat ligula. Etiam vel est purus.
-    </p>
-    {
-      !isLoggin ? (
-        <AuthButtons className="flex gap-4" />
-      ) : (
-        <div class="flex justify-center">
-          <SideMenuItem
-            href={ROUTES_PATH.DASHBOARD}
-            className="bg-[#26ab3c] hover:bg-[#36b84b] flex justify-center items-center py-3 px-4"
-          >
-            <EnterIcon className="w-6 h-6" />
-            Ir al Dashboard
-          </SideMenuItem>
-        </div>
-      )
-    }
+    <div
+      class="flex flex-col gap-4 items-center mx-auto mt-10 md:w-[65%] text-pretty text-white"
+    >
+      <p>
+        Encuentra y descarga partituras de diversos géneros musicales, o
+        comparte las tuyas propias.
+      </p>
+      <p>
+        Domina tu ritmo con nuestro metrónomo integrado y desata tu creatividad
+        musical con nuestra sección de creación de canciones respaldada por
+        inteligencia artificial.
+      </p>
+      <p class="mb-0">
+        Únete a nuestra comunidad y déjate inspirar por el mundo de la música en
+        Musician's Corner.
+      </p>
+    </div>
+    <div class="w-full mt-20">
+      {
+        !isLoggin ? (
+          <AuthButtons className="flex flex-col md:flex-row md:gap-4 " />
+        ) : (
+          <div class="flex justify-center">
+            <SideMenuItem
+              href={ROUTES_PATH.DASHBOARD}
+              className="bg-[#26ab3c] hover:bg-[#36b84b] flex justify-center items-center py-3 px-4"
+            >
+              <EnterIcon className="w-6 h-6" />
+              Ir al Dashboard
+            </SideMenuItem>
+          </div>
+        )
+      }
+    </div>
   </div>
 </div>
