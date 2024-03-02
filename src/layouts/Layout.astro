@@ -8,7 +8,8 @@ interface Props {
 const { title } = Astro.props;
 
 let styles = "";
-if (Astro.url.pathname.includes("/auth")) {
+const imgHidden = Astro.url.pathname.includes("/auth");
+if (imgHidden) {
   styles =
     "bg-[#10141d] bg-[url('/images/bg-pattern-music.svg')] bg-contain bg- bg-center";
 }
@@ -25,7 +26,19 @@ if (Astro.url.pathname.includes("/auth")) {
     <title>{title}</title>
     <ViewTransitions fallback="none" />
   </head>
-  <body class="relative">
+  <body class="w-full h-screen relative">
+    {
+      !imgHidden && (
+        <img
+          id="hero-bg"
+          src="/images/hero-bg.webp"
+          alt="bg-hero"
+          class="object-cover w-full h-full opacity-40 fixed"
+          loading="lazy"
+          ondragstart="return false"
+        />
+      )
+    }
     <Header />
     <main class={`${styles}`}>
       <slot />
@@ -35,8 +48,8 @@ if (Astro.url.pathname.includes("/auth")) {
         font-family: "CircularStd", system-ui, sans-serif;
         color: white;
       }
-      
-      main {
+
+      body {
         width: 100%;
         height: 100vh;
         display: flex;
