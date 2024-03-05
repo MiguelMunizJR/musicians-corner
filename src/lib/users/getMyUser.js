@@ -1,7 +1,13 @@
 import { ROUTES_PATH, URL_API } from "@/const";
 
+
 export const getMyUser = async (token) => {
 	const URL = `${URL_API}${ROUTES_PATH.USER}`;
+	
+	if (!token) {
+		console.error("missing token");
+		return;
+	}
 
 	try {
 		const res = await fetch(URL, {

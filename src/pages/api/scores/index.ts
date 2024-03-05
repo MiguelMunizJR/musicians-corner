@@ -2,7 +2,6 @@ import { ROUTES_PATH, URL_API } from "@/const";
 import { deleteFile, uploadStream } from "@/lib/cloudinary";
 import { updateUrlScore, deleteScore } from "@/lib/scores";
 import type { APIRoute } from "astro";
-import axios from "axios";
 
 export const POST: APIRoute = async ({ request }) => {
 	const URL = `${URL_API}${ROUTES_PATH.SCORES.SCORES}`;
@@ -23,13 +22,17 @@ export const POST: APIRoute = async ({ request }) => {
 	};
 
 	//* Upload score to API
-	const dataDB = await axios.post(URL, data, {
+	const dataDB = await fetch(URL, {
+		method: "POST",
 		headers: {
-			Authorization: `JWT ${token}`,
+			"Content-Type": "application/json",
+			"Authorization": `JWT ${token}`,
+			
 		},
+		body: JSON.stringify(data)
 	});
 
-	const dataScore = dataDB?.data;
+	const dataScore = await dataDB?.json();
 
 	//* Transform file to Uint8Array and upload to Cloudinary
 	const arrayBuffer = await file.arrayBuffer();
