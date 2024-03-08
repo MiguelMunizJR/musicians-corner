@@ -1,10 +1,28 @@
 ---
+import { CardScore } from "@/components/CardScore";
+import Scores from "@/components/pages/scores/Scores.astro";
 import AppLayout from "@/layouts/AppLayout.astro";
+import { getAllScores } from "@/lib/scores/scores_actions";
 import { fade } from "astro:transitions";
+const { cookies } = Astro;
 
-const { scores_category } = Astro.params;
+const sb_user = cookies.get("sb-user");
+const token = sb_user?.json().token_session;
+const url = Astro.url.pathname;
+let subUrl = url.substring(url.lastIndexOf("/") + 1);
 
-const title = "Banda Sinaloense";
+let category = subUrl.replace(
+  /\w\S*/g,
+  (category: any) =>
+    subUrl.charAt(0).toUpperCase() + category.substr(1).toLowerCase()
+);
+
+if (category === "Banda") {
+  category = "Banda Sinaloense";
+}
+
+const scores = await getAllScores(token);
+const filteredScores = scores?.filter((score: any) => score.category === subUrl);
 ---
 
 <AppLayout title="">
@@ -14,24 +32,37 @@ const title = "Banda Sinaloense";
         Partituras
       </h2>
       <h4
-        class="mt-4 text-lg text-gray-100 font-semibold"
+        class="mt-6 text-2xl text-[#26ab3c] font-semibold"
         transition:animate={fade({ duration: ".4s" })}
       >
-        {title}
+        {category}
       </h4>
     </article>
     <section
-      class="w-full min-h-max mt-8 mb-24 grid grid-cols-4 gap-x-8 gap-y-12"
+      class="w-full min-h-96 flex justify-center items-center"
       transition:animate={fade({ duration: ".4s" })}
     >
-      <!-- <CardScore />
-      <CardScore />
-      <CardScore />
-      <CardScore />
-      <CardScore />
-      <CardScore />
-      <CardScore />
-      <CardScore /> -->
+      {
+        filteredScores.length > 0 ? (
+          <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20 ">
+            {filteredScores?.map((score: any) => (
+              <CardScore
+                title={score.name}
+                author={score.artist}
+                user={"pending"}
+                downloads="4"
+                scoreImage={score.url_image}
+              />
+            ))}
+          </div>
+        ) : (
+          <div>
+            <p class="text-center text-xl text-gray-400/60">
+              No hay partituras en esta categoria
+            </p>
+          </div>
+        )
+      }
     </section>
   </section>
 </AppLayout>

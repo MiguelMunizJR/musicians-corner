@@ -29,7 +29,7 @@ export const VolumeControl = () => {
 				{isVolumeSilenced ? <VolumeSilence /> : <Volume />}
 			</button>
 			<Slider
-				defaultValue={[100]}
+				defaultValue={100}
 				min={0}
 				max={100}
 				value={[volume * 100]}

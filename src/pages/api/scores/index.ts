@@ -1,6 +1,6 @@
 import { ROUTES_PATH, URL_API } from "@/const";
 import { deleteFile, uploadStream } from "@/lib/cloudinary";
-import { updateUrlScore, deleteScore } from "@/lib/scores";
+import { updateUrlScore, deleteScore } from "@/lib/scores/scores";
 import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({ request }) => {
