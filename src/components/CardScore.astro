@@ -14,12 +14,13 @@ interface Props {
 }
 
 const { className, title, author, user, downloads, scoreImage } = Astro.props;
+const src = !scoreImage?.includes("waiting for cloudinary url...") ? scoreImage : "/images/score.jpg";
 ---
 
 <article class={`w-full min-h-[18rem] rounded-xl bg-[#1a1e2c] ${className}`}>
   <div class="w-full relative">
     <img
-      src={scoreImage ? scoreImage : "/images/score.jpg"}
+      src={src}
       alt="score-img"
       class="w-full h-full"
       loading="lazy"

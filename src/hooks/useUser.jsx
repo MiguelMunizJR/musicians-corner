@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ROUTES_PATH, URL_API } from "../const";
+const URL = `${URL_API}${ROUTES_PATH.USER}`;
 
 const useUser = () => {
 	const [user, setUser] = useState(null);
@@ -7,14 +8,13 @@ const useUser = () => {
 	const [error, setError] = useState(null);
 	const [token, setToken] = useState("");
 
-	const getUserInfo = async () => {
+	const getUserInfo = async (token_session) => {
 		setLoading(true);
-		const URL = `${URL_API}${ROUTES_PATH.USER}`;
 
-		const res = await fetch(URL, {
+		await fetch(URL, {
 			method: "GET",
 			headers: {
-				"authorization": `JWT ${token}`,
+				Authorization: `JWT ${token_session}`,
 			},
 		})
 			.then((res) => res.json())
@@ -26,19 +26,34 @@ const useUser = () => {
 				setError(err.message);
 				setLoading(false);
 			});
-
-		console.log(await res.JSON());
 	};
 
 	useEffect(() => {
 		const tokenB = localStorage.getItem("token");
 		setToken(tokenB);
 
-
 		if (token) {
-			getUserInfo();
-		} else {
-			setLoading(false);
+			return async () => {
+				try {
+					await fetch(URL, {
+						method: "GET",
+						headers: {
+							Authorization: `JWT ${tokenB}`,
+						},
+					})
+						.then((res) => res.json())
+						.then((data) => {
+							setUser(data);
+							setLoading(false);
+						})
+						.catch((err) => {
+							setError(err.message);
+							setLoading(false);
+						});
+				} catch (e) {
+					console.error(e);
+				}
+			};
 		}
 	}, [token]);
 
