@@ -23,6 +23,8 @@ if (category === "Banda") {
 
 const scores = await getAllScores(token);
 const filteredScores = scores?.filter((score: any) => score.category === subUrl);
+
+// Pendiente agregar downloadings en API en scores model
 ---
 
 <AppLayout title="">
@@ -48,8 +50,8 @@ const filteredScores = scores?.filter((score: any) => score.category === subUrl)
             {filteredScores.map((score: any) => (
               <CardScore
                 title={score.name}
-                author={score.author}
-                user={"pending"}
+                author={score.artist}
+                user={score.author}
                 downloads="4"
                 scoreImage={score.url_image}
               />

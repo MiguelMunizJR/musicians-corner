@@ -68,7 +68,7 @@ export const CardScore = ({
 			</div>
 			<div className="p-3">
 				<div className="w-full flex flex-col px-2">
-					<h3 className="text-balance h-[3rem] text-gray-300">{title}</h3>
+					<h3 className="text-balance text-lg h-[3rem] text-gray-300">{title}</h3>
 					<div className="w-full flex justify-between items-center">
 						<div className="flex gap-1 items-center">
 							<MusicCategoryIcon className="w-4 h-4 text-[#26ab3c]" />

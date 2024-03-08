@@ -98,9 +98,9 @@ export const ScoresForm = ({ setIsOpen, setIsFiles }) => {
 				throw new Error("Error while uploading");
 			}
 
-			e.target.reset();
 			await getUserInfo(token);
 			setIsOpen(false);
+			e.target.reset();
 		} catch (e) {
 			console.error(e.message);
 			e.target.reset();
