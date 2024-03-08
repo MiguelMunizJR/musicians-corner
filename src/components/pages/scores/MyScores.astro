@@ -9,12 +9,12 @@ const token = sb_user?.json().token_session;
 const userData = await getMyUser(token);
 ---
 
-<section class="w-full mt-10 flex flex-col">
+<section class="w-full mt-10 px-6 md:px-0 flex flex-col">
   <h2 class="text-2xl font-medium py-3">Mis partituras</h2>
-  <article class="w-full min-h-96 flex justify-center items-center">
+  <article class="w-full min-h-96 flex items-center justify-center">
     {
       userData.scores.length > 0 ? (
-        <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20 ">
+        <div class="w-full min-h-max mt-8 mb-28 gap-10 flex flex-wrap justify-center lg:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-20">
           {userData.scores.map((score: any) => (
             <CardScore
               title={score.name}

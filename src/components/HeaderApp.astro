@@ -9,8 +9,8 @@ const userData = user && JSON.parse(user?.value);
 ---
 
 <header class="w-full mt-8 flex items-center">
-  <div class="w-full flex items-center">
-    <SearchInput className="w-[725px]" />
+  <div class="w-full hidden md:flex items-center">
+    <SearchInput className="md:w-[400px] lg:w-[725px]" />
     <ScoresFormCard client:load />
   </div>
   <article class="w-full flex justify-end items-center">
@@ -19,7 +19,6 @@ const userData = user && JSON.parse(user?.value);
       user={userData}
       client:visible
       transition:name="avatar-card"
-      transition:persist
     />
   </article>
 </header>

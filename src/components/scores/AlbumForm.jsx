@@ -27,11 +27,11 @@ const AlbumForm = () => {
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen} >
 			<DialogTrigger asChild>
-				<button className="w-36 h-36 flex justify-center items-center rounded-lg relative bg-[#26ab3c] hover:bg-[#2cb643] cursor-pointer transition-all">
+				<button className="w-32 h-32 md:w-36 md:h-36 flex justify-center items-center rounded-lg relative text-gray-300/90 bg-[#26ab3c] hover:bg-[#2cb643] cursor-pointer transition-all">
 					<svg
 						className="w-16"
 						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
+						fill="currentColor"
 						viewBox="0 0 24 24"
 					>
 						<path

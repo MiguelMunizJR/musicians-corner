@@ -24,19 +24,19 @@ const { title, description } = Astro.props;
   <body>
     <div id="app" class="relative h-screen">
       <aside
-        class="[grid-area:aside] flex-col flex pt-3 overflow-y-auto bg-[#161925]"
+        class="w-[291px] hidden md:flex flex-col pt-3 overflow-y-auto bg-[#161925]"
       >
         <Logo className="w-60 mx-auto relative py-5" />
         <AsideNav />
       </aside>
-      <main class="[grid-area:main] px-16 overflow-y-auto w-full bg-[#11141d]">
+      <main class="px-0 md:px-16 overflow-y-auto w-full bg-[#11141d]">
         <HeaderApp />
-        <div class="w-full flex justify-between gap-20">
+        <div class="w-full flex justify-between md:gap-20">
           <slot />
           <AsideApp />
         </div>
       </main>
-      <footer class="[grid-area:player] h-[80px] hidden">
+      <footer class="h-[80px] hidden">
         <!-- FOOTER PLAYER -->
       </footer>
     </div>
@@ -49,12 +49,7 @@ const { title, description } = Astro.props;
       #app {
         width: 100%;
         height: 100vh;
-        display: grid;
-        grid-template-areas:
-          "aside main main"
-          "player player player";
-        grid-template-columns: 250px 1fr;
-        grid-template-rows: 1fr auto;
+        display: flex;
         background-color: #1f2235;
       }
 

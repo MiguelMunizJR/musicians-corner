@@ -28,13 +28,13 @@ const filteredScores = scores?.filter((score: any) => score.category === subUrl)
 ---
 
 <AppLayout title="">
-  <section class="w-full mt-10 flex flex-col">
+  <section class="w-full mt-10 px-6 md:px-0 flex flex-col">
     <article>
       <h2 class="text-2xl font-medium py-3" transition:name="scores_title">
         Partituras
       </h2>
       <h4
-        class="mt-6 text-2xl text-[#26ab3c] font-semibold"
+        class="mt-4 text-2xl text-[#26ab3c] font-semibold"
         transition:animate={fade({ duration: ".4s" })}
       >
         {category}
@@ -46,7 +46,7 @@ const filteredScores = scores?.filter((score: any) => score.category === subUrl)
     >
       {
         filteredScores.length > 0 ? (
-          <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20">
+          <div class="w-full min-h-max mt-10 mb-28 gap-10 flex flex-wrap justify-center md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-20">
             {filteredScores.map((score: any) => (
               <CardScore
                 title={score.name}

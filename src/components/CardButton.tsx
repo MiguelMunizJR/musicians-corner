@@ -11,7 +11,7 @@ const CardButton = ({ title, className, href, children, userId }: Props) => {
 
 	return (
 		<article
-			className={`w-36 h-36 flex justify-center items-center rounded-lg relative transition-all ${className}`}
+			className={`w-32 h-32 md:w-36 md:h-36 flex justify-center items-center text-gray-200 rounded-lg relative transition-all ${className}`}
 		>
 			<a
 				className="w-full min-h-max flex flex-col justify-center items-center"
