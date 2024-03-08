@@ -1,9 +1,9 @@
 ---
-import CardScore from "@/components/CardScore.astro";
+import { CardScore } from "@/components/CardScore";
 import { getMyUser } from "@/lib/users/getMyUser";
 const { cookies } = Astro;
 
-const sb_user = cookies.get("sb-user")
+const sb_user = cookies.get("sb-user");
 const token = sb_user?.json().token_session;
 
 const userData = await getMyUser(token);
@@ -11,21 +11,25 @@ const userData = await getMyUser(token);
 
 <section class="w-full mt-10 flex flex-col">
   <h2 class="text-2xl font-medium py-3">Mis partituras</h2>
-  <article>
-    <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20 ">
-		{userData ? (
-            userData.scores.map((score: any) => (
-              <CardScore
-                title={score.name}
-                author={score.artist}
-        		    user={userData?.email}
-                downloads="4"
-                scoreImage={score.url_image}
-              />
-            ))
-          ) : (
-            <p>Loading user data...</p>
-          )}
-    </div>
+  <article class="w-full min-h-96 flex justify-center items-center">
+    {
+      userData ? (
+        <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20 ">
+          {userData.scores.map((score: any) => (
+            <CardScore
+              title={score.name}
+              author={score.artist}
+              user={userData?.email}
+              downloads="4"
+              scoreImage={score.url_image}
+            />
+          ))}
+        </div>
+      ) : (
+        <div>
+          <p class="text-center text-xl text-gray-300">No tienes partituras</p>
+        </div>
+      )
+    }
   </article>
 </section>
