@@ -12,15 +12,19 @@ export const POST: APIRoute = async ({ request }) => {
 	const category = formData.get("category") as string;
 	const file = formData.get("file") as File;
 	const userId = formData.get("userId") as string;
+	const author = formData.get("author") as string;
 	const token = formData.get("token") as string;
 
+	
+	
 	const data = {
 		name,
 		artist,
 		category,
 		userId,
+		author
 	};
-
+	
 	//* Upload score to API
 	const dataDB = await fetch(URL, {
 		method: "POST",

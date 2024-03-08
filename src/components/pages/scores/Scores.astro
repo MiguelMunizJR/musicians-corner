@@ -7,14 +7,18 @@ import { ROUTES_PATH } from "../../../const";
 import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../../CardButtonCategories.astro";
 import AlbumForm from "@/components/scores/AlbumForm.jsx";
+import { getAllScores } from "@/lib/scores/scores_actions";
+const { cookies } = Astro;
+const sb_user = cookies.get("sb-user");
 
-const user = Astro?.cookies.get("sb-user");
-let userID = ""
+const token = sb_user?.json().token_session;
+const scores = await getAllScores(token);
 
+const user = cookies.get("sb-user");
 const userData = user && JSON.parse(user?.value);
-userID = userData.user.id;
-
+const userID = userData.user.id;
 ---
+
 <section class="w-full mt-10 flex flex-col">
   <div class="w-full flex items-center gap-24">
     <article>
@@ -70,7 +74,7 @@ userID = userData.user.id;
           className="w-3/4"
           title="Banda Sinaloense"
           description="Partituras para banda sinaloense"
-          total="200"
+          total={scores?.filter((score: any) => score.category === "banda").length}
           href={ROUTES_PATH.SCORES_CATEGORY.BANDA}
         >
           <MusicCategoryIcon className="w-16" />
@@ -79,7 +83,7 @@ userID = userData.user.id;
           className="w-3/4"
           title="Mariachi"
           description="Partituras para mariachi"
-          total="9"
+          total={scores?.filter((score: any) => score.category === "mariachi").length}
           href={ROUTES_PATH.SCORES_CATEGORY.MARIACHI}
         >
           <MusicCategoryIcon className="w-16" />
@@ -88,7 +92,7 @@ userID = userData.user.id;
           className="w-3/4"
           title="Sonora"
           description="Partituras para sonora tropical"
-          total="20"
+          total={scores?.filter((score: any) => score.category === "sonora").length}
           href={ROUTES_PATH.SCORES_CATEGORY.SONORA}
         >
           <MusicCategoryIcon className="w-16" />

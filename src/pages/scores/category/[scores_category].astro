@@ -44,11 +44,11 @@ const filteredScores = scores?.filter((score: any) => score.category === subUrl)
     >
       {
         filteredScores.length > 0 ? (
-          <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20 ">
-            {filteredScores?.map((score: any) => (
+          <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20">
+            {filteredScores.map((score: any) => (
               <CardScore
                 title={score.name}
-                author={score.artist}
+                author={score.author}
                 user={"pending"}
                 downloads="4"
                 scoreImage={score.url_image}
@@ -56,7 +56,7 @@ const filteredScores = scores?.filter((score: any) => score.category === subUrl)
             ))}
           </div>
         ) : (
-          <div>
+          <div class="w-full">
             <p class="text-center text-xl text-gray-400/60">
               No hay partituras en esta categoria
             </p>

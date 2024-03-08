@@ -20,9 +20,9 @@ interface IRoutesPath {
   NOT_FOUND: string;
 }
 
-export const URL_API_RENDER: string =
-  "https://musicians-corner-app.onrender.com/api/v1";
 export const URL_API: string =
+  "https://musicians-corner-app.onrender.com/api/v1";
+export const URL_API_CYCLYC: string =
   "https://zany-jade-bunny-wig.cyclic.app/api/v1";
 
 export const API_ROUTES: IApiRoutes = Object.freeze({

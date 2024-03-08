@@ -13,7 +13,7 @@ const userData = await getMyUser(token);
   <h2 class="text-2xl font-medium py-3">Mis partituras</h2>
   <article class="w-full min-h-96 flex justify-center items-center">
     {
-      userData ? (
+      userData.length > 0 ? (
         <div class="w-full min-h-max mt-8 mb-28 grid lg:grid-cols-4 gap-y-20 ">
           {userData.scores.map((score: any) => (
             <CardScore
@@ -27,7 +27,7 @@ const userData = await getMyUser(token);
         </div>
       ) : (
         <div>
-          <p class="text-center text-xl text-gray-400/60">No tienes partituras</p>
+          <p class="text-center text-xl text-gray-400/60">No tienes partituras todavia</p>
         </div>
       )
     }

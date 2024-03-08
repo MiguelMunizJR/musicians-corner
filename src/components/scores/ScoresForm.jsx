@@ -84,6 +84,7 @@ export const ScoresForm = ({ setIsOpen, setIsFiles }) => {
 
 		const formData = new FormData(e.target);
 		formData.append("file", files[0], files.name);
+		formData.append("author", userData?.user?.email);
 		formData.append("userId", userData?.user?.id);
 		formData.append("token", token);
 
