@@ -8,13 +8,13 @@ import MusicCategoryIcon from "@/icons/dashboard/MusicCategory.astro";
 import CardButtonCategories from "../../CardButtonCategories.astro";
 import AlbumForm from "@/components/scores/AlbumForm.jsx";
 
-const user = Astro.cookies.get("sb-user");
+const user = Astro?.cookies.get("sb-user");
 let userID = ""
 
 const userData = user && JSON.parse(user?.value);
-userID = userData?.user?.id;
----
+userID = userData.user.id;
 
+---
 <section class="w-full mt-10 flex flex-col">
   <div class="w-full flex items-center gap-24">
     <article>

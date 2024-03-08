@@ -44,6 +44,7 @@ const Form = ({ URL }) => {
 					expires: 3,
 					path: "/",
 				});
+				
 				navigate(ROUTES_PATH.SCORES.SCORES);
 			}
 		} catch (err) {
