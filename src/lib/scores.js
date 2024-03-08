@@ -6,7 +6,7 @@ export const updateUrlScore = async (scoreId, data, token) => {
 	const updateUrl = `${URL_API}${ROUTES_PATH.SCORES.SCORES}/${scoreId}`;
 
 	const { secure_url } = data;
-	const url_image = secure_url.slice(0, -4) + ".webp";
+	const url_image = secure_url.replace("/upload/", "/upload/w_470,h_600,c_scale/").slice(0, -4) + ".webp";
 
 	const updateDB = await axios.patch(
 		updateUrl,

@@ -14,40 +14,42 @@ interface Props {
 }
 
 const { className, title, author, user, downloads, scoreImage } = Astro.props;
-const src = !scoreImage?.includes("waiting for cloudinary url...") ? scoreImage : "/images/score.jpg";
+const src = !scoreImage?.includes("waiting for cloudinary url...")
+  ? scoreImage
+  : "/images/score.jpg";
 ---
 
-<article class={`w-full min-h-[18rem] rounded-xl bg-[#1a1e2c] ${className}`}>
-  <div class="w-full relative">
+<article class={`w-[15rem] h-[26rem] bg-[#1a1e2c] shadow-sm rounded-xl  ${className}`}>
+  <div class="w-full h-[17rem] relative">
     <img
       src={src}
       alt="score-img"
-      class="w-full h-full"
+      class="w-full h-full p-1 object-contain"
       loading="lazy"
     />
     <div
-      class="p-2 absolute right-3 bottom-2 bg-[#1a1e2c] hover:bg-[#2e3342] transition-all rounded-full cursor-pointer"
+      class="p-2 absolute top-2 right-5 bg-[#1a1e2c] hover:bg-[#2e3342] transition-all rounded-full cursor-pointer"
     >
       <MenuScore />
     </div>
   </div>
   <div class="p-3">
-    <div class="w-full flex flex-col">
-      <h3 class="text-lg">{title}</h3>
+    <div class="w-full flex flex-col px-2">
+      <h3 class="text-balance h-[3rem] text-gray-300">{title}</h3>
       <div class="w-full flex justify-between items-center">
         <div class="flex gap-1 items-center">
           <MusicCategory className="w-5 h-5 text-[#26ab3c]" />
-          <p class="font-light text-sm text-gray-200/60">{author}</p>
+          <p class="text-sm text-gray-300/60">{author}</p>
         </div>
         <div class="flex flex-col justify-center items-center">
           <DownloadIcon className="w-6 h-6" />
           <span class="text-[#26ab3c] text-sm">{downloads}</span>
         </div>
       </div>
-    </div>
-    <div class="flex items-center gap-1">
-      <UserIcon className="" />
-      <p class="font-light text-sm text-gray-200/60">{user}</p>
+      <div class="flex gap-1 items-center">
+        <UserIcon />
+        <p class="text-sm text-gray-300/60">{user}</p>
+      </div>
     </div>
   </div>
 </article>
